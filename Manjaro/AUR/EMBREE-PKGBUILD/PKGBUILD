@@ -1,0 +1,38 @@
+# Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
+
+pkgname=embree
+pkgver=git
+pkgrel=5
+pkgdesc="double-down: A double precision interface to Embree"
+pkgdir=/opt
+arch=(x86_64)
+url="https://bitbucket.org/fathomteam/moab"
+license=(GPL3)
+makedepends=(
+	git
+	python
+	python-numpy
+	cmake
+	binutils
+	cmake
+	make
+	gcc
+	# eigen
+	tbb
+	openimageio
+)
+provides=("${pkgname%}")
+
+build() {
+	cd /opt
+	git clone --single-branch --branch v3.13.2 --depth 1 https://github.com/embree/embree.git
+	cd "$pkgname"
+	mkdir build && cd build
+	cmake ../embree -DCMAKE_INSTALL_PREFIX=/opt/embree \
+	                -DEMBREE_ISPC_SUPPORT=OFF
+}
+
+package() {
+	make
+	make install
+}

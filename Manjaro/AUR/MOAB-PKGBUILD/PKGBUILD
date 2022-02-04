@@ -1,0 +1,54 @@
+# Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
+
+pkgname=moab
+pkgver=git
+pkgrel=5
+pkgdesc="The Mesh-Oriented datABase MOAB is a component for representing and evaluating mesh data"
+pkgdir=/opt
+arch=(x86_64)
+url="https://bitbucket.org/fathomteam/moab"
+license=(GPL3)
+makedepends=(
+	git
+	python
+	cmake
+	# binutils
+	# cmake
+	# make
+	# gcc
+	# gcc-fortran
+	eigen
+	netcdf
+	hdf5
+	cython
+)
+provides=("${pkgname%}")
+
+build() {
+	cd /opt
+	git clone  --single-branch --branch 5.3.0 --depth 1 ${url}
+	cd "$pkgname"
+	mkdir build && cd build
+	# test later if it's necessary to have double compilation
+	cmake ../moab -DENABLE_HDF5=ON \
+	              -DENABLE_NETCDF=ON \
+	              -DENABLE_FORTRAN=OFF \
+	              -DENABLE_BLASLAPACK=OFF \
+	              -DBUILD_SHARED_LIBS=ON \
+	              -DCMAKE_INSTALL_PREFIX=/opt/moab
+	make
+	make install
+	cmake ../moab -DENABLE_HDF5=ON \
+	              -DENABLE_PYMOAB=ON \
+	              -DENABLE_FORTRAN=OFF \
+	              -DBUILD_SHARED_LIBS=ON \
+	              -DENABLE_BLASLAPACK=OFF \
+	              -DCMAKE_INSTALL_PREFIX=/opt/moab
+	make install
+}
+
+package() {
+	cd pymoab
+	bash install.sh
+	python setup.py install
+}

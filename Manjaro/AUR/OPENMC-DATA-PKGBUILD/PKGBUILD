@@ -1,0 +1,36 @@
+# Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
+
+pkgname=openmc-data
+pkgver=VII
+pkgrel=1
+pkgdesc="Evaluated nuclear data files for OpenMC"
+pkgdir=/opt
+arch=(x86_64)
+#defaul libraries
+endfb_VII="https://anl.box.com/shared/static/9igk353zpy8fn9ttvtrqgzvw1vtejoz6.xz"
+endfb_VIII="https://anl.box.com/shared/static/uhbxlrx7hvxqw27psymfbhi7bx7s6u6a.xz"
+jeff="https://anl.box.com/shared/static/4jwkvrr9pxlruuihcrgti75zde6g7bum.xz"
+url="endfb_VII"
+license=(GPL3)
+makedepends=(
+	git
+	python
+	cmake
+)
+provides=("${pkgname%}")
+
+build() {
+	# add line where it asks the user which libraries to download
+	cd /opt
+	mkdir "$pkgname"
+	cd "$pkgname"
+	wget ${url}
+}
+
+package() {
+	for entry in "$PWD"/*
+	do
+	  tar -xvf $entry
+	done
+	# need to set up path to datafiles
+}

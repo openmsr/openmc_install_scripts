@@ -1,0 +1,40 @@
+# Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
+
+pkgname=double-down
+pkgver=git
+pkgrel=5
+pkgdesc="double-down: A double precision interface to Embree"
+pkgdir=/opt
+arch=(x86_64)
+url="https://github.com/pshriwise/double-down.git"
+license=(GPL3)
+makedepends=(
+	git
+	python
+	cmake
+	binutils
+	cmake
+	make
+	gcc
+	eigen
+)
+depends=(
+	moab
+	embree
+)
+provides=("${pkgname%}")
+
+build() {
+	cd /opt
+	git clone --single-branch --branch main --depth 1 ${url}
+	cd "$pkgname"
+	mkdir build && cd build
+	cmake ../double-down -DMOAB_DIR=/opt/moab \
+	                     -DCMAKE_INSTALL_PREFIX=/opt/double-down \
+	                     -DEMBREE_DIR=/opt/embree
+}
+
+package() {
+	make
+	make install
+}

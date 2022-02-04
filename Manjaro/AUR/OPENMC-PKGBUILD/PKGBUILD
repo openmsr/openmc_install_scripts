@@ -1,0 +1,50 @@
+# Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
+
+pkgname=openmc
+pkgver=git
+pkgrel=1
+pkgdesc="OpenMC Monte Carlo Particle Transport Code"
+pkgdir=/opt
+arch=(x86_64)
+url="https://github.com/openmc-dev/openmc"
+license=('MIT')
+makedepends=(
+  cmake
+  git
+	python
+	python-numpy
+	python-setuptools
+  python-lxml
+  python-scipy
+  python-pandas
+  python-h5py
+  python-matplotlib
+  python-uncertainties
+)
+depends=(
+	dagmc
+)
+optdepends=(
+  openmc-data
+)
+provides=("${pkgname%}")
+conflicts=(
+	openmc-git
+)
+
+build() {
+  cd /opt/
+  git clone --recurse-submodules --single-branch --branch develop --depth 1 ${url}
+  cd "$pkgname"
+  mkdir -p build && cd build
+  cmake -Doptimize=on \
+        -Ddagmc=ON \
+        -DDAGMC_ROOT=/opt/dagmc \
+        -DHDF5_PREFER_PARALLEL=off ..
+}
+
+package() {
+  make install
+  cd ..
+  python setup.py install
+}

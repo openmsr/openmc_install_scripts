@@ -1,0 +1,40 @@
+# Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
+
+pkgname=dagmc
+pkgver=git
+pkgrel=1
+pkgdesc="DAGMC – Direct Accelerated Geometry Monte Carlo"
+pkgdir=/opt
+arch=(x86_64)
+url="https://github.com/svalinn/DAGMC.git"
+license=(GPL3)
+makedepends=(
+	git
+	python
+	cmake
+)
+depends=(
+	moab
+	double-down
+)
+provides=("${pkgname%}")
+
+build() {
+	cd /opt
+	git clone --single-branch --branch develop --depth 1 ${url}
+	cd "$pkgname"
+	mkdir build && cd build
+	cmake ../DAGMC -DBUILD_TALLY=ON \
+	               -DMOAB_DIR=/opt/moab \
+	               -DDOUBLE_DOWN="$include_double_down" \
+	               -DBUILD_STATIC_EXE=OFF \
+	               -DBUILD_STATIC_LIBS=OFF \
+	               -DCMAKE_INSTALL_PREFIX=/opt/DAGMC \
+	               -DDOUBLE_DOWN_DIR=/opt/double-down
+}
+
+package() {
+	make install
+}
+
+# add plugin to cubit
