@@ -40,7 +40,7 @@ if [ ! -e $0.done ]; then
            -DHDF5_PREFER_PARALLEL=off ..
   sudo make install
   cd ..
-  sudo python setup.py install
+  sudo pip install .
   rm -rf build
 else
    name=`basename $0`
