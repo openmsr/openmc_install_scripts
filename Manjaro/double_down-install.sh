@@ -25,4 +25,3 @@ cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \
                      -DEMBREE_DIR=$HOME/openmc/embree
 make
 make install
-rm -rf /double-down/build /double-down/double-down

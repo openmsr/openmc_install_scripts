@@ -22,4 +22,3 @@ cmake ../DAGMC -DBUILD_TALLY=ON \
                -DCMAKE_INSTALL_PREFIX=$HOME/openmc/DAGMC/ \
                -DDOUBLE_DOWN_DIR=$HOME/openmc/double-down
 make install
-rm -rf /DAGMC/DAGMC /DAGMC/build

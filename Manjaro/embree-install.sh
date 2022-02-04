@@ -25,4 +25,3 @@ cmake ../embree -DCMAKE_INSTALL_PREFIX=/embree \
                 -DEMBREE_ISPC_SUPPORT=OFF
 sudo make
 sudo make install
-rm -rf /embree/build /embree/embree
