@@ -4,10 +4,11 @@
 #!/bin/bash
 set -ex
 
-sudo pacman -Syu --noconfirm eigen \
-		             netcdf \
-		             hdf5 \
-		             cython
+sudo pacman -Syu --noconfirm \
+	eigen \
+	netcdf \
+	hdf5 \
+	cython
 
 cd $HOME/openmc
 mkdir MOAB
@@ -22,7 +23,7 @@ cmake ../moab -DENABLE_HDF5=ON \
               -DBUILD_SHARED_LIBS=ON \
               -DCMAKE_INSTALL_PREFIX=$HOME/openmc/MOAB
 make
-make install 
+make install
 cmake ../moab -DENABLE_HDF5=ON \
               -DENABLE_PYMOAB=ON \
               -DENABLE_FORTRAN=OFF \

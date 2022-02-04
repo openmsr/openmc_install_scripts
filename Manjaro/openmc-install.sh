@@ -12,12 +12,13 @@ echo "Compiled & installed dagmc, proceeding..."
 ./nuclear_data-install.sh
 echo "Downloaded & extracted nuclear data, proceeding..."
 
-sudo pacman -Syu --noconfirm python-lxml \
-			     python-scipy \
-			     python-pandas \
-                             python-h5py \
-                             python-matplotlib \
-                             python-uncertainties 
+sudo pacman -Syu --noconfirm \
+	python-lxml \
+	python-scipy \
+	python-pandas \
+	python-h5py \
+	python-matplotlib \
+	python-uncertainties
 
 #source install
 cd /opt
