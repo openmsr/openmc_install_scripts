@@ -21,7 +21,7 @@ provides=("${pkgname%}")
 
 build() {
 	cd /opt
-	git clone --single-branch --branch develop --depth 1 ${url}
+	git clone ${url}
 	cd "$pkgname"
 	mkdir build && cd build
 	cmake ../DAGMC -DBUILD_TALLY=ON \

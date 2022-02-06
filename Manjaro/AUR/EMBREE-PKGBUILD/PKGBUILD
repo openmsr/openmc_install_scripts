@@ -24,7 +24,7 @@ provides=("${pkgname%}")
 
 build() {
 	cd /opt
-	git clone --single-branch --branch v3.13.2 --depth 1 https://github.com/embree/embree.git
+	git clone ${url}
 	cd "$pkgname"
 	mkdir build && cd build
 	cmake ../embree -DCMAKE_INSTALL_PREFIX=/opt/embree \

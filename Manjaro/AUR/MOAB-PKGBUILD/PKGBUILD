@@ -13,9 +13,7 @@ makedepends=(
 	python
 	cmake
 	# binutils
-	# cmake
 	# make
-	# gcc
 	# gcc-fortran
 	eigen
 	netcdf
@@ -26,7 +24,7 @@ provides=("${pkgname%}")
 
 build() {
 	cd /opt
-	git clone  --single-branch --branch 5.3.0 --depth 1 ${url}
+	git clone ${url}
 	cd "$pkgname"
 	mkdir build && cd build
 	# test later if it's necessary to have double compilation
@@ -44,6 +42,7 @@ build() {
 	              -DBUILD_SHARED_LIBS=ON \
 	              -DENABLE_BLASLAPACK=OFF \
 	              -DCMAKE_INSTALL_PREFIX=/opt/moab
+	make #?
 	make install
 }
 

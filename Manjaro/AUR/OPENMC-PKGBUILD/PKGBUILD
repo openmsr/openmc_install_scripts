@@ -34,7 +34,7 @@ conflicts=(
 
 build() {
   cd /opt/
-  git clone --recurse-submodules --single-branch --branch develop --depth 1 ${url}
+  git clone ${url}
   cd "$pkgname"
   mkdir -p build && cd build
   cmake -Doptimize=on \
