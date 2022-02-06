@@ -25,7 +25,7 @@ depends=(
 	dagmc
 )
 optdepends=(
-  openmc-data
+  nuclear-data
 )
 provides=("${pkgname%}")
 conflicts=(

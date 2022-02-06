@@ -30,11 +30,11 @@ cd ..
 echo "compiled & installed DAGMC, proceeding..."
 
 # Compile OpenMC package and install it
-cd OPENMC-DATA-PKGBUILD
+cd NUCLEAR-DATA-PKGBUILD
 makepkg -c
-sudo pacman -U ./openmc-data*
+sudo pacman -U ./nuclear-data*
 cd ..
-echo "OpenMC data downloaded , proceeding..."
+echo "nuclear data downloaded , proceeding..."
 
 # Compile OpenMC package and install it
 cd OPENMC-PKGBUILD

@@ -1,7 +1,7 @@
 # Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
 
-pkgname=openmc-data
-pkgver=VII
+pkgname=nuclear-data
+pkgver=0
 pkgrel=1
 pkgdesc="Evaluated nuclear data files for OpenMC"
 pkgdir=/opt
@@ -36,5 +36,7 @@ package() {
 	do
 	  tar -xvf $entry
 	done
-	# need to set up path to datafiles
+	echo "export OPENMC_CROSS_SECTIONS=/opt/nuclear-data/endfb71_hdf5/cross_sections.xml" >> $HOME/.bashrc
+	source $HOME/.bashrc
+	# need to set up path to depletion chain
 }
