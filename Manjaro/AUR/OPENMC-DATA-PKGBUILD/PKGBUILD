@@ -6,12 +6,16 @@ pkgrel=1
 pkgdesc="Evaluated nuclear data files for OpenMC"
 pkgdir=/opt
 arch=(x86_64)
-#defaul libraries
-endfb_VII="https://anl.box.com/shared/static/9igk353zpy8fn9ttvtrqgzvw1vtejoz6.xz"
-endfb_VIII="https://anl.box.com/shared/static/uhbxlrx7hvxqw27psymfbhi7bx7s6u6a.xz"
-jeff="https://anl.box.com/shared/static/4jwkvrr9pxlruuihcrgti75zde6g7bum.xz"
-url="endfb_VII"
-license=(GPL3)
+# https://openmc.org/ hosted libraries
+endfb71="https://anl.box.com/shared/static/9igk353zpy8fn9ttvtrqgzvw1vtejoz6.xz"
+endfb80="https://anl.box.com/shared/static/uhbxlrx7hvxqw27psymfbhi7bx7s6u6a.xz"
+jeff33="https://anl.box.com/shared/static/4jwkvrr9pxlruuihcrgti75zde6g7bum.xz"
+fendl32="https://anl.box.com/shared/static/3cb7jetw7tmxaw6nvn77x6c578jnm2ey.xz"
+chain_endfb71_pwr="https://anl.box.com/shared/static/os1u896bwsbopurpgas72bi6aij2zzdc.xml"
+chain_endfb71_fast="https://anl.box.com/shared/static/9058zje1gm0ekd93hja542su50pccvj0.xml"
+chain_casl_pwr="https://anl.box.com/shared/static/3nvnasacm2b56716oh5hyndxdyauh5gs.xml"
+chain_casl_sfr="https://anl.box.com/shared/static/9fqbq87j0tx4m6vfl06pl4ccc0hwamg9.xml"
+license=()
 makedepends=(
 	git
 	python

@@ -2,7 +2,7 @@
 
 pkgname=moab
 pkgver=git
-pkgrel=5
+pkgrel=1
 pkgdesc="The Mesh-Oriented datABase MOAB is a component for representing and evaluating mesh data"
 pkgdir=/opt
 arch=(x86_64)

@@ -7,7 +7,7 @@ pkgdesc="DAGMC – Direct Accelerated Geometry Monte Carlo"
 pkgdir=/opt
 arch=(x86_64)
 url="https://github.com/svalinn/DAGMC.git"
-license=(GPL3)
+license=(Simplified BSD)
 makedepends=(
 	git
 	python

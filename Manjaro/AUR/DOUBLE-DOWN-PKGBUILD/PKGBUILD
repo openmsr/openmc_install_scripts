@@ -2,12 +2,12 @@
 
 pkgname=double-down
 pkgver=git
-pkgrel=5
+pkgrel=1
 pkgdesc="double-down: A double precision interface to Embree"
 pkgdir=/opt
 arch=(x86_64)
 url="https://github.com/pshriwise/double-down.git"
-license=(GPL3)
+license=(MIT)
 makedepends=(
 	git
 	python
@@ -15,7 +15,7 @@ makedepends=(
 	binutils
 	cmake
 	make
-	gcc
+	gcc-fortran
 	eigen
 )
 depends=(

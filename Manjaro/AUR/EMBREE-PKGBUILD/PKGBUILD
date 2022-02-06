@@ -2,21 +2,20 @@
 
 pkgname=embree
 pkgver=git
-pkgrel=5
+pkgrel=1
 pkgdesc="double-down: A double precision interface to Embree"
 pkgdir=/opt
 arch=(x86_64)
-url="https://bitbucket.org/fathomteam/moab"
-license=(GPL3)
+url="https://github.com/embree/embree.git"
+license=(Apache 2.0)
 makedepends=(
 	git
-	python
-	python-numpy
+	make
 	cmake
 	binutils
-	cmake
-	make
-	gcc
+	python
+	python-numpy
+	gcc-fortran
 	# eigen
 	tbb
 	openimageio
