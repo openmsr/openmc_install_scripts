@@ -8,6 +8,10 @@ sudo apt-get --yes install libeigen3-dev \
         python3-netcdf4 \
         libhdf5-103 \
         libhdf5-cpp-103 \
+        libnetcdf13\
+        libnetcdf-dev\
+        libnetcdf-mpi-13\
+        libnetcdf-mpi-dev\
         libhdf5-dev \
         cython
 
@@ -31,7 +35,7 @@ if [ ! -e $0.done ]; then
               -DCMAKE_INSTALL_PREFIX=$HOME/openmc/MOAB
   make
   make install 
-  cd ../moab/pymoab
+  cd pymoab
   bash install.sh
   sudo python setup.py install
 else
