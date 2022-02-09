@@ -21,9 +21,6 @@ sudo apt-get install --yes python3-lxml\
 
 #if there is a .done-file then skip this step
 if [ ! -e $0.done ]; then
-
-  touch ${0}.done
-
   #source install
   cd $HOME
   mkdir -p openmc_chkout
@@ -42,6 +39,8 @@ if [ ! -e $0.done ]; then
   cd ..
   sudo pip install .
   rm -rf build
+  
+  touch ${0}.done
 else
    name=`basename $0`
    echo openmc appears to already be installed \(lock file ${name}.done exists\) - skipping.
