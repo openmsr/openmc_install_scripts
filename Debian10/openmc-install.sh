@@ -28,7 +28,7 @@ if [ ! -e $0.done ]; then
   cd $HOME
   mkdir -p openmc_chkout
   cd openmc_chkout
-  #git clone --recurse-submodules --single-branch --branch develop --depth 1 https://github.com/openmc-dev/openmc.git
+  git clone --recurse-submodules --single-branch --branch develop --depth 1 https://github.com/openmc-dev/openmc.git
   cd openmc
 
 
