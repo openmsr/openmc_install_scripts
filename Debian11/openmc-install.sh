@@ -12,7 +12,9 @@ set -ex
 ./dagmc-install.sh
 echo "Compiled & installed dagmc, proceeding..."
 
-sudo apt-get install --yes python3-lxml\
+sudo apt-get install --yes libpng-dev libpng++-dev\
+	imagemagick\
+	python3-lxml\
         python3-scipy\
         python3-pandas\
         python3-h5py\
@@ -37,9 +39,9 @@ if [ ! -e $0.done ]; then
            -DHDF5_PREFER_PARALLEL=off ..
   sudo make install
   cd ..
-  sudo pip install .
+  sudo pip3 install .
   rm -rf build
-  
+  #this was apparently successful - mark as done. 
   touch ${0}.done
 else
    name=`basename $0`

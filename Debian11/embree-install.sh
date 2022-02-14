@@ -16,11 +16,13 @@ sudo apt-get install --yes gcc\
         cmake\
         libglfw3\
         libglfw3-dev\
-        python3-numpy\
         libtbb2\
         libtbb-dev\
         libopenimageio2.2\
         libopenimageio-dev
+
+sudo pip install numpy
+
 
 #if there is a .done-file then skip this step
 if [ ! -e $0.done ]; then

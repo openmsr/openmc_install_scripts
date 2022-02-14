@@ -23,7 +23,7 @@ if [ ! -e $0.done ]; then
   cd build
   cmake ../DAGMC -DBUILD_TALLY=ON \
                -DMOAB_DIR=$HOME/openmc/MOAB \
-               -DDOUBLE_DOWN="$include_double_down" \
+               -DDOUBLE_DOWN=ON \
                -DBUILD_STATIC_EXE=OFF \
                -DBUILD_STATIC_LIBS=OFF \
                -DCMAKE_INSTALL_PREFIX=$HOME/openmc/DAGMC/ \

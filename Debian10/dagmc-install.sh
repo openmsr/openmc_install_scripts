@@ -8,6 +8,8 @@ set -ex
 ./double_down-install.sh
 echo "Compiled & installed double-down, proceeding..."
 
+sudo apt-get install --yes python
+
 #if there is a .done-file then skip this step
 if [ ! -e $0.done ]; then
 
