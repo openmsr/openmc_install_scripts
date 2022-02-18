@@ -22,6 +22,7 @@ makedepends=(
 	blas
 	lapack
 	python-numpy
+	python-setuptools
 	'glibc>=2.34'
 )
 provides=("${pkgname%}")
@@ -51,7 +52,7 @@ build() {
 }
 
 package() {
-	cd pymoab
+	cd /opt/"$pkgname"/pymoab
 	bash install.sh
 	python setup.py install
 }
