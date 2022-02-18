@@ -14,11 +14,15 @@ makedepends=(
 	cmake
 	# binutils
 	# make
-	# gcc-fortran
+	gcc-fortran
 	eigen
 	netcdf
 	hdf5
 	cython
+	blas
+	lapack
+	python-numpy
+	'glibc>=2.34'
 )
 provides=("${pkgname%}")
 
@@ -28,20 +32,20 @@ build() {
 	cd "$pkgname"
 	mkdir build && cd build
 	# test later if it's necessary to have double compilation
-	cmake ../moab -DENABLE_HDF5=ON \
-	              -DENABLE_NETCDF=ON \
-	              -DENABLE_FORTRAN=OFF \
-	              -DENABLE_BLASLAPACK=OFF \
-	              -DBUILD_SHARED_LIBS=ON \
-	              -DCMAKE_INSTALL_PREFIX=/opt/moab
+	cmake .. -DENABLE_HDF5=ON \
+				   -DENABLE_NETCDF=ON \
+				   -DENABLE_FORTRAN=OFF \
+				   -DENABLE_BLASLAPACK=OFF \
+				   -DBUILD_SHARED_LIBS=ON \
+				   -DCMAKE_INSTALL_PREFIX=/opt/moab
 	make
 	make install
-	cmake ../moab -DENABLE_HDF5=ON \
-	              -DENABLE_PYMOAB=ON \
-	              -DENABLE_FORTRAN=OFF \
-	              -DBUILD_SHARED_LIBS=ON \
-	              -DENABLE_BLASLAPACK=OFF \
-	              -DCMAKE_INSTALL_PREFIX=/opt/moab
+	cmake .. -DENABLE_HDF5=ON \
+	      	 -DENABLE_PYMOAB=ON \
+	      	 -DENABLE_FORTRAN=OFF \
+					 -DBUILD_SHARED_LIBS=ON \
+					 -DENABLE_BLASLAPACK=OFF \
+					 -DCMAKE_INSTALL_PREFIX=/opt/moab
 	make #?
 	make install
 }
