@@ -12,8 +12,6 @@ makedepends=(
 	git
 	python
 	cmake
-	# binutils
-	# make
 	gcc-fortran
 	eigen
 	netcdf
@@ -23,7 +21,7 @@ makedepends=(
 	lapack
 	python-numpy
 	python-setuptools
-	'glibc>=2.34'
+	"glibc>=2.34"
 )
 provides=("${pkgname%}")
 
@@ -48,11 +46,14 @@ build() {
 					 -DENABLE_BLASLAPACK=OFF \
 					 -DCMAKE_INSTALL_PREFIX=/opt/moab
 	make #?
-	make install
 }
 
 package() {
+	cd /opt/"$pkgname"/build
+	make install
 	cd /opt/"$pkgname"/pymoab
+	ls
+	pwd
 	bash install.sh
 	python setup.py install
 }

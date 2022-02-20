@@ -10,6 +10,8 @@ echo "Compiled & installed openmc, done."
 
 echo "Running test script..."
 python test_openmc.py
+rm *.xml
+rm *.h5
 
-#check sudoers file to make sure there aren't duplicates of the timestamp_timeout variable 
+#check sudoers file to make sure there aren't duplicates of the timestamp_timeout variable
 sudo sed '$d' -i /etc/sudoers
