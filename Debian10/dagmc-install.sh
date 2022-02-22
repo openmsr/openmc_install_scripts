@@ -13,8 +13,6 @@ sudo apt-get install --yes python
 #if there is a .done-file then skip this step
 if [ ! -e $0.done ]; then
 
-  touch ${0}.done
-
   cd $HOME/openmc
   mkdir DAGMC
   cd DAGMC
@@ -23,7 +21,7 @@ if [ ! -e $0.done ]; then
   cd build
   cmake ../DAGMC -DBUILD_TALLY=ON \
                -DMOAB_DIR=$HOME/openmc/MOAB \
-               -DDOUBLE_DOWN="$include_double_down" \
+               -DDOUBLE_DOWN=ON \
                -DBUILD_STATIC_EXE=OFF \
                -DBUILD_STATIC_LIBS=OFF \
                -DCMAKE_INSTALL_PREFIX=$HOME/openmc/DAGMC/ \
@@ -31,6 +29,8 @@ if [ ! -e $0.done ]; then
   make install
   cd ../..
   rm -rf DAGMC/DAGMC /DAGMC/build
+
+  touch ${0}.done
 else
    name=`basename $0`
    echo DAGMC appears to already be installed \(lock file ${name}.done exists\) - skipping.
