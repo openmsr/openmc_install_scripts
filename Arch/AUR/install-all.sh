@@ -7,7 +7,7 @@ sudo pacman -Syy --ignore sudo --needed base-devel
 
 # Compile MOAB package and install it
 cd MOAB-PKGBUILD
-makepkg --noconfirm -cs
+makepkg --noconfirm -cs -g >> PKGBUILD && makepkg
 sudo pacman -U ./moab*
 cd ..
 echo "compiled & installed MOAB, proceeding..."

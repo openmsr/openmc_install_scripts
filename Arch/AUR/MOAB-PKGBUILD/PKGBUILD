@@ -4,7 +4,6 @@ pkgname=moab
 pkgver=git
 pkgrel=1
 pkgdesc="The Mesh-Oriented datABase MOAB is a component for representing and evaluating mesh data"
-pkgdir=/opt
 arch=(x86_64)
 url="https://bitbucket.org/fathomteam/moab"
 license=(GPL3)
@@ -24,36 +23,24 @@ makedepends=(
 	"glibc>=2.34"
 )
 provides=("${pkgname%}")
+source=("${pkgname}::git+${url}.git")
 
 build() {
-	cd /opt
-	git clone ${url}
-	cd "$pkgname"
+	cd $srcdir/$pkgname
 	mkdir build && cd build
 	# test later if it's necessary to have double compilation
 	cmake .. -DENABLE_HDF5=ON \
+					 -DENABLE_PYMOAB=ON \
 				   -DENABLE_NETCDF=ON \
 				   -DENABLE_FORTRAN=OFF \
 				   -DENABLE_BLASLAPACK=OFF \
-				   -DBUILD_SHARED_LIBS=ON \
-				   -DCMAKE_INSTALL_PREFIX=/opt/moab
+				   -DBUILD_SHARED_LIBS=ON
 	make
-	make install
-	cmake .. -DENABLE_HDF5=ON \
-	      	 -DENABLE_PYMOAB=ON \
-	      	 -DENABLE_FORTRAN=OFF \
-					 -DBUILD_SHARED_LIBS=ON \
-					 -DENABLE_BLASLAPACK=OFF \
-					 -DCMAKE_INSTALL_PREFIX=/opt/moab
-	make #?
 }
 
 package() {
-	cd /opt/"$pkgname"/build
-	make install
-	cd /opt/"$pkgname"/pymoab
-	ls
-	pwd
-	bash install.sh
+	cd $srcdir/$pkgname/build
+	make DESTDIR="${pkgdir}" install
+	cd $srcdir/$pkgname/pymoab
 	python setup.py install
 }
