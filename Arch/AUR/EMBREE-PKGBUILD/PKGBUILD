@@ -1,6 +1,6 @@
 # Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
 
-pkgname=embree
+pkgname=embree-git
 pkgver=git
 pkgrel=1
 pkgdesc="double-down: A double precision interface to Embree"
@@ -16,16 +16,16 @@ makedepends=(
 	python
 	python-numpy
 	gcc-fortran
-	# eigen
-	tbb
-	openimageio
 )
 provides=("${pkgname%}")
+source=("${pkgname}::git+${url}.git")
+pkgver() {
+  cd "$pkgname"
+  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-	cd /opt
-	git clone ${url}
-	cd "$pkgname"
+	cd $srcdir/$pkgname
 	mkdir build && cd build
 	cmake ../embree -DCMAKE_INSTALL_PREFIX=/opt/embree \
 	                -DEMBREE_ISPC_SUPPORT=OFF
@@ -35,3 +35,5 @@ package() {
 	make
 	make install
 }
+sha256sums=('SKIP')
+sha256sums=('SKIP')

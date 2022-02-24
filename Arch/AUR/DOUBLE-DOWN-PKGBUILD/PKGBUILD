@@ -1,6 +1,6 @@
 # Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
 
-pkgname=double-down
+pkgname=double-down-git
 pkgver=git
 pkgrel=1
 pkgdesc="double-down: A double precision interface to Embree"
@@ -23,11 +23,14 @@ depends=(
 	embree
 )
 provides=("${pkgname%}")
+source=("${pkgname}::git+${url}.git")
+pkgver() {
+  cd "$pkgname"
+  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-	cd /opt
-	git clone ${url}
-	cd "$pkgname"
+	cd $srcdir/$pkgname
 	mkdir build && cd build
 	cmake ../double-down -DMOAB_DIR=/opt/moab \
 	                     -DCMAKE_INSTALL_PREFIX=/opt/double-down \

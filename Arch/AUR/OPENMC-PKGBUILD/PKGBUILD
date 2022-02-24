@@ -28,15 +28,18 @@ optdepends=(
   nuclear-data
 )
 provides=("${pkgname%}")
+source=("${pkgname}::git+${url}.git")
+pkgver() {
+  cd "$pkgname"
+  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 conflicts=(
 	openmc-git
 )
 
 build() {
-  cd /opt/
-  git clone ${url}
-  cd "$pkgname"
-  mkdir -p build && cd build
+  cd $srcdir/$pkgname
+	mkdir build && cd build
   cmake -Doptimize=on \
         -Ddagmc=ON \
         -DDAGMC_ROOT=/opt/dagmc \

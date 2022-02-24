@@ -1,6 +1,6 @@
 # Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
 
-pkgname=dagmc
+pkgname=dagmc-git
 pkgver=git
 pkgrel=1
 pkgdesc="DAGMC – Direct Accelerated Geometry Monte Carlo"
@@ -17,12 +17,16 @@ depends=(
 	moab
 	double-down
 )
+
 provides=("${pkgname%}")
+source=("${pkgname}::git+${url}.git")
+pkgver() {
+  cd "$pkgname"
+  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-	cd /opt
-	git clone ${url}
-	cd "$pkgname"
+	cd $srcdir/$pkgname
 	mkdir build && cd build
 	cmake ../DAGMC -DBUILD_TALLY=ON \
 	               -DMOAB_DIR=/opt/moab \
