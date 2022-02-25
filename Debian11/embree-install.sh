@@ -37,7 +37,7 @@ if [ ! -e $0.done ]; then
    git clone --single-branch --branch v3.13.2 --depth 1 https://github.com/embree/embree.git
    mkdir build
    cd build
-   cmake ../embree -DCMAKE_INSTALL_PREFIX=/embree \
+   cmake ../embree -DCMAKE_INSTALL_PREFIX=$HOME/openmc/embree \
                 -DEMBREE_ISPC_SUPPORT=OFF
    make -j $ccores
    sudo make install
