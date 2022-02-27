@@ -2,17 +2,17 @@
 set -ex
 
 #install needed base-devel software & turn off install confirms
-sudo pacman -Syy --ignore sudo --needed base-devel
+find /var/cache/pacman/pkg/ -iname "*.part" -delete
+#sudo pacman -Syyu --ignore sudo --needed base-devel
 
 # Compile MOAB package and install it
-cd MOAB-PKGBUILD
-makepkg --noconfirm -csgi >> PKGBUILD && makepkg
-cd ..
-echo "compiled & installed MOAB, proceeding..."
+#cd MOAB-PKGBUILD
+#makepkg --noconfirm -csgi >> PKGBUILD && makepkg
+#cd ..
+#echo "compiled & installed MOAB, proceeding..."
 
 # Compile Embree package and install it
 cd EMBREE-PKGBUILD
-sudo pacman -Syy --noconfirm tbb openimageio
 makepkg --noconfirm -csgi >> PKGBUILD && makepkg
 cd ..
 echo "compiled & installed Embree, proceeding..."

@@ -49,3 +49,7 @@ package() {
 	bash install.sh
 	python setup.py install
 }
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')

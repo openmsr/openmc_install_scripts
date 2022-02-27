@@ -41,3 +41,4 @@ package() {
 	make
 	make install
 }
+sha256sums=('SKIP')

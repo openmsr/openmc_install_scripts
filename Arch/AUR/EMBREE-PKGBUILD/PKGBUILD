@@ -1,12 +1,12 @@
 # Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
 
 pkgname=embree-git
-pkgver=git
+pkgver=v3.13.1.r107.g0835461a5
 pkgrel=1
 pkgdesc="double-down: A double precision interface to Embree"
 pkgdir=/opt
 arch=(x86_64)
-url="https://github.com/embree/embree.git"
+url="https://github.com/embree/embree"
 license=(Apache 2.0)
 makedepends=(
 	git
@@ -25,15 +25,15 @@ pkgver() {
 }
 
 build() {
+	sudo pacman --noconfirm -Syu tbb glfw
 	cd $srcdir/$pkgname
 	mkdir build && cd build
-	cmake ../embree -DCMAKE_INSTALL_PREFIX=/opt/embree \
-	                -DEMBREE_ISPC_SUPPORT=OFF
+	cmake .. -DEMBREE_ISPC_SUPPORT=OFF
 }
 
 package() {
+	cd $srcdir/$pkgname/build
 	make
 	make install
 }
-sha256sums=('SKIP')
 sha256sums=('SKIP')
