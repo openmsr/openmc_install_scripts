@@ -6,10 +6,10 @@ find /var/cache/pacman/pkg/ -iname "*.part" -delete
 #sudo pacman -Syyu --ignore sudo --needed base-devel
 
 # Compile MOAB package and install it
-#cd MOAB-PKGBUILD
-#makepkg --noconfirm -csgi >> PKGBUILD && makepkg
-#cd ..
-#echo "compiled & installed MOAB, proceeding..."
+cd MOAB-PKGBUILD
+makepkg --noconfirm -csgi >> PKGBUILD && makepkg
+cd ..
+echo "compiled & installed MOAB, proceeding..."
 
 # Compile Embree package and install it
 cd EMBREE-PKGBUILD
@@ -29,7 +29,7 @@ makepkg --noconfirm -csgi >> PKGBUILD && makepkg
 cd ..
 echo "compiled & installed DAGMC, proceeding..."
 
-# Compile OpenMC package and install it
+# Download the nuclear data
 cd NUCLEAR-DATA-PKGBUILD
 makepkg --noconfirm -csgi >> PKGBUILD && makepkg
 cd ..
@@ -39,5 +39,5 @@ echo "nuclear data downloaded , proceeding..."
 cd OPENMC-PKGBUILD
 makepkg --noconfirm -csgi >> PKGBUILD && makepkg
 cd ..
-
 echo "compiled & installed OpenMC, finised!"
+python test_openmc.py

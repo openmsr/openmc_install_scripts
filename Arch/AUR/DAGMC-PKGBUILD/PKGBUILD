@@ -1,21 +1,17 @@
-# Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
+# Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 
 pkgname=dagmc-git
-pkgver=git
+pkgver=v0.1.r3799.g1f8b5979
 pkgrel=1
 pkgdesc="DAGMC – Direct Accelerated Geometry Monte Carlo"
 pkgdir=/opt
 arch=(x86_64)
-url="https://github.com/svalinn/DAGMC.git"
+url="https://github.com/svalinn/DAGMC"
 license=(Simplified BSD)
 makedepends=(
 	git
 	python
 	cmake
-)
-depends=(
-	moab
-	double-down
 )
 
 provides=("${pkgname%}")
@@ -28,17 +24,19 @@ pkgver() {
 build() {
 	cd $srcdir/$pkgname
 	mkdir build && cd build
-	cmake ../DAGMC -DBUILD_TALLY=ON \
-	               -DMOAB_DIR=/opt/moab \
-	               -DDOUBLE_DOWN="$include_double_down" \
-	               -DBUILD_STATIC_EXE=OFF \
-	               -DBUILD_STATIC_LIBS=OFF \
-	               -DCMAKE_INSTALL_PREFIX=/opt/DAGMC \
-	               -DDOUBLE_DOWN_DIR=/opt/double-down
+	cmake .. -DBUILD_TALLY=ON \
+	         -DMOAB_DIR=/opt/moab \
+	         -DDOUBLE_DOWN="$include_double_down" \
+	         -DBUILD_STATIC_EXE=OFF \
+	         -DBUILD_STATIC_LIBS=OFF \
+	         -DCMAKE_INSTALL_PREFIX=/opt/DAGMC \
+	         -DDOUBLE_DOWN_DIR=/opt/double-down
 }
 
 package() {
+	cd $srcdir/$pkgname/build
+	make
 	make install
 }
-
-# add plugin to cubit
+sha256sums=('SKIP')
+sha256sums=('SKIP')

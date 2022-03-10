@@ -1,7 +1,7 @@
-# Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
+# Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 
 pkgname=openmc
-pkgver=git
+pkgver=v0.5.2.r11311.g062b8897a
 pkgrel=1
 pkgdesc="OpenMC Monte Carlo Particle Transport Code"
 pkgdir=/opt
@@ -14,18 +14,6 @@ makedepends=(
 	python
 	python-numpy
 	python-setuptools
-  python-lxml
-  python-scipy
-  python-pandas
-  python-h5py
-  python-matplotlib
-  python-uncertainties
-)
-depends=(
-	dagmc
-)
-optdepends=(
-  nuclear-data
 )
 provides=("${pkgname%}")
 source=("${pkgname}::git+${url}.git")
@@ -38,15 +26,26 @@ conflicts=(
 )
 
 build() {
+  sudo pacman --noconfirm -Syu python-lxml \
+                               python-scipy \
+                               python-pandas \
+                               python-h5py \
+                               python-matplotlib \
+                               python-uncertainties
   cd $srcdir/$pkgname
 	mkdir build && cd build
   cmake -Doptimize=on \
         -Ddagmc=ON \
         -DDAGMC_ROOT=/opt/dagmc \
         -DHDF5_PREFER_PARALLEL=off ..
+  make
 }
 
 package() {
+  cd $srcdir/$pkgname/build
   make install
-  python ../setup.py install
+  cd ..
+  python setup.py install
 }
+sha256sums=('SKIP')
+sha256sums=('SKIP')
