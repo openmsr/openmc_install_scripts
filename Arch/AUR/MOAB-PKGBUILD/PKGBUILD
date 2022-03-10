@@ -1,10 +1,9 @@
-# Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
+# Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 
-pkgname=moab
-pkgver=git
+pkgname=moab-git
+pkgver=5.3.1.r96.g6410dadbb
 pkgrel=1
 pkgdesc="The Mesh-Oriented datABase MOAB is a component for representing and evaluating mesh data"
-pkgdir=/opt
 arch=(x86_64)
 url="https://bitbucket.org/fathomteam/moab"
 license=(GPL3)
@@ -12,42 +11,49 @@ makedepends=(
 	git
 	python
 	cmake
-	# binutils
-	# make
-	# gcc-fortran
+	gcc-fortran
 	eigen
 	netcdf
 	hdf5
 	cython
+	blas
+	lapack
+	python-numpy
+	python-setuptools
+	"glibc>=2.34"
 )
 provides=("${pkgname%}")
-
+source=("${pkgname}::git+${url}.git")
+pkgver() {
+  cd "$pkgname"
+  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 build() {
-	cd /opt
-	git clone ${url}
-	cd "$pkgname"
+	cd $srcdir/$pkgname
 	mkdir build && cd build
 	# test later if it's necessary to have double compilation
-	cmake ../moab -DENABLE_HDF5=ON \
-	              -DENABLE_NETCDF=ON \
-	              -DENABLE_FORTRAN=OFF \
-	              -DENABLE_BLASLAPACK=OFF \
-	              -DBUILD_SHARED_LIBS=ON \
-	              -DCMAKE_INSTALL_PREFIX=/opt/moab
+	cmake .. -DENABLE_HDF5=ON \
+	         -DENABLE_NETCDF=ON \
+	         -DENABLE_FORTRAN=OFF \
+	         -DENABLE_BLASLAPACK=OFF \
+	         -DBUILD_SHARED_LIBS=ON \
+	         -DCMAKE_INSTALL_PREFIX=/opt/moab
 	make
 	make install
-	cmake ../moab -DENABLE_HDF5=ON \
-	              -DENABLE_PYMOAB=ON \
-	              -DENABLE_FORTRAN=OFF \
-	              -DBUILD_SHARED_LIBS=ON \
-	              -DENABLE_BLASLAPACK=OFF \
-	              -DCMAKE_INSTALL_PREFIX=/opt/moab
-	make #?
-	make install
+	cmake .. -DENABLE_HDF5=ON \
+	         -DENABLE_PYMOAB=ON \
+	         -DENABLE_FORTRAN=OFF \
+	         -DBUILD_SHARED_LIBS=ON \
+	         -DENABLE_BLASLAPACK=OFF \
+	         -DCMAKE_INSTALL_PREFIX=/opt/moab
+	make
 }
 
 package() {
+	cd $srcdir/$pkgname/build
+	make DESTDIR="${pkgdir}" install
 	cd pymoab
+	ls
 	bash install.sh
 	python setup.py install
 }

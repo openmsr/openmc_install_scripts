@@ -1,12 +1,12 @@
-# Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
+# Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 
-pkgname=double-down
-pkgver=git
+pkgname=double-down-git
+pkgver=v1.0.0.r0.gd20beda
 pkgrel=1
 pkgdesc="double-down: A double precision interface to Embree"
 pkgdir=/opt
 arch=(x86_64)
-url="https://github.com/pshriwise/double-down.git"
+url="https://github.com/pshriwise/double-down"
 license=(MIT)
 makedepends=(
 	git
@@ -18,23 +18,24 @@ makedepends=(
 	gcc-fortran
 	eigen
 )
-depends=(
-	moab
-	embree
-)
+
 provides=("${pkgname%}")
+source=("${pkgname}::git+${url}.git")
+pkgver() {
+  cd "$pkgname"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-	cd /opt
-	git clone ${url}
-	cd "$pkgname"
+	cd $srcdir/$pkgname
 	mkdir build && cd build
-	cmake ../double-down -DMOAB_DIR=/opt/moab \
-	                     -DCMAKE_INSTALL_PREFIX=/opt/double-down \
-	                     -DEMBREE_DIR=/opt/embree
+	cmake .. -DMOAB_DIR=/opt/moab \
+	         -DEMBREE_DIR=/opt/embree \
+					 -DCMAKE_INSTALL_PREFIX=/opt/double-down
 }
 
 package() {
+	cd $srcdir/$pkgname/build
 	make
 	make install
 }

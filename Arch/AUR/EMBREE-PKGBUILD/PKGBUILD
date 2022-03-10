@@ -1,12 +1,12 @@
-# Maintainer: aslak stubsgaard <aslak@stubsgaard.dk>
+# Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 
-pkgname=embree
-pkgver=git
+pkgname=embree-git
+pkgver=v3.13.1.r117.gf7a54f8f6
 pkgrel=1
 pkgdesc="double-down: A double precision interface to Embree"
 pkgdir=/opt
 arch=(x86_64)
-url="https://github.com/embree/embree.git"
+url="https://github.com/LukeLabrie/embree"
 license=(Apache 2.0)
 makedepends=(
 	git
@@ -16,22 +16,25 @@ makedepends=(
 	python
 	python-numpy
 	gcc-fortran
-	# eigen
-	tbb
-	openimageio
 )
 provides=("${pkgname%}")
+source=("${pkgname}::git+${url}.git")
+pkgver() {
+  cd "$pkgname"
+  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-	cd /opt
-	git clone ${url}
-	cd "$pkgname"
+	sudo pacman --noconfirm -Syu tbb glfw
+	cd $srcdir/$pkgname
 	mkdir build && cd build
-	cmake ../embree -DCMAKE_INSTALL_PREFIX=/opt/embree \
-	                -DEMBREE_ISPC_SUPPORT=OFF
+	cmake .. -DEMBREE_ISPC_SUPPORT=OFF \
+					 -DCMAKE_C_COMPILER=gcc \
+					 -DCMAKE_INSTALL_PREFIX=/opt/embree
 }
 
 package() {
+	cd $srcdir/$pkgname/build
 	make
 	make install
 }
