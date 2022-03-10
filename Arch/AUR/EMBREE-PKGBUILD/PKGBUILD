@@ -29,8 +29,8 @@ build() {
 	cd $srcdir/$pkgname
 	mkdir build && cd build
 	cmake .. -DEMBREE_ISPC_SUPPORT=OFF \
-					 -DCMAKE_C_COMPILER=gcc \
-					 -DCMAKE_INSTALL_PREFIX=/opt/embree
+		 -DCMAKE_C_COMPILER=gcc \
+	         -DCMAKE_INSTALL_PREFIX=/opt/embree
 }
 
 package() {
