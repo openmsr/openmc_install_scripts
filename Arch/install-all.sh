@@ -1,4 +1,4 @@
-jb m#!/bin/bash
+#!/bin/bash
 set -ex
 
 echo 'Defaults    timestamp_timeout=-1' | sudo EDITOR='tee -a' visudo
