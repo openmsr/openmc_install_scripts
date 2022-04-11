@@ -34,8 +34,7 @@ build() {
                                python-uncertainties
   cd $srcdir/$pkgname
 	mkdir build && cd build
-  cmake -Doptimize=on \
-        -Ddagmc=ON \
+  cmake -DOPENMC_USE_DAGMC=ON \
         -DDAGMC_ROOT=/opt/dagmc \
         -DHDF5_PREFER_PARALLEL=off ..
   make
