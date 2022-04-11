@@ -23,13 +23,13 @@ jobs:
     runs-on: debian
     steps:
       - name: checkout_main_repo
-          uses: actions/checkout@v2
-          with:
-            repository: 'openmsr/openmc-install_scripts'
-            ref: 'HEAD'
-            path: openmc-install-scripts
-            submodules: true
+        uses: actions/checkout@v2
+        with:
+          repository: 'openmsr/openmc-install_scripts'
+          ref: 'HEAD'
+          path: openmc-install-scripts
+          submodules: true
       - name: embree-install
-          run: |
-            cd openmsr-install-scripts/Debian11
-            ./embree-install.sh
+        run: |
+          cd openmsr-install-scripts/Debian11
+          ./embree-install.sh
