@@ -16,15 +16,21 @@ if [ ! -e $0.done ]; then
 	tbb \
 	openimageio
 
-cd $HOME
-mkdir openmc
-cd openmc
-mkdir embree
-cd embree
-git clone --single-branch --branch v3.13.2 --depth 1 https://github.com/embree/embree.git
-mkdir build
-cd build
-cmake ../embree -DCMAKE_INSTALL_PREFIX=$HOME/openmc/embree \
+  #Should we run make in parallel? Default is yo use all available cores
+  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
+  if [ "x$1" != "x" ]; then
+	ccores=$1
+  fi
+
+  #run actual install process
+
+  cd $HOME
+  mkdir -p openmc/embree
+  cd openmc/embree
+  git clone --single-branch --branch v3.13.2 --depth 1 https://github.com/embree/embree.git
+  mkdir build
+  cd build
+  cmake ../embree -DCMAKE_INSTALL_PREFIX=$HOME/openmc/embree \
                 -DEMBREE_ISPC_SUPPORT=OFF
   make -j ${ccores}
   sudo make install
