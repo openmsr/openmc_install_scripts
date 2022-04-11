@@ -12,6 +12,8 @@ on:
       tags:
         description: 'Test scenario tags'
         required: true
+  schedule:
+    - cron: '44 4 * * 0'
 jobs:
   print-tag:
     runs-on: ubuntu-latest
