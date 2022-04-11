@@ -31,7 +31,7 @@ if [ ! -e $0.done ]; then
    cd openmc
    mkdir -p embree
    cd embree
-   git clone --single-branch --branch v3.13.2 --depth 1 https://github.com/embree/embree.git
+   git clone --single-branch --branch v3.13.3 --depth 1 https://github.com/embree/embree.git
    mkdir build
    cd build
    cmake ../embree -DCMAKE_INSTALL_PREFIX=$HOME/openmc/embree \
