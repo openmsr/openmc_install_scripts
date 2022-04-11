@@ -31,8 +31,7 @@ if [ ! -e $0.done ]; then
 
   mkdir -p build
   cd build
-  cmake -Doptimize=on \
-           -Ddagmc=ON \
+  cmake -DOPENMC_USE_DAGMC=ON \
            -DDAGMC_ROOT=$HOME/openmc/DAGMC \
            -DHDF5_PREFER_PARALLEL=off ..
   sudo make install
