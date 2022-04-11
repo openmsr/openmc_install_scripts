@@ -1,4 +1,4 @@
-name: build Debian11
+name: build Ubuntu
 on:
   workflow_dispatch:
     inputs:
@@ -22,7 +22,7 @@ jobs:
       - name: Print the input tag to STDOUT
         run: echo  The tags are ${{ github.event.inputs.tags }}
   run-embree-installer:
-    runs-on: debian
+    runs-on: ubuntu-latest
     steps:
       - name: checkout_main_repo
         uses: actions/checkout@v2
