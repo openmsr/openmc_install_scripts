@@ -4,8 +4,12 @@
 #!/bin/bash
 set -ex
 
+WD=`pwd`
+name=`basename $0`
+
 #check if there is a .done file indicating that we have already built this target
-if [ ! -e $0.done ]; then
+if [ ! -e ${name}.done ]; then
+  
   #check dependencies
   sudo pacman -Syu --noconfirm \
 	gcc \
@@ -23,11 +27,10 @@ if [ ! -e $0.done ]; then
   fi
 
   #run actual install process
-
   cd $HOME
   mkdir -p openmc/embree
   cd openmc/embree
-  git clone --single-branch --branch v3.13.2 --depth 1 https://github.com/embree/embree.git
+  git clone --single-branch --branch v3.13.3 --depth 1 https://github.com/embree/embree.git
   mkdir build
   cd build
   cmake ../embree -DCMAKE_INSTALL_PREFIX=$HOME/openmc/embree \
@@ -35,10 +38,9 @@ if [ ! -e $0.done ]; then
 		-DEMBREE_TUTORIALS=OFF
   make -j ${ccores}
   sudo make install
-
+  cd ${WD}
   #touch a lock file to avoid uneccessary rebuilds
   touch ${name}.done
 else
-  name=`basename $0`
   echo embree appears to be already installed \(lock file ${name}.done exists\) - skipping.
 fi
