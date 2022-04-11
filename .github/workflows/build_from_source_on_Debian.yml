@@ -11,7 +11,7 @@ on:
         required: true 
       tags:
         description: 'Test scenario tags'
-        required: truejobs:
+        required: true
 jobs:
   print-tag:
     runs-on: ubuntu-latest
