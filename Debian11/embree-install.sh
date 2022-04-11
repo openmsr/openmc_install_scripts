@@ -22,13 +22,10 @@ sudo apt-get install --yes gcc\
         libopenimageio-dev
 
 sudo pip install numpy
-
+WD=`pwd`
 
 #if there is a .done-file then skip this step
 if [ ! -e $0.done ]; then
-    
-   touch ${0}.done
-
    cd $HOME
    mkdir -p openmc
    cd openmc
@@ -42,8 +39,10 @@ if [ ! -e $0.done ]; then
 		-DEMBREE_TUTORIALS=OFF
    make -j $ccores
    sudo make install
-   cd ../..
    rm -rf embree/build embree/embree
+
+   cd ${WD}
+   touch ${0}.done
 else
    name=`basename $0`
    echo embree appears to already be installed \(lock file ${name}.done exists\) - skipping.
