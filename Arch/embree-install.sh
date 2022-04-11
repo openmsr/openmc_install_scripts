@@ -4,7 +4,10 @@
 #!/bin/bash
 set -ex
 
-sudo pacman -Syu --noconfirm \
+#check if there is a .done file indicating that we have already built this target
+if [ ! -e $0.done ]; then
+  #check dependencies
+  sudo pacman -Syu --noconfirm \
 	gcc \
 	make \
 	cmake \
@@ -23,5 +26,12 @@ mkdir build
 cd build
 cmake ../embree -DCMAKE_INSTALL_PREFIX=$HOME/openmc/embree \
                 -DEMBREE_ISPC_SUPPORT=OFF
-sudo make
-sudo make install
+  make -j ${ccores}
+  sudo make install
+
+  #touch a lock file to avoid uneccessary rebuilds
+  touch ${name}.done
+else
+  name=`basename $0`
+  echo embree appears to be already installed \(lock file ${name}.done exists\) - skipping.
+fi
