@@ -26,8 +26,7 @@ sudo git clone --recurse-submodules --single-branch --branch develop --depth 1 h
 cd openmc
 sudo mkdir build
 cd build
-sudo cmake -Doptimize=on \
-           -Ddagmc=ON \
+cmake -DOPENMC_USE_DAGMC=ON \
            -DDAGMC_ROOT=$HOME/openmc/DAGMC \
            -DHDF5_PREFER_PARALLEL=off ..
 sudo make install
