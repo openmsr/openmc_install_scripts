@@ -27,7 +27,7 @@ jobs:
       - name: checkout_main_repo
         uses: actions/checkout@v2
         with:
-          repository: 'openmsr/openmc-install_scripts'
+          repository: 'openmsr/openmc_install_scripts'
           ref: 'HEAD'
           path: openmc-install-scripts
           submodules: true
