@@ -1,4 +1,4 @@
-build Debian11
+name: build Debian11
 on:
   workflow-dispatch:
     inputs:
