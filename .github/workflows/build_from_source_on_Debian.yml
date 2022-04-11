@@ -1,0 +1,35 @@
+build Debian11
+on:
+  workflow-dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning' 
+      print_tags:
+        description: 'True to print to STDOUT'
+        required: true 
+      tags:
+        description: 'Test scenario tags'
+        required: truejobs:
+jobs:
+  print-tag:
+    runs-on: ubuntu-latest
+    if:  ${{ github.event.inputs.print_tags == 'true' }} 
+    steps:
+      - name: Print the input tag to STDOUT
+        run: echo  The tags are ${{ github.event.inputs.tags }}
+  run-embree-installer:
+    runs-on: debian
+    steps:
+      name: checkout_main_repo
+        uses: actions/checkout@v2
+        with:
+          repository: 'openmsr/openmc-install_scripts'
+          ref: 'HEAD'
+          path: openmc-install-scripts
+          submodules: true
+      name: embree-install
+        run: |
+          cd openmsr-install-scripts/Debian11
+          ./embree-install.sh
