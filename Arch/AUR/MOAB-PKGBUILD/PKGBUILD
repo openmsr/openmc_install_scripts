@@ -38,22 +38,22 @@ build() {
 	         -DENABLE_BLASLAPACK=OFF \
 	         -DBUILD_SHARED_LIBS=ON \
 	         -DCMAKE_INSTALL_PREFIX=/opt/moab
-	make
-	make install
+	sudo make
+	sudo make install
 	cmake .. -DENABLE_HDF5=ON \
 	         -DENABLE_PYMOAB=ON \
 	         -DENABLE_FORTRAN=OFF \
 	         -DBUILD_SHARED_LIBS=ON \
 	         -DENABLE_BLASLAPACK=OFF \
 	         -DCMAKE_INSTALL_PREFIX=/opt/moab
-	make
+	sudo make
 }
 
 package() {
 	cd $srcdir/$pkgname/build
-	make DESTDIR="${pkgdir}" install
+	sudo make DESTDIR="${pkgdir}" install
 	cd pymoab
 	ls
-	bash install.sh
+	sudo bash install.sh
 	python setup.py install
 }

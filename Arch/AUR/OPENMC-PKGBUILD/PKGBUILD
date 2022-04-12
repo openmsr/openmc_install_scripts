@@ -37,12 +37,12 @@ build() {
   cmake -DOPENMC_USE_DAGMC=ON \
         -DDAGMC_ROOT=/opt/dagmc \
         -DHDF5_PREFER_PARALLEL=off ..
-  make
+  sudo make
 }
 
 package() {
   cd $srcdir/$pkgname/build
-  make install
+  sudo make install
   cd ..
   python setup.py install
 }
