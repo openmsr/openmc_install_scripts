@@ -29,12 +29,12 @@ build() {
 	cd $srcdir/$pkgname
 	mkdir build && cd build
 	cmake .. -DEMBREE_ISPC_SUPPORT=OFF \
-		 -DCMAKE_C_COMPILER=gcc \
+		 			 -DCMAKE_C_COMPILER=gcc \
 	         -DCMAKE_INSTALL_PREFIX=/opt/embree
 }
 
 package() {
 	cd $srcdir/$pkgname/build
-	make
-	make install
+	sudo make
+	sudo make install
 }
