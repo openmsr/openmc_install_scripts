@@ -24,15 +24,15 @@ if [ ! -e ${name}.done ]; then
 	ccores=$1
   fi
 
-  mkdir $HOME/openmc/double-down
-  cd $HOME/openmc/double-down
+  mkdir /opt/double-down
+  cd /opt/double-down
   git clone --single-branch --branch main --depth 1 https://github.com/pshriwise/double-down.git
   mkdir build
   cd build
-  cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \
-                     -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down \
-                     -DEMBREE_DIR=$HOME/openmc/embree
-  make -j ${ccores}
+  cmake ../double-down -DMOAB_DIR=/opt/MOAB \
+                       -DCMAKE_INSTALL_PREFIX=/opt/double-down \
+                       -DEMBREE_DIR=/opt/embree
+  sudo make -j ${ccores}
   sudo make install
   
   #touch a lock file to avoid uneccessary rebuilds
