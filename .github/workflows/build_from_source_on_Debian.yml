@@ -32,5 +32,5 @@ jobs:
           submodules: true
       - name: embree-install
         run: |
-          cd openmsr-install-scripts/Debian11
+          cd openmsr_install_scripts/Debian11
           ./embree-install.sh
