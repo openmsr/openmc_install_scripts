@@ -29,7 +29,6 @@ jobs:
         with:
           repository: 'openmsr/openmc_install_scripts'
           ref: 'main'
-          path: openmc-install-scripts
           submodules: true
       - name: embree-install
         run: |
