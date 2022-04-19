@@ -15,7 +15,7 @@ sudo apt-get install --yes gcc\
 	build-essential\
 	libeigen3-dev \
         libnetcdf-dev \
-	libnetcdf13\
+	libnetcdf15\
         libnetcdf-mpi-dev\
 	libnetcdf-mpi-13\
 	python3-netcdf4 \
