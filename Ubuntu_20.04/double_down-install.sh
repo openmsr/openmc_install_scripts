@@ -18,17 +18,17 @@ else
 	ccores=$1
 fi
 
+WD=`pwd`
+name=`basename $0`
+package_name='double_down'
 
 sudo apt-get install --yes doxygen
 
 #if there is a .done-file then skip this step
 if [ ! -e $0.done ]; then
 
-  touch ${0}.done
-
-  cd $HOME/openmc
-  mkdir double-down
-  cd double-down
+  mkdir -p $HOME/openmc/double-down
+  cd $HOME/openmc/double-down
   git clone --single-branch --branch main --depth 1 https://github.com/pshriwise/double-down.git
   mkdir build
   cd build
@@ -39,6 +39,9 @@ if [ ! -e $0.done ]; then
   make install
   cd ../..
   rm -rf /double-down/build /double-down/double-down
+
+  cd ${WD}
+  touch ${0}.done
 else
    name=`basename $0`
    echo double-down appears to already be installed \(lock file ${name}.done exists\) - skipping.
