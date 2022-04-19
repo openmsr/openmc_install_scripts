@@ -29,9 +29,9 @@ jobs:
         with:
           repository: 'openmsr/openmc_install_scripts'
           ref: 'main'
-          path: openmc-install-scripts
+          path: openmc_install_scripts
           submodules: true
       - name: embree-install
         run: |
-          cd openmsr-install-scripts/Debian11
+          cd openmc_install_scripts/Ubuntu_20.04
           ./embree-install.sh
