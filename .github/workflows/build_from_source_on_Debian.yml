@@ -8,10 +8,12 @@ on:
         default: 'warning' 
       print_tags:
         description: 'True to print to STDOUT'
-        required: true 
+        required: true
+        default: true
       tags:
         description: 'Test scenario tags'
         required: true
+        default: false
   schedule:
     - cron: '44 4 * * 0'
 jobs:
