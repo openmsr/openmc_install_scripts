@@ -1,0 +1,43 @@
+#dagmc-install.sh:sudo apt-get install --yes 
+	python
+#double_down-install.sh:sudo apt-get install --yes 
+	doxygen
+#embree-install.sh:sudo apt-get install --yes
+	gcc
+       	build-essential
+	cpp
+        make
+        cmake
+        libglfw3
+        libglfw3-dev
+        libtbb2
+        libtbb-dev
+        libopenimageio2.2
+        libopenimageio-dev
+#moab-install.sh:sudo apt-get install --yes
+	gcc
+	cmake
+	make
+	build-essential
+	libeigen3-dev 
+        libnetcdf-dev 
+	libnetcdf18
+        libnetcdf-mpi-dev
+	libnetcdf-mpi-18
+	python3-netcdf4 
+        libhdf5-103 
+        libhdf5-cpp-103 
+        libhdf5-dev 
+        python3-setuptools
+	cython3
+#openmc-install.sh:sudo apt-get install --yes
+	libpng-dev
+	libpng++-dev
+	imagemagick
+	python3-lxml
+        python3-scipy
+        python3-pandas
+        python3-h5py
+        python3-matplotlib
+        python3-uncertainties 
+	
