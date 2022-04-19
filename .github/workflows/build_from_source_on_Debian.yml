@@ -33,7 +33,5 @@ jobs:
           submodules: true
       - name: embree-install
         run: |
-          ls .
-          ls openmc*
-          cd openmc_install_scripts/Debian11
+          cd openmc_install_scripts/Ubuntu_20.04
           ./embree-install.sh
