@@ -36,4 +36,4 @@ jobs:
       - name: embree-install
         run: |
           cd openmc_install_scripts/Ubuntu_20.04
-          ./moab-install.sh
+          ./double_down-install.sh
