@@ -9,6 +9,10 @@ else
 	ccores=$1
 fi
 
+WD=`pwd`
+name=`basename $0`
+package_name='MOAB'
+
 sudo apt-get install --yes gcc\
 	cmake\
 	make\
@@ -27,8 +31,6 @@ sudo apt-get install --yes gcc\
 
 #if there is a .done-file then skip this step
 if [ ! -e $0.done ]; then
-
-  touch ${0}.done
 
   cd $HOME
   mkdir -p openmc
@@ -50,6 +52,11 @@ if [ ! -e $0.done ]; then
   cd pymoab
   bash install.sh
   sudo python3 setup.py install
+
+  cd ${WD}
+
+  touch ${0}.done
+
 else
    name=`basename $0`
    echo MOAB appears to already be installed \(lock file ${name}.done exists\) - skipping.
