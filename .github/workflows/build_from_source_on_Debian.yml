@@ -36,4 +36,20 @@ jobs:
       - name: embree-install
         run: |
           cd openmc_install_scripts/Ubuntu_20.04
+          ./embree-install.sh
+      - name: moab-install
+        run: |
+          cd openmc_install_scripts/Ubuntu_20.04
+          ./moab-install.sh
+      - name: double_down-install
+        run: |
+          cd openmc_install_scripts/Ubuntu_20.04
           ./double_down-install.sh
+      - name: dagmc-install
+        run: |
+          cd openmc_install_scripts/Ubuntu_20.04
+          ./dagmc-install.sh
+      - name: openmc-install
+        run: |
+          cd openmc_install_scripts/Ubuntu_20.04
+          ./openmc-install.sh
