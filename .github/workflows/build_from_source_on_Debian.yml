@@ -2,7 +2,7 @@ name: build Ubuntu
 on:
   workflow_dispatch:
   schedule:
-    - cron: '15 8 * * *'
+    - cron: '15 10 * * *'
 jobs:
   run-openmc-installer:
     runs-on: ubuntu-latest
