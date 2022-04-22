@@ -26,7 +26,7 @@ jobs:
         run: |
           cd openmc_install_scripts/Ubuntu_20.04
           ./dagmc-install.sh
-      - name: dagmc-install
+      - name: openmc-install
         run: |
           cd openmc_install_scripts/Ubuntu_20.04
           ./openmc-install.sh
