@@ -33,10 +33,6 @@ jobs:
           ref: 'main'
           path: openmc_install_scripts
           submodules: true
-      - name: embree-install
-        run: |
-          cd openmc_install_scripts/Ubuntu_20.04
-          ./embree-install.sh
       - name: moab-install
         run: |
           cd openmc_install_scripts/Ubuntu_20.04
