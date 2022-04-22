@@ -16,6 +16,8 @@ WD=`pwd`
 name=`basename $0`
 package_name='double_down'
 
+sudo apt-get install --yes doxygen libembree-dev libembree3-3
+
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
   sudo apt-get install --yes doxygen\
@@ -34,8 +36,12 @@ if [ ! -e ${name}.done ]; then
   cd build
   cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \
                      -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down
+<<<<<<< HEAD
 
   make -j $ccores
+=======
+  make -j $ccores 
+>>>>>>> d6d3d91 (do not build embree from source - install binary instead)
   make install
 
   cd ${WD}
