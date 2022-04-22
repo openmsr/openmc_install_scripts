@@ -16,10 +16,6 @@ jobs:
           submodules: true
       - name: bootstrap
         run: sudo apt-get -y update
-      - name: embree-install
-        run: |
-          cd openmc_install_scripts/Ubuntu_20.04
-          ./embree-install.sh
       - name: moab-install
         run: |
           cd openmc_install_scripts/Ubuntu_20.04
