@@ -1,9 +1,11 @@
 name: build Ubuntu
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '44 4 * * 0'
 jobs:
   run-openmc-installer:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: checkout_main_repo
         uses: actions/checkout@v3
