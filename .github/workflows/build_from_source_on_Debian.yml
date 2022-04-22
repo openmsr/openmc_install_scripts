@@ -1,0 +1,32 @@
+name: build Ubuntu
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '44 4 * * 0'
+jobs:
+  run-openmc-installer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout_main_repo
+        uses: actions/checkout@v3
+        with:
+          repository: 'openmsr/openmc_install_scripts'
+          ref: 'main'
+          path: openmc_install_scripts
+          submodules: true
+      - name: moab-install
+        run: |
+          cd openmc_install_scripts/Ubuntu_20.04
+          ./moab-install.sh
+      - name: double_down-install
+        run: |
+          cd openmc_install_scripts/Ubuntu_20.04
+          ./double_down-install.sh
+      - name: dagmc-install
+        run: |
+          cd openmc_install_scripts/Ubuntu_20.04
+          ./dagmc-install.sh
+      - name: dagmc-install
+        run: |
+          cd openmc_install_scripts/Ubuntu_20.04
+          ./openmc-install.sh
