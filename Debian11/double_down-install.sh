@@ -9,8 +9,8 @@ set -ex
 #echo "Compiled & installed embree, proceeding..."
 
 #moab compile & install
-#./moab-install.sh
-#echo "Compiled & installed moab, proceeding..."
+./moab-install.sh
+echo "Compiled & installed moab, proceeding..."
 
 if [ "x" == "$1x" ]; then
 	ccores=1
@@ -19,7 +19,9 @@ else
 fi
 
 
-sudo apt-get install --yes doxygen
+sudo apt-get install --yes doxygen\
+        libembree3-3 libembree-dev
+
 
 #if there is a .done-file then skip this step
 if [ ! -e $0.done ]; then
@@ -33,8 +35,8 @@ if [ ! -e $0.done ]; then
   mkdir build
   cd build
   cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \
-                     -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down \
-                     -DEMBREE_DIR=$HOME/openmc/embree
+                     -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down
+  
   make -j $ccores 
   make install
   cd ../..
