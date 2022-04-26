@@ -5,12 +5,18 @@
 set -ex
 
 #embree compile & install
-#./embree-install.sh
-#echo "Compiled & installed embree, proceeding..."
+./embree-install.sh
+echo "Compiled & installed embree, proceeding..."
 
 #moab compile & install
 ./moab-install.sh
 echo "Compiled & installed moab, proceeding..."
+
+if [ "x" == "$1x" ]; then
+	ccores=1
+else
+	ccores=$1
+fi
 
 WD=`pwd`
 name=`basename $0`
@@ -41,7 +47,6 @@ if [ ! -e ${name}.done ]; then
   cd ..
   mkdir -p build
   cd build
-<<<<<<< HEAD
   
 
   cmake ../double-down -DMOAB_DIR=${install_prefix} \
@@ -49,11 +54,6 @@ if [ ! -e ${name}.done ]; then
                        -DCMAKE_VERBOSE_MAKEFILE=TRUE \
                        -DCMAKE_BUILD_TYPE=Debug
   make -j ${ccores}
-=======
-  cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \
-                     -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down
-  make -j $ccores 
->>>>>>> d6d3d91 (do not build embree from source - install binary instead)
   make install
 
   cd ${WD}
