@@ -5,12 +5,12 @@
 set -ex
 
 #embree compile & install
-#./embree-install.sh
-#echo "Compiled & installed embree, proceeding..."
+./embree-install.sh
+echo "Compiled & installed embree, proceeding..."
 
 #moab compile & install
-#./moab-install.sh
-#echo "Compiled & installed moab, proceeding..."
+./moab-install.sh
+echo "Compiled & installed moab, proceeding..."
 
 if [ "x" == "$1x" ]; then
 	ccores=1
