@@ -12,6 +12,12 @@ echo "Compiled & installed embree, proceeding..."
 ./moab-install.sh
 echo "Compiled & installed moab, proceeding..."
 
+if [ "x" == "$1x" ]; then
+	ccores=1
+else
+	ccores=$1
+fi
+
 WD=`pwd`
 name=`basename $0`
 package_name='double_down'
@@ -36,12 +42,7 @@ if [ ! -e ${name}.done ]; then
   cd build
   cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \
                      -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down
-<<<<<<< HEAD
-
   make -j $ccores
-=======
-  make -j $ccores 
->>>>>>> d6d3d91 (do not build embree from source - install binary instead)
   make install
 
   cd ${WD}

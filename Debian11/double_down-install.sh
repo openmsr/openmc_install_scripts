@@ -16,6 +16,16 @@ WD=`pwd`
 name=`basename $0`
 package_name='double_down'
 
+if [ "x" == "$1x" ]; then
+	ccores=1
+else
+	ccores=$1
+fi
+
+
+sudo apt-get install --yes doxygen\
+        libembree3-3 libembree-dev
+
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
   sudo apt-get install --yes doxygen\
@@ -34,8 +44,8 @@ if [ ! -e ${name}.done ]; then
   cd build
   cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \
                      -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down
-
-  make -j $ccores
+  
+  make -j $ccores 
   make install
 
   cd ${WD}
