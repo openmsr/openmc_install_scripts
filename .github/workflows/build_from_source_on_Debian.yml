@@ -15,7 +15,7 @@ jobs:
           path: openmc_install_scripts
           submodules: true
       - name: bootstrap
-        run: apt-get -y update
+        run: sudo apt-get -y update
       - name: embree-install
         run: |
           cd openmc_install_scripts/Ubuntu_20.04
