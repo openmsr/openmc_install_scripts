@@ -1,8 +1,6 @@
 name: build Ubuntu
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '44 4 * * *'
 jobs:
   run-openmc-installer:
     runs-on: ubuntu-22.04
