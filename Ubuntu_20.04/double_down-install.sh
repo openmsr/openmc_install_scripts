@@ -12,20 +12,20 @@ echo "Compiled & installed embree, proceeding..."
 ./moab-install.sh
 echo "Compiled & installed moab, proceeding..."
 
-if [ "x" == "$1x" ]; then
-	ccores=1
-else
-	ccores=$1
-fi
-
 WD=`pwd`
 name=`basename $0`
 package_name='double_down'
 
-sudo apt-get install --yes doxygen libembree-dev libembree3-3
-
 #if there is a .done-file then skip this step
-if [ ! -e $0.done ]; then
+if [ ! -e ${name}.done ]; then
+  sudo apt-get install --yes doxygen\
+        libembree3-3 libembree-dev
+
+  #Should we run make in parallel? Default is to use all available cores
+  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
+  if [ "x$1" != "x" ]; then
+	ccores=$1
+  fi
 
   mkdir -p $HOME/openmc/double-down
   cd $HOME/openmc/double-down
@@ -34,14 +34,12 @@ if [ ! -e $0.done ]; then
   cd build
   cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \
                      -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down
-  make -j $ccores 
+
+  make -j $ccores
   make install
-  cd ../..
-  rm -rf /double-down/build /double-down/double-down
 
   cd ${WD}
-  touch ${0}.done
+  touch ${name}.done
 else
-   name=`basename $0`
-   echo double-down appears to already be installed \(lock file ${name}.done exists\) - skipping.
+  echo double-down appears to be already installed \(lock file ${name}.done exists\) - skipping.
 fi
