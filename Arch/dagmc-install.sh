@@ -26,8 +26,8 @@ if [ ! -e ${name}.done ]; then
   fi
   
 
-  mkdir -p $HOME/dagmc/DAGMC
-  cd $HOME/dagmc/DAGMC
+  mkdir -p $HOME/openmc/DAGMC
+  cd $HOME/openmc/DAGMC
   git clone --single-branch --branch develop --depth 1 https://github.com/svalinn/DAGMC.git
   mkdir build
   cd build
