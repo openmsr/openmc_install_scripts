@@ -12,17 +12,11 @@ set -ex
 ./dagmc-install.sh
 echo "Compiled & installed dagmc, proceeding..."
 
-if [ "x" == "$1x" ]; then
-	ccores=1
-else
-	ccores=$1
-fi
 
 WD=`pwd`
 name=`basename $0`
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-
   sudo apt-get install --yes libpng-dev libpng++-dev\
 	imagemagick\
 	python3-lxml\
