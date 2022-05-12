@@ -12,7 +12,6 @@ set -ex
 ./dagmc-install.sh
 echo "Compiled & installed dagmc, proceeding..."
 
-
 WD=`pwd`
 name=`basename $0`
 #if there is a .done-file then skip this step
