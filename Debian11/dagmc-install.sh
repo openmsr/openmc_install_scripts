@@ -8,12 +8,13 @@ set -ex
 ./double_down-install.sh
 echo "Compiled & installed double-down, proceeding..."
 
-sudo apt-get install --yes python
+WD=`pwd`
+name=`basename $0`
 
 #if there is a .done-file then skip this step
 if [ ! -e $0.done ]; then
 
-  touch ${0}.done
+  sudo apt-get install --yes python3
 
   cd $HOME/openmc
   mkdir DAGMC
@@ -29,10 +30,10 @@ if [ ! -e $0.done ]; then
                -DCMAKE_INSTALL_PREFIX=$HOME/openmc/DAGMC/ \
                -DDOUBLE_DOWN_DIR=$HOME/openmc/double-down
   make install
-  cd ../..
-  rm -rf DAGMC/DAGMC /DAGMC/build
+  cd $WD
+
+  touch ${0}.done
 else
-   name=`basename $0`
-   echo DAGMC appears to already be installed \(lock file ${name}.done exists\) - skipping.
+  echo DAGMC appears already to be installed \(lock file ${name}.done exists\) - skipping.
 fi
   

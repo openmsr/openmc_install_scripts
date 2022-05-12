@@ -12,7 +12,18 @@ set -ex
 ./dagmc-install.sh
 echo "Compiled & installed dagmc, proceeding..."
 
-sudo apt-get install --yes libpng-dev libpng++-dev\
+if [ "x" == "$1x" ]; then
+	ccores=1
+else
+	ccores=$1
+fi
+
+WD=`pwd`
+name=`basename $0`
+#if there is a .done-file then skip this step
+if [ ! -e ${name}.done ]; then
+
+  sudo apt-get install --yes libpng-dev libpng++-dev\
 	imagemagick\
 	python3-lxml\
         python3-scipy\
@@ -21,28 +32,36 @@ sudo apt-get install --yes libpng-dev libpng++-dev\
         python3-matplotlib\
         python3-uncertainties 
 
-#if there is a .done-file then skip this step
-if [ ! -e $0.done ]; then
+
   #source install
   cd $HOME
-  mkdir -p openmc_chkout
-  cd openmc_chkout
-  git clone --recurse-submodules --single-branch --branch develop --depth 1 https://github.com/openmc-dev/openmc.git
+  mkdir -p openmc
   cd openmc
+  if [ -e openmc ]; then
+        cd openmc
+        git pull --recurse-submodules
+  else
+        git clone --recurse-submodules --single-branch --branch develop --depth 1 https://github.com/openmc-dev/openmc.git
+        cd openmc
+  fi
 
-
+  if [ -e build ]; then
+    rm -rf build.bak
+    mv build build.bak
+  fi
   mkdir -p build
   cd build
   cmake -DOPENMC_USE_DAGMC=ON \
-           -DDAGMC_ROOT=$HOME/openmc/DAGMC \
-           -DHDF5_PREFER_PARALLEL=off ..
+        -DDAGMC_ROOT=$HOME/openmc/DAGMC \
+        -DHDF5_PREFER_PARALLEL=off ..
   sudo make install
   cd ..
   sudo pip3 install .
-  rm -rf build
+
+  cd $WD
+
   #this was apparently successful - mark as done. 
-  touch ${0}.done
+  touch ${name}.done
 else
-   name=`basename $0`
-   echo openmc appears to already be installed \(lock file ${name}.done exists\) - skipping.
+  echo openmc appears to be already installed \(lock file ${name}.done exists\) - skipping.
 fi
