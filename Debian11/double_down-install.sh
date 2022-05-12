@@ -14,6 +14,7 @@ echo "Compiled & installed moab, proceeding..."
 
 WD=`pwd`
 name=`basename $0`
+package_name='double_down'
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
@@ -26,11 +27,8 @@ if [ ! -e ${name}.done ]; then
 	ccores=$1
   fi
 
-  cd $HOME
-  mkdir -p openmc
-  cd openmc
-  mkdir -p double-down
-  cd double-down
+  mkdir -p $HOME/openmc/double-down
+  cd $HOME/openmc/double-down
   git clone --single-branch --branch main --depth 1 https://github.com/pshriwise/double-down.git
   mkdir build
   cd build
@@ -40,8 +38,7 @@ if [ ! -e ${name}.done ]; then
   make -j $ccores
   make install
 
-  cd $WD
-
+  cd ${WD}
   touch ${name}.done
 else
   echo double-down appears to be already installed \(lock file ${name}.done exists\) - skipping.
