@@ -9,7 +9,13 @@ else
 	ccores=$1
 fi
 
-sudo apt-get install --yes gcc\
+WD=`pwd`
+name=`basename $0`
+
+#if there is a .done-file then skip this step
+if [ ! -e ${name}.done ]; then
+
+  sudo apt-get install --yes gcc\
 	cmake\
 	make\
 	build-essential\
@@ -25,17 +31,12 @@ sudo apt-get install --yes gcc\
         python3-setuptools\
 	cython3
 
-#if there is a .done-file then skip this step
-if [ ! -e $0.done ]; then
-
-  touch ${0}.done
-
   cd $HOME
   mkdir -p openmc
   cd openmc
   mkdir -p MOAB
   cd MOAB
-  git clone  --single-branch --branch 5.3.0 --depth 1 https://bitbucket.org/fathomteam/moab.git
+  git clone  --single-branch --branch 5.3.1 --depth 1 https://bitbucket.org/fathomteam/moab.git
   mkdir -p build
   cd build
   cmake ../moab -DENABLE_HDF5=ON \
@@ -43,14 +44,18 @@ if [ ! -e $0.done ]; then
               -DENABLE_FORTRAN=OFF \
               -DENABLE_BLASLAPACK=OFF \
               -DBUILD_SHARED_LIBS=ON \
-              -DENABLE_PYMOAB=ON \
+              -DENABLE_PYMOAB=OFF \
               -DCMAKE_INSTALL_PREFIX=$HOME/openmc/MOAB
-  make  -j $ccores
-  make install 
-  cd pymoab
-  bash install.sh
-  sudo python3 setup.py install
+  make -j $ccores
+  make install
+
+  #cd pymoab
+  #bash install.sh
+  #sudo python3 setup.py install
+
+  cd $WD
+
+  touch ${name}.done
 else
-   name=`basename $0`
-   echo MOAB appears to already be installed \(lock file ${name}.done exists\) - skipping.
+  echo MOAB appears to be already installed \(lock file ${name}.done exists\) - skipping.
 fi

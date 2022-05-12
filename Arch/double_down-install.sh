@@ -18,7 +18,7 @@ name=`basename $0`
 if [ ! -e ${name}.done ]; then
   sudo pacman -Syu --noconfirm doxygen
 
-  #Should we run make in parallel? Default is yo use all available cores
+  #Should we run make in parallel? Default is to use all available cores
   ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
   if [ "x$1" != "x" ]; then
 	ccores=$1
