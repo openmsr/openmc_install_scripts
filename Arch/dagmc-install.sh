@@ -44,19 +44,14 @@ if [ ! -e ${name}.done ]; then
                -DDOUBLE_DOWN=ON\
                -DBUILD_STATIC_EXE=OFF\
                -DBUILD_STATIC_LIBS=OFF\
-<<<<<<< HEAD
-               -DCMAKE_INSTALL_PREFIX=${install_prefix}/DAGMC/ \
-               -DDOUBLE_DOWN_DIR=${install_prefix}/double-down
-=======
                -DCMAKE_INSTALL_PREFIX=${install_prefix}\
                -DDOUBLE_DOWN_DIR=${install_prefix}
->>>>>>> 6d9a6b5 (dont use the debug flag here)
+  
   make -j $ccores
   sudo make install
 
   cd ${WD}
   touch ${name}.done
 else
-  echo DAGMC appears already to be installed \(lock file ${name}.done exists\) \
-        - skipping.
+  echo DAGMC appears already to be installed \(lock file ${name}.done exists\) - skipping.
 fi
