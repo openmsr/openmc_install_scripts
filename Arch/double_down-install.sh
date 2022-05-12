@@ -31,8 +31,10 @@ if [ ! -e ${name}.done ]; then
 
   mkdir -p $HOME/openmc/double-down
   cd $HOME/openmc/double-down
-  git clone --single-branch --branch main --depth 1 https://github.com/pshriwise/double-down.git
-  mkdir build
+  if [ ! -d double-down ]; then
+	  git clone --single-branch --branch main --depth 1 https://github.com/pshriwise/double-down.git
+  fi
+  mkdir -p build
   cd build
   cmake ../double-down -DMOAB_DIR=${install_prefix}/MOAB \
                        -DCMAKE_INSTALL_PREFIX=${install_prefix}/double-down \
