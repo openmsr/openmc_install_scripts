@@ -27,16 +27,15 @@ if [ ! -e ${name}.done ]; then
   fi
 
   #run actual install process
-  cd /opt
-  mkdir -p embree
-  cd embree
+  mkdir -p $HOME/openmc/embree
+  cd $HOME/openmc/embree
   git clone --single-branch --branch v3.13.3 --depth 1 https://github.com/embree/embree.git
-  mkdir build
+  mkdir -p build
   cd build
-  cmake ../embree -DCMAKE_INSTALL_PREFIX=/opt/embree \
-                  -DEMBREE_ISPC_SUPPORT=OFF \
-		              -DEMBREE_TUTORIALS=OFF
-  sudo make -j ${ccores}
+  cmake ../embree -DCMAKE_INSTALL_PREFIX=/opt/embree\
+              -DEMBREE_ISPC_SUPPORT=OFF\
+              -DEMBREE_TUTORIALS=OFF
+  make -j ${ccores}
   sudo make install
   cd ${WD}
   #touch a lock file to avoid uneccessary rebuilds
