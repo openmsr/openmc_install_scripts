@@ -37,18 +37,31 @@ if [ ! -e ${name}.done ]; then
 	ccores=$1
   fi
 
+<<<<<<< HEAD
   mkdir -p $HOME/openmc/double-down
   cd $HOME/openmc/double-down
+=======
+  cd $HOME
+  mkdir -p openmc
+  cd openmc
+  mkdir -p double-down
+  cd double-down
+>>>>>>> dcddca6 (refactoring incorporqating changes forom Arch)
   git clone --single-branch --branch main --depth 1 https://github.com/pshriwise/double-down.git
   mkdir build
   cd build
   cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \
                      -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down
-  
-  make -j $ccores 
+
+  make -j $ccores
   make install
 
+<<<<<<< HEAD
   cd ${WD}
+=======
+  cd $WD
+
+>>>>>>> dcddca6 (refactoring incorporqating changes forom Arch)
   touch ${name}.done
 else
   echo double-down appears to be already installed \(lock file ${name}.done exists\) - skipping.

@@ -52,7 +52,12 @@ if [ ! -e ${name}.done ]; then
   #bash install.sh
   #sudo python3 setup.py install
 
+<<<<<<< HEAD
   cd ${WD}
+=======
+  cd $WD
+
+>>>>>>> dcddca6 (refactoring incorporqating changes forom Arch)
   touch ${name}.done
 else
   echo MOAB appears to be already installed \(lock file ${name}.done exists\) - skipping.
