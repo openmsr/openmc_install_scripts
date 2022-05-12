@@ -14,7 +14,12 @@ echo "Compiled & installed moab, proceeding..."
 
 WD=`pwd`
 name=`basename $0`
+package_name='double_down'
 
+install_prefix="/opt"
+build_prefix="$HOME/openmc"
+
+#if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
   sudo pacman -Syu --noconfirm doxygen
 
@@ -24,17 +29,17 @@ if [ ! -e ${name}.done ]; then
 	ccores=$1
   fi
 
-  mkdir /opt/double-down
-  cd /opt/double-down
+  mkdir -p $HOME/openmc/double-down
+  cd $HOME/openmc/double-down
   git clone --single-branch --branch main --depth 1 https://github.com/pshriwise/double-down.git
   mkdir build
   cd build
-  cmake ../double-down -DMOAB_DIR=/opt/MOAB \
-                       -DCMAKE_INSTALL_PREFIX=/opt/double-down \
-                       -DEMBREE_DIR=/opt/embree
-  sudo make -j ${ccores}
+  cmake ../double-down -DMOAB_DIR=${install_prefix}/MOAB \
+                       -DCMAKE_INSTALL_PREFIX=${install_prefix}/double-down \
+                       -DEMBREE_DIR=${install_prefix}/embree
+  make -j ${ccores}
   sudo make install
-  
+
   #touch a lock file to avoid uneccessary rebuilds
   cd $WD
   touch ${name}.done
