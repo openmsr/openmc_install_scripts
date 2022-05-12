@@ -3,11 +3,6 @@
 ################################################################################
 #!/bin/bash
 set -ex
-if [ "x" == "$1x" ]; then
-	ccores=1
-else
-	ccores=$1
-fi
 
 WD=`pwd`
 name=`basename $0`
@@ -31,12 +26,15 @@ if [ ! -e ${name}.done ]; then
         python3-setuptools\
 	cython3
 
-  cd $HOME
-  mkdir -p openmc
-  cd openmc
-  mkdir -p MOAB
-  cd MOAB
-  git clone  --single-branch --branch 5.3.1 --depth 1 https://bitbucket.org/fathomteam/moab.git
+  #Should we run make in parallel? Default is to use all available cores
+  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
+  if [ "x$1" != "x" ]; then
+	ccores=$1
+  fi
+
+  mkdir -p $HOME/openmc/MOAB
+  cd $HOME/openmc/MOAB
+  git clone --single-branch --branch 5.3.1 --depth 1 https://bitbucket.org/fathomteam/moab.git
   mkdir -p build
   cd build
   cmake ../moab -DENABLE_HDF5=ON \
@@ -53,8 +51,7 @@ if [ ! -e ${name}.done ]; then
   #bash install.sh
   #sudo python3 setup.py install
 
-  cd $WD
-
+  cd ${WD}
   touch ${name}.done
 else
   echo MOAB appears to be already installed \(lock file ${name}.done exists\) - skipping.

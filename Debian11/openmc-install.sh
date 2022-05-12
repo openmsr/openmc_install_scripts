@@ -12,17 +12,11 @@ set -ex
 ./dagmc-install.sh
 echo "Compiled & installed dagmc, proceeding..."
 
-if [ "x" == "$1x" ]; then
-	ccores=1
-else
-	ccores=$1
-fi
 
 WD=`pwd`
 name=`basename $0`
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-
   sudo apt-get install --yes libpng-dev libpng++-dev\
 	imagemagick\
 	python3-lxml\
@@ -30,13 +24,17 @@ if [ ! -e ${name}.done ]; then
         python3-pandas\
         python3-h5py\
         python3-matplotlib\
-        python3-uncertainties 
+        python3-uncertainties
 
+  #Should we run make in parallel? Default is to use all available cores
+  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
+  if [ "x$1" != "x" ]; then
+	ccores=$1
+  fi
 
   #source install
-  cd $HOME
-  mkdir -p openmc
-  cd openmc
+  mkdir -p $HOME/openmc
+  cd $HOME/openmc
   if [ -e openmc ]; then
         cd openmc
         git pull --recurse-submodules
@@ -54,11 +52,13 @@ if [ ! -e ${name}.done ]; then
   cmake -DOPENMC_USE_DAGMC=ON \
         -DDAGMC_ROOT=$HOME/openmc/DAGMC \
         -DHDF5_PREFER_PARALLEL=off ..
+  make -j $ccores
   sudo make install
+
   cd ..
   sudo pip3 install .
 
-  cd $WD
+  cd ${WD}
 
   #this was apparently successful - mark as done. 
   touch ${name}.done
