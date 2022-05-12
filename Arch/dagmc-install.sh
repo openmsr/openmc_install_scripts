@@ -17,7 +17,7 @@ build_prefix="$HOME/openmc"
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-  pacman -Syu python
+  sudo pacman -Syu python
 
   #Should we run make in parallel? Default is to use all available cores
   ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
