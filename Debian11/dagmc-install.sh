@@ -10,9 +10,10 @@ echo "Compiled & installed double-down, proceeding..."
 
 WD=`pwd`
 name=`basename $0`
+package_name='dagmc'
 
 #if there is a .done-file then skip this step
-if [ ! -e $0.done ]; then
+if [ ! -e ${name}.done ]; then
 
   sudo apt-get install --yes python3
 
@@ -36,10 +37,9 @@ if [ ! -e $0.done ]; then
                -DDOUBLE_DOWN_DIR=$HOME/openmc/double-down
   make -j $ccores
   make install
-  cd $WD
 
-  touch ${0}.done
+  cd ${WD}
+  touch ${name}.done
 else
   echo DAGMC appears already to be installed \(lock file ${name}.done exists\) - skipping.
 fi
-  
