@@ -12,17 +12,9 @@ echo "Compiled & installed embree, proceeding..."
 ./moab-install.sh
 echo "Compiled & installed moab, proceeding..."
 
-if [ "x" == "$1x" ]; then
-	ccores=1
-else
-	ccores=$1
-fi
-
 WD=`pwd`
 name=`basename $0`
 package_name='double_down'
-
-sudo apt-get install --yes doxygen libembree-dev libembree3-3
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
@@ -47,13 +39,10 @@ if [ ! -e ${name}.done ]; then
   cd ..
   mkdir -p build
   cd build
-  
+  cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \
+                     -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down
 
-  cmake ../double-down -DMOAB_DIR=${install_prefix} \
-                       -DCMAKE_INSTALL_PREFIX=${install_prefix} \
-                       -DCMAKE_VERBOSE_MAKEFILE=TRUE \
-                       -DCMAKE_BUILD_TYPE=Debug
-  make -j ${ccores}
+  make -j $ccores
   make install
 
   cd ${WD}
