@@ -16,9 +16,14 @@ if [ ! -e $0.done ]; then
 
   sudo apt-get install --yes python3
 
-  cd $HOME/openmc
-  mkdir DAGMC
-  cd DAGMC
+  #Should we run make in parallel? Default is to use all available cores
+  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
+  if [ "x$1" != "x" ]; then
+	ccores=$1
+  fi
+
+  mkdir -p $HOME/openmc/DAGMC
+  cd $HOME/openmc/DAGMC
   git clone --single-branch --branch develop --depth 1 https://github.com/svalinn/DAGMC.git
   mkdir build
   cd build
@@ -29,6 +34,7 @@ if [ ! -e $0.done ]; then
                -DBUILD_STATIC_LIBS=OFF \
                -DCMAKE_INSTALL_PREFIX=$HOME/openmc/DAGMC/ \
                -DDOUBLE_DOWN_DIR=$HOME/openmc/double-down
+  make -j $ccores
   make install
   cd $WD
 
