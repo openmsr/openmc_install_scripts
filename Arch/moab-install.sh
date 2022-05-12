@@ -16,7 +16,7 @@ if [ ! -e ${name}.done ]; then
     sudo pacman -Syu --noconfirm \
 	eigen \
 	netcdf \
-	hdf5-openmpi \
+	hdf5 \
         python-setuptools \
 	cython
   fi
@@ -28,21 +28,15 @@ if [ ! -e ${name}.done ]; then
 
   mkdir -p $HOME/openmc/MOAB
   cd $HOME/openmc/MOAB
-  if [ ! -e moab ]; then
-    git clone --single-branch --branch 5.3.1 --depth 1 https://bitbucket.org/fathomteam/moab.git
-  else
-    cd moab
-    git pull
-  fi
+  git clone --single-branch --branch 5.3.1 --depth 1 https://bitbucket.org/fathomteam/moab.git
   mkdir -p build
   cd build
   cmake ../moab -DENABLE_HDF5=ON \
-	              -DENABLE_PYMOAB=ON \
-                -DENABLE_FORTRAN=OFF \
-                -DBUILD_SHARED_LIBS=ON \
-                -DENABLE_BLASLAPACK=OFF \
-                -DENABLE_NETCDF=ON \
-                -DCMAKE_INSTALL_PREFIX=${install_prefix}/MOAB
+              -DENABLE_PYMOAB=ON \
+              -DENABLE_FORTRAN=OFF \
+              -DBUILD_SHARED_LIBS=ON \
+              -DENABLE_BLASLAPACK=OFF \
+              -DCMAKE_INSTALL_PREFIX=${install_prefix}/MOAB
   make -j ${ccores}
   sudo make install
 
