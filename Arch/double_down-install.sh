@@ -36,8 +36,8 @@ if [ ! -e ${name}.done ]; then
   fi
   mkdir -p build
   cd build
-  cmake ../double-down -DMOAB_DIR=${install_prefix}/MOAB \
-                       -DCMAKE_INSTALL_PREFIX=${install_prefix}/double-down
+  cmake ../double-down -DMOAB_DIR=${install_prefix} \
+                       -DCMAKE_INSTALL_PREFIX=${install_prefix}
   make -j ${ccores}
   sudo make install
 
