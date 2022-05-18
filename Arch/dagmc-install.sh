@@ -33,11 +33,11 @@ if [ ! -e ${name}.done ]; then
   cd build
   cmake ../DAGMC -DBUILD_TALLY=ON \
                -DMOAB_DIR=${install_prefix}/MOAB\
-               -DDOUBLE_DOWN=ON\
+               -DDOUBLE_DOWN=OFF\
                -DBUILD_STATIC_EXE=OFF\
                -DBUILD_STATIC_LIBS=OFF\
                -DCMAKE_BUILD_TYPE=Debug\
-               -DCMAKE_INSTALL_PREFIX=${install_prefix}/DAGMC/ \
+               -DCMAKE_INSTALL_PREFIX=${install_prefix}/DAGMC\
                -DDOUBLE_DOWN_DIR=${install_prefix}/double-down
   make -j $ccores
   sudo make install
