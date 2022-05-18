@@ -55,7 +55,7 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake -DOPENMC_USE_DAGMC=ON \
-        -DDAGMC_ROOT=${install_prefix}/DAGMC \
+        -DDAGMC_ROOT=${install_prefix} \
         -DHDF5_PREFER_PARALLEL=off ..
   make -j $ccores
   sudo make install
