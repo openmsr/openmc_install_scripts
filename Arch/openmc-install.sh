@@ -57,7 +57,7 @@ if [ ! -e ${name}.done ]; then
 	-DCMAKE_INSTALL_PREFIX=${install_prefix} ..
   make -j $ccores
   sudo make install
-
+  sudo python setup.py install 
   #set up a python venv and install the python api (and deps) into that
   cd ${HOME}
   python -m venv openmc_env

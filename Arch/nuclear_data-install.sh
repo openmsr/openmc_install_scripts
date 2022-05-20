@@ -15,13 +15,13 @@ endfb_VIII="https://anl.box.com/shared/static/uhbxlrx7hvxqw27psymfbhi7bx7s6u6a.x
 jeff="https://anl.box.com/shared/static/4jwkvrr9pxlruuihcrgti75zde6g7bum.xz"
 
 cd /opt
-mkdir -p nuclear_data
+sudo mkdir -p nuclear_data
 cd nuclear_data
 
 #see other default options above
-wget $endfb_VII
+sudo wget $endfb_VIII
 
 for entry in "$PWD"/*
 do
-  tar -xvf $entry
+  sudo tar -xvf $entry
 done
