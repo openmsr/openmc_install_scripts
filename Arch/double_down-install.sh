@@ -5,8 +5,8 @@
 set -ex
 
 #embree compile & install
-./embree-install.sh
-echo "Compiled & installed embree, proceeding..."
+#./embree-install.sh
+#echo "Compiled & installed embree, proceeding..."
 
 #moab compile & install
 ./moab-install.sh
@@ -21,7 +21,7 @@ build_prefix="$HOME/openmc"
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-  sudo pacman -Syu --noconfirm doxygen
+  sudo pacman -Syu --noconfirm embree doxygen
 
   #Should we run make in parallel? Default is to use all available cores
   ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
@@ -36,10 +36,9 @@ if [ ! -e ${name}.done ]; then
   fi
   mkdir -p build
   cd build
-  sudo cmake ../double-down -DMOAB_DIR=${install_prefix}/MOAB \
-                       -DCMAKE_INSTALL_PREFIX=${install_prefix}/double-down \
-                       -DEMBREE_DIR=${install_prefix}/embree
-  sudo make -j ${ccores}
+  cmake ../double-down -DMOAB_DIR=${install_prefix}/MOAB \
+                       -DCMAKE_INSTALL_PREFIX=${install_prefix}/double-down
+  make -j ${ccores}
   sudo make install
 
   #touch a lock file to avoid uneccessary rebuilds
