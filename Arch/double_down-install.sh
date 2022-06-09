@@ -36,11 +36,11 @@ if [ ! -e ${name}.done ]; then
   fi
   mkdir -p build
   cd build
-  sudo cmake ../double-down -DMOAB_DIR=${install_prefix}/MOAB \
+  cmake ../double-down -DMOAB_DIR=${install_prefix}/MOAB \
                        -DCMAKE_BUILD_TYPE=Debug\
                        -DCMAKE_INSTALL_PREFIX=${install_prefix}/double-down \
                        -DEMBREE_DIR=${install_prefix}/embree
-  sudo make -j ${ccores}
+  make -j ${ccores}
   sudo make install
 
   #touch a lock file to avoid uneccessary rebuilds
