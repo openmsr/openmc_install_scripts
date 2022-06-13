@@ -17,9 +17,9 @@ if [ ! -e ${name}.done ]; then
 	build-essential\
 	libeigen3-dev \
         libnetcdf-dev \
-	libnetcdf15\
+	libnetcdf19\
         libnetcdf-mpi-dev\
-	libnetcdf-mpi-13\
+	libnetcdf-mpi-19\
 	python3-netcdf4 \
         libhdf5-103 \
         libhdf5-cpp-103 \
