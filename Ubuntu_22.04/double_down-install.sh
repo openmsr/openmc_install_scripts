@@ -5,8 +5,8 @@
 set -ex
 
 #embree compile & install
-./embree-install.sh
-echo "Compiled & installed embree, proceeding..."
+#./embree-install.sh
+#echo "Compiled & installed embree, proceeding..."
 
 #moab compile & install
 ./moab-install.sh
