@@ -53,7 +53,6 @@ if [ ! -e ${name}.done ]; then
   cmake -DOPENMC_USE_DAGMC=ON\
         -DDAGMC_ROOT=${install_prefix}/DAGMC\
         -DHDF5_PREFER_PARALLEL=off\
-	-DCMAKE_BUILD_TYPE=Debug\
 	-DCMAKE_INSTALL_PREFIX=${install_prefix} ..
   make -j $ccores
   sudo make install

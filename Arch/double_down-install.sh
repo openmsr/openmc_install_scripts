@@ -37,7 +37,6 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   sudo cmake ../double-down -DMOAB_DIR=${install_prefix}/MOAB \
-                       -DCMAKE_BUILD_TYPE=Debug\
                        -DCMAKE_INSTALL_PREFIX=${install_prefix}/double-down \
                        -DEMBREE_DIR=${install_prefix}/embree
   sudo make -j ${ccores}
