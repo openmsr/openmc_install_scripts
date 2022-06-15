@@ -2,10 +2,10 @@ name: build Ubuntu
 on:
   workflow_dispatch:
   schedule:
-    - cron: '44 4 * * 0'
+    - cron: '44 4 * * *'
 jobs:
   run-openmc-installer:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: checkout_main_repo
         uses: actions/checkout@v3
@@ -14,19 +14,21 @@ jobs:
           ref: '${{github.sha}}'
           path: openmc_install_scripts
           submodules: true
+      - name: bootstrap
+        run: sudo apt-get -y update
       - name: moab-install
         run: |
-          cd openmc_install_scripts/Ubuntu_20.04
+          cd openmc_install_scripts/Ubuntu_22.04
           ./moab-install.sh
       - name: double_down-install
         run: |
-          cd openmc_install_scripts/Ubuntu_20.04
+          cd openmc_install_scripts/Ubuntu_22.04
           ./double_down-install.sh
       - name: dagmc-install
         run: |
-          cd openmc_install_scripts/Ubuntu_20.04
+          cd openmc_install_scripts/Ubuntu_22.04
           ./dagmc-install.sh
       - name: openmc-install
         run: |
-          cd openmc_install_scripts/Ubuntu_20.04
+          cd openmc_install_scripts/Ubuntu_22.04
           ./openmc-install.sh
