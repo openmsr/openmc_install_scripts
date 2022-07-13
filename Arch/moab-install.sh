@@ -32,11 +32,12 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake ../moab -DENABLE_HDF5=ON \
-	      -DENABLE_PYMOAB=ON \
-              -DENABLE_FORTRAN=OFF \
-              -DBUILD_SHARED_LIBS=ON \
-              -DENABLE_BLASLAPACK=OFF \
-              -DCMAKE_INSTALL_PREFIX=${install_prefix}/MOAB
+	              -DENABLE_PYMOAB=ON \
+                -DENABLE_FORTRAN=OFF \
+                -DBUILD_SHARED_LIBS=ON \
+                -DENABLE_BLASLAPACK=OFF \
+                -DENABLE_NETCDF=ON \
+                -DCMAKE_INSTALL_PREFIX=${install_prefix}/MOAB
   make -j ${ccores}
   sudo make install
 
