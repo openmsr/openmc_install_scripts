@@ -17,7 +17,7 @@ build_prefix="$HOME/openmc"
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-  sudo pacman -Syu python
+  sudo pacman -Syu --noconfirm python
 
   #Should we run make in parallel? Default is to use all available cores
   ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
@@ -43,5 +43,6 @@ if [ ! -e ${name}.done ]; then
   cd ${WD}
   touch ${name}.done
 else
-  echo DAGMC appears already to be installed \(lock file ${name}.done exists\) - skipping.
+  echo DAGMC appears already to be installed \(lock file ${name}.done exists\) \
+        - skipping.
 fi
