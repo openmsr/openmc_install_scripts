@@ -46,7 +46,6 @@ if [ ! -e ${name}.done ]; then
                -DBUILD_STATIC_LIBS=OFF\
                -DCMAKE_INSTALL_PREFIX=${install_prefix}\
                -DDOUBLE_DOWN_DIR=${install_prefix}
-  
   make -j $ccores
   sudo make install
 

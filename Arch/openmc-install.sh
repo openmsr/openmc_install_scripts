@@ -57,14 +57,14 @@ if [ ! -e ${name}.done ]; then
   fi
   mkdir -p build
   cd build
+<<<<<<< HEAD
   cmake -DOPENMC_USE_DAGMC=ON \
         -DDAGMC_ROOT=${install_prefix} \
-        -DHDF5_PREFER_PARALLEL=off ..
+        -DHDF5_PREFER_PARALLEL=OFF \
+	-DCMAKE_INSTALL_PREFIX=${install_prefix} ..
   make -j $ccores
   make install
 
-  cd ..
-  sudo pip3 install .
   #install the python layer
   pip install ..
 
