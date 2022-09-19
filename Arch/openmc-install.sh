@@ -15,7 +15,12 @@ echo "Compiled & installed dagmc, proceeding..."
 WD=`pwd`
 name=`basename $0`
 install_prefix="/opt"
+if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
+  install_prefix=$LOCAL_INSTALL_PREFIX
+fi
 build_prefix="$HOME/openmc"
+
+echo will install openmc to $install_prefix
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then

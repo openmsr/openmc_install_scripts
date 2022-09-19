@@ -9,6 +9,11 @@ name=`basename $0`
 package_name='MOAB'
 
 install_prefix="/opt"
+if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
+  install_prefix=$LOCAL_INSTALL_PREFIX
+fi
+
+echo will install to $LOCAL_INSTALL_PREFIX
 
 #check if there is a .done file indicating that we have already built this target
 if [ ! -e ${name}.done ]; then
