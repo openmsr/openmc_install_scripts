@@ -33,7 +33,13 @@ if [ ! -e ${name}.done ]; then
 
   mkdir -p $HOME/openmc/MOAB
   cd $HOME/openmc/MOAB
-  git clone --single-branch --branch 5.3.1 --depth 1 https://bitbucket.org/fathomteam/moab.git
+  if [ ! -e moab ]; then
+    git clone --single-branch --branch 5.3.1 --depth 1 https://bitbucket.org/fathomteam/moab.git
+  else
+    cd moab
+    git pull
+    cd ..
+  fi
   mkdir -p build
   cd build
   cmake ../moab -DENABLE_HDF5=ON \
