@@ -25,8 +25,6 @@ echo will install openmc to $install_prefix
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
   sudo pacman -Syu --noconfirm\
-	python-lxml\
-	python-scipy\
 	python-pandas\
 	python-h5py\
 	python-matplotlib\
@@ -63,10 +61,12 @@ if [ ! -e ${name}.done ]; then
         -DDAGMC_ROOT=${install_prefix} \
         -DHDF5_PREFER_PARALLEL=off ..
   make -j $ccores
-  sudo make install
+  make install
 
   cd ..
   sudo pip3 install .
+  #install the python layer
+  pip install ..
 
   cd ${WD}
 
