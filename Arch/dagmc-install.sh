@@ -13,6 +13,9 @@ name=`basename $0`
 package_name='dagmc'
 
 install_prefix="/opt"
+if [ "x" 1= "x$LOCAL_INSTALL_PREFIX" ]; then
+  install_prefix=$LOCAL_INSTALL_PREFIX
+fi
 build_prefix="$HOME/openmc"
 
 #if there is a .done-file then skip this step
