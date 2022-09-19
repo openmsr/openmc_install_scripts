@@ -57,19 +57,16 @@ if [ ! -e ${name}.done ]; then
   cd build
   cmake -DOPENMC_USE_DAGMC=ON\
         -DOPENMC_USE_OPENMP=OFF\
+        -DOPENMC_USE_MPI=off\
         -DDAGMC_ROOT=${install_prefix}/DAGMC\
         -DHDF5_PREFER_PARALLEL=off\
 	-DCMAKE_BUILD_TYPE=Debug\
 	-DCMAKE_INSTALL_PREFIX=${install_prefix} ..
   make -j $ccores
-  sudo make install
+  make install
 
-  sudo python setup.py install 
-  #set up a python venv and install the python api (and deps) into that
-  cd ${HOME}
-  python -m venv openmc_env
-  openmc_env/bin/python -m pip install --upgrade pip
-  openmc_env/bin/python -m pip install $HOME/openmc/openmc
+  #install the python layer
+  pip install ..
 
   cd ${WD}
 
