@@ -39,11 +39,10 @@ if [ ! -e ${name}.done ]; then
   fi
   mkdir -p build
   cd build
-  cmake ../double-down -DMOAB_DIR=${install_prefix}/MOAB \
-  sudo cmake ../double-down -DMOAB_DIR=${install_prefix}/MOAB \
+  cmake ../double-down -DMOAB_DIR=${install_prefix}\
+  sudo cmake ../double-down -DMOAB_DIR=${install_prefix}\
                        -DCMAKE_BUILD_TYPE=Debug\
-                       -DCMAKE_INSTALL_PREFIX=${install_prefix}/double-down \
-                       -DEMBREE_DIR=${install_prefix}/embree
+                       -DCMAKE_INSTALL_PREFIX=${install_prefix}
   sudo make -j ${ccores}
   sudo make install
 

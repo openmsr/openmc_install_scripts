@@ -58,7 +58,7 @@ if [ ! -e ${name}.done ]; then
   cmake -DOPENMC_USE_DAGMC=ON\
         -DOPENMC_USE_OPENMP=OFF\
         -DOPENMC_USE_MPI=off\
-        -DDAGMC_ROOT=${install_prefix}/DAGMC\
+        -DDAGMC_ROOT=${install_prefix}\
         -DHDF5_PREFER_PARALLEL=off\
 	-DCMAKE_BUILD_TYPE=Debug\
 	-DCMAKE_INSTALL_PREFIX=${install_prefix} ..
