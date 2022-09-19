@@ -5,8 +5,8 @@
 set -ex
 
 #embree compile & install
-./embree-install.sh
-echo "Compiled & installed embree, proceeding..."
+#./embree-install.sh
+#echo "Compiled & installed embree, proceeding..."
 
 #moab compile & install
 ./moab-install.sh
@@ -17,11 +17,14 @@ name=`basename $0`
 package_name='double_down'
 
 install_prefix="/opt"
+if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
+  install_prefix=$LOCAL_INSTALL_PREFIX
+fi
 build_prefix="$HOME/openmc"
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-  sudo pacman -Syu --noconfirm doxygen
+  sudo pacman -Syu --noconfirm doxygen embree
 
   #Should we run make in parallel? Default is to use all available cores
   ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
