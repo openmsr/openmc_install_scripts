@@ -31,6 +31,20 @@ do
 done
 export OPENMC_BUILD_PREFIX
 
+#default install location. may be overrridden by the option --prefix=<path>
+LOCAL_INSTALL_PREFIX=/usr/local/lib
+
+prefix_regex="^--prefix=(.*)$"
+for arg in $*
+do
+  if [[ $arg =~ $prefix_regex ]]
+  then
+    echo ${BASH_REMATCH[0]}
+    LOCAL_INSTALL_PREFIX=${BASH_REMATCH[1]}
+  fi
+done
+export LOCAL_INSTALL_PREFIX
+
 #openmc compile & install
 #openmc-install.sh will call install scripts of its dependencies & nuclear data
 ./openmc-install.sh
