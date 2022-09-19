@@ -27,12 +27,14 @@ if [ ! -e ${name}.done ]; then
   if [ "x$1" != "x" ]; then
 	ccores=$1
   fi
-  
 
   mkdir -p $HOME/openmc/DAGMC
   cd $HOME/openmc/DAGMC
-  git clone --single-branch --branch develop --depth 1 https://github.com/svalinn/DAGMC.git
-  mkdir build
+  if [ ! -e DAGMC ]; then
+    git clone --single-branch --branch develop --depth 1 https://github.com/svalinn/DAGMC.git
+  fi
+
+  mkdir -p build
   cd build
   cmake ../DAGMC -DBUILD_TALLY=ON \
                -DMOAB_DIR=${install_prefix}/MOAB\
