@@ -1,0 +1,24 @@
+diff --git a/include/double-down/MOABDirectAccess.h b/include/double-down/MOABDirectAccess.h
+index dd3b245..ad31008 100644
+--- a/include/double-down/MOABDirectAccess.h
++++ b/include/double-down/MOABDirectAccess.h
+@@ -2,6 +2,7 @@
+ #define _MBDIRECTACCESS_
+ 
+ #include <memory>
++#include <array>
+ 
+ // MOAB
+ #include "moab/Core.hpp"
+diff --git a/include/double-down/primitives.hpp b/include/double-down/primitives.hpp
+index 5eeb6a5..41b1f2a 100644
+--- a/include/double-down/primitives.hpp
++++ b/include/double-down/primitives.hpp
+@@ -1,6 +1,7 @@
+ 
+ #ifndef DD_PRIMITIVES_H
+ #define DD_PRIMITIVES_H
++#include <array>
+ 
+ // Embree
+ #include "embree3/rtcore.h"
