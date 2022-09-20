@@ -12,14 +12,14 @@ install_prefix="/opt"
 
 #check if there is a .done file indicating that we have already built this target
 if [ ! -e ${name}.done ]; then
-
-  sudo pacman -Syu --noconfirm \
+  if ! pacman -Qi eigen netcdf hdf5-openmpi python-setuptools cython; then
+    sudo pacman -Syu --noconfirm \
 	eigen \
 	netcdf \
-	hdf5 \
+	hdf5-openmpi \
         python-setuptools \
 	cython
-
+  fi
   #Should we run make in parallel? Default is to use all available cores
   ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
   if [ "x$1" != "x" ]; then
