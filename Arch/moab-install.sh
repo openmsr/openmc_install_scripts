@@ -21,7 +21,7 @@ if [ ! -e ${name}.done ]; then
     sudo pacman -Sy --noconfirm \
 	eigen \
 	netcdf \
-	hdf5 \
+	hdf5-openmpi \
         python-setuptools \
 	cython
   fi
