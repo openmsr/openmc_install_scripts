@@ -9,6 +9,11 @@ name=`basename $0`
 package_name='MOAB'
 
 install_prefix="/opt"
+if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
+  install_prefix=$LOCAL_INSTALL_PREFIX
+fi
+
+echo will install to $LOCAL_INSTALL_PREFIX
 
 #check if there is a .done file indicating that we have already built this target
 if [ ! -e ${name}.done ]; then
@@ -28,7 +33,13 @@ if [ ! -e ${name}.done ]; then
 
   mkdir -p $HOME/openmc/MOAB
   cd $HOME/openmc/MOAB
-  git clone --single-branch --branch 5.3.1 --depth 1 https://bitbucket.org/fathomteam/moab.git
+  if [ ! -e moab ]; then
+    git clone --single-branch --branch 5.3.1 --depth 1 https://bitbucket.org/fathomteam/moab.git
+  else
+    cd moab
+    git pull
+    cd ..
+  fi
   mkdir -p build
   cd build
   cmake ../moab -DENABLE_HDF5=ON \
@@ -37,14 +48,14 @@ if [ ! -e ${name}.done ]; then
               -DENABLE_FORTRAN=OFF \
               -DBUILD_SHARED_LIBS=ON \
               -DENABLE_BLASLAPACK=OFF \
-              -DCMAKE_INSTALL_PREFIX=${install_prefix}/MOAB
+              -DCMAKE_INSTALL_PREFIX=${install_prefix}
   make -j ${ccores}
-  sudo make install
+  make install
 
   #to install the python API
   cd pymoab
-  sudo bash install.sh
-  sudo python setup.py install
+  bash install.sh
+  python setup.py install
 
   cd ${WD}
   touch ${name}.done

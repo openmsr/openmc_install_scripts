@@ -15,7 +15,12 @@ echo "Compiled & installed dagmc, proceeding..."
 WD=`pwd`
 name=`basename $0`
 install_prefix="/opt"
+if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
+  install_prefix=$LOCAL_INSTALL_PREFIX
+fi
 build_prefix="$HOME/openmc"
+
+echo will install openmc to $install_prefix
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
@@ -51,18 +56,17 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake -DOPENMC_USE_DAGMC=ON\
-        -DDAGMC_ROOT=${install_prefix}/DAGMC\
+        -DOPENMC_USE_OPENMP=OFF\
+        -DOPENMC_USE_MPI=off\
+        -DDAGMC_ROOT=${install_prefix}\
         -DHDF5_PREFER_PARALLEL=off\
 	-DCMAKE_BUILD_TYPE=Debug\
 	-DCMAKE_INSTALL_PREFIX=${install_prefix} ..
   make -j $ccores
-  sudo make install
-  sudo python setup.py install 
-  #set up a python venv and install the python api (and deps) into that
-  cd ${HOME}
-  python -m venv openmc_env
-  openmc_env/bin/python -m pip install --upgrade pip
-  openmc_env/bin/python -m pip install $HOME/openmc/openmc
+  make install
+
+  #install the python layer
+  pip install ..
 
   cd ${WD}
 

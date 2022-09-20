@@ -18,7 +18,7 @@ sudo apt-get install --yes gcc\
         libglfw3-dev\
         libtbb2\
         libtbb-dev\
-        libopenimageio2.1\
+        libopenimageio2.2\
         libopenimageio-dev
 
 sudo pip install numpy
