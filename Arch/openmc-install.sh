@@ -56,11 +56,10 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake -DOPENMC_USE_DAGMC=ON\
-        -DOPENMC_USE_OPENMP=OFF\
-        -DOPENMC_USE_MPI=off\
+        -DOPENMC_USE_OPENMP=ON\
+        -DOPENMC_USE_MPI=OFF\
         -DDAGMC_ROOT=${install_prefix}\
         -DHDF5_PREFER_PARALLEL=off\
-	-DCMAKE_BUILD_TYPE=Debug\
 	-DCMAKE_INSTALL_PREFIX=${install_prefix} ..
   make -j $ccores
   make install
