@@ -37,10 +37,14 @@ if [ ! -e ${name}.done ]; then
   mkdir -p $HOME/openmc
   cd $HOME/openmc
   if [ -e openmc ]; then
+        #repo exists checkout the stable version
         cd openmc
+        git checkout v0.13.1
         git pull --recurse-submodules
   else
-        git clone --recurse-submodules --single-branch --branch develop --depth 1 https://github.com/openmc-dev/openmc.git
+        #clone the repo and checkout the stable version
+        git clone --recurse-submodules https://github.com/openmc-dev/openmc.git
+        git checkout v0.13.1
         cd openmc
   fi
 
