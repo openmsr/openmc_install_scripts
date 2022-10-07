@@ -22,7 +22,7 @@ build_prefix="$HOME/openmc"
 if [ ! -e ${name}.done ]; then
   pacman -Qi python > /dev/null
   if [[ $? != 0 ]]; then
-     sudo pacman -Syu python
+     sudo pacman -Sy python
   fi
 
   #Should we run make in parallel? Default is to use all available cores

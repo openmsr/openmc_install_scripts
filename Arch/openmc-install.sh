@@ -30,11 +30,14 @@ echo will install openmc to $install_prefix
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-  sudo pacman -Sy --noconfirm\
+  pacman -Qi python-pandas python-h5py python-matplotlib python-uncertainties > /dev/null
+  if [[ $? != 0 ]]; then
+    sudo pacman -Sy --noconfirm\
 	python-pandas\
 	python-h5py\
 	python-matplotlib\
 	python-uncertainties
+  fi
 
   #Should we run make in parallel? Default is to use all available cores
   ccores=`cat /proc/cpuinfo |grep CPU|wc -l`

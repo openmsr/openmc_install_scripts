@@ -10,7 +10,7 @@ name=`basename $0`
 #check if there is a .done file indicating that we have already built this target
 if [ ! -e ${name}.done ]; then
   #check dependencies
-  sudo pacman -Syu --noconfirm \
+  sudo pacman -Sy --noconfirm \
 	gcc \
 	make \
 	cmake \

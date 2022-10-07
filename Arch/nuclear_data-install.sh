@@ -7,7 +7,7 @@ set -ex
 echo "export OPENMC_CROSS_SECTIONS=$HOME/openmc/nuclear_data/endfb80_hdf5/cross_sections.xml" >> $HOME/.bashrc
 source $HOME/.bashrc
 
-sudo pacman -Syu --noconfirm wget
+sudo pacman -Sy --noconfirm wget
 
 #defaul libraries
 endfb_VII="https://anl.box.com/shared/static/9igk353zpy8fn9ttvtrqgzvw1vtejoz6.xz"

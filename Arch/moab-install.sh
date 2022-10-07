@@ -18,7 +18,7 @@ echo will install to $LOCAL_INSTALL_PREFIX
 #check if there is a .done file indicating that we have already built this target
 if [ ! -e ${name}.done ]; then
   if ! pacman -Qi eigen netcdf hdf5-openmpi python-setuptools cython; then
-    sudo pacman -Syu --noconfirm \
+    sudo pacman -Sy --noconfirm \
 	eigen \
 	netcdf \
 	hdf5 \
