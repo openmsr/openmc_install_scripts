@@ -22,15 +22,15 @@ export LOCAL_INSTALL_PREFIX
 ./openmc-install.sh
 echo "Compiled & installed openmc, done."
 
-bash cad-to-openmc-install.sh
-echo "Compiled & installed CAD_to_openMC, done."
+#bash cad-to-openmc-install.sh
+#echo "Compiled & installed CAD_to_openMC, done."
 
 #remove timestamp update
-sudo sed -i '/Defaults    timestamp_timeout=-1/d' /etc/sudoers
+#sudo sed -i '/Defaults    timestamp_timeout=-1/d' /etc/sudoers
 
-echo "Running test scripts..."
-python ./tests/step_to_h5m.py
-python ./tests/test_openmc.py
+#echo "Running test scripts..."
+#python ./tests/step_to_h5m.py
+#python ./tests/test_openmc.py
 rm *.xml
 rm *.h5
 rm *.stl
