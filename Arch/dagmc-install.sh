@@ -47,7 +47,7 @@ if [ ! -e ${name}.done ]; then
                -DCMAKE_INSTALL_PREFIX=${install_prefix}\
                -DDOUBLE_DOWN_DIR=${install_prefix}
   make -j $ccores
-  sudo make install
+  make install
 
   cd ${WD}
   touch ${name}.done

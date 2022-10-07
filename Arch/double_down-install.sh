@@ -42,7 +42,7 @@ if [ ! -e ${name}.done ]; then
   cmake ../double-down -DMOAB_DIR=${install_prefix} \
                        -DCMAKE_INSTALL_PREFIX=${install_prefix}
   make -j ${ccores}
-  sudo make install
+  make install
 
   #touch a lock file to avoid uneccessary rebuilds
   cd $WD
