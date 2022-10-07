@@ -30,7 +30,7 @@ echo will install openmc to $install_prefix
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-  sudo pacman -Syu --noconfirm\
+  sudo pacman -Sy --noconfirm\
 	python-pandas\
 	python-h5py\
 	python-matplotlib\
