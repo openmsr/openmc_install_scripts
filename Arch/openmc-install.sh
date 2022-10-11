@@ -20,13 +20,18 @@ echo "Compiled & installed dagmc, proceeding..."
 
 WD=`pwd`
 name=`basename $0`
-install_prefix="/opt"
+install_prefix="/usr/local/lib"
 if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
 fi
+
 build_prefix="$HOME/openmc"
+if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
+  build_prefix=$OPENMC_BUILD_PREFIX
+fi
 
 echo will install openmc to $install_prefix
+echo will build openmc from $build_prefix
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
@@ -44,19 +49,24 @@ if [ ! -e ${name}.done ]; then
   if [ "x$1" != "x" ]; then
 	ccores=$1
   fi
-
-  #source install
-  mkdir -p $HOME/openmc
-  cd $HOME/openmc
-  if [ -e openmc ]; then
-        #repo exists checkout the given version
-        cd openmc
-        git checkout $openmc_version
+  
+  #Should --openmc_build be passed as argument, it assumes a git version is already checked-out
+  if [ -e $build_prefix/openmc ]; then
+	  cd $build_prefix
   else
-        #clone the repo and checkout the given version
-        git clone --recurse-submodules https://github.com/openmc-dev/openmc.git
-        cd openmc
-        git checkout $openmc_version
+  	#source install
+  	mkdir -p $HOME/openmc
+  	cd $HOME/openmc
+  	if [ -e openmc ]; then
+        	#repo exists checkout the given version
+        	cd openmc
+        	git checkout $openmc_version
+  	else
+        	#clone the repo and checkout the given version
+        	git clone --recurse-submodules https://github.com/openmc-dev/openmc.git
+        	cd openmc
+        	git checkout $openmc_version
+  	fi
   fi
 
   if [ -e build ]; then
