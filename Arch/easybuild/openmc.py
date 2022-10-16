@@ -12,8 +12,14 @@ builddependencies = [('CMake', '3.18.4')]
 
 dependencies = [
     ('Python', '3.8.2'),
-    ('HDF5', '1.10.6'),
+    ('HDF5', '1.13.2'),
     ('SciPy-bundle', '2020.03', '-Python-%(pyver)s'),
+    ('numpy', '1.23.0'),
+    ('pandas', '1.5.0'),
+    ('h5py', '3.7.0'),
+    ('matplotlib', '3.6.0'),
+    ('uncertanties', '3.1.7'),
+    ('lxml', '4.9.1'),
 ]
 
 easyblock = 'CMakeMake'
