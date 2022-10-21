@@ -1,4 +1,4 @@
-name = 'openmc_dagmc'
+name = 'openmc_dagmc_dev'
 version = '0.13.1'
 
 homepage = 'https://openmc.org/'
