@@ -20,7 +20,7 @@ builddependencies = [
     ('pybind11', '2.4.3'),
 ]
 dependencies = [
-    ('Python', '3.7.4'),
+    ('Python', '3.10.4'),
     ('SciPy-bundle', '2019.10'),
 ]
 

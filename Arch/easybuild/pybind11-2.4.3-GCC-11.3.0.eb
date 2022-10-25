@@ -14,7 +14,7 @@ patches = ['%(name)s-%(version)s-fix-get-include.patch']
 
 builddependencies = [
     ('binutils', '2.34'),
-    ('CMake', '3.16.4'),
+    ('CMake', '3.23.1'),
     ('Eigen', '3.3.7'),
 ]
 dependencies = [('Python', '3.8.2')]
