@@ -29,4 +29,3 @@ easyblock = 'CMakeMake'
 
 local_install_prefix = '/usr/local/lib'
 configure_cmd = f"cmake ../DAGMC -DBUILDTALLY=ON -DMOAB_DIR={local_install_prefix} -DDOUBLE_DOWN=ON -DBUILD_STATIC_EXE=OFF -DBUILD_STATIC_LIBS=OFF -DCMAKE_INSTALL_PREFIX={local_install_prefix} -DDOUBLE_DOWN_DIR={local_install_prefix}"
-postinstallcmds = ['pip install ..']
