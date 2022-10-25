@@ -1,0 +1,32 @@
+name = 'dagmc_dev'
+version = '3.2.2'
+
+homepage = 'https://svalinn.github.io/DAGMC/index.html'
+description = "Direct Accelerated Geometry Monte Carlo (DAGMC) is a software package that allows users to perform Monte Carlo radiation transport directly on CAD models."
+software_license = 'LicenseBSD'
+software_license_urls = ['https://github.com/svalinn/DAGMC/blob/develop/LICENSE.txt']
+toolchain = {'name': 'GCC', 'version': '11.3.0'}
+
+sources = [{
+    'filename': 'dagmc-dev.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/svalinn',
+        'repo_name': 'DAGMC',
+        'tag':'v3.2.2'
+    },
+}]
+
+
+builddependencies = [('CMake', '3.23.1')]
+
+dependencies = [
+    ('HDF5', '1.13.1','',{'name': 'iimpi', 'version': '2022a'}),
+    ('Eigen','3.4.0','',{'name': 'GCCcore', 'version': '11.3.0'}),
+    ('moab')
+]
+
+easyblock = 'CMakeMake'
+
+local_install_prefix = '/usr/local/lib'
+configure_cmd = f"cmake ../DAGMC -DBUILDTALLY=ON -DMOAB_DIR={local_install_prefix} -DDOUBLE_DOWN=ON -DBUILD_STATIC_EXE=OFF -DBUILD_STATIC_LIBS=OFF -DCMAKE_INSTALL_PREFIX={local_install_prefix} -DDOUBLE_DOWN_DIR={local_install_prefix}"
+postinstallcmds = ['pip install ..']
