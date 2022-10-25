@@ -23,15 +23,10 @@ builddependencies = [('CMake', '3.23.1')]
 dependencies = [
     ('Python', '3.10.4'),
     ('HDF5', '1.13.1','',{'name': 'iimpi', 'version': '2022a'}),
-    ('scipy','1.4.1','-Python-3.7.4',{'name': 'fosscuda', 'version': '2019b'}),
-    ('numpy', '1.13.1','-Python-3.6.1',{'name': 'intel', 'version': '2017a'}),
-    ('pandas', '1.1.2','-Python-3.8.2',{'name': 'foss', 'version': '2020a'}),
-    ('h5py', '3.7.0','',{'name': 'foss', 'version': '2022a'}),
-    ('matplotlib', '3.5.2','',{'name': 'foss', 'version': '2022a'}),
-    ('uncertainties', '3.1.7','-Python-3.8.2',{'name': 'foss', 'version': '2020a'}),
-    ('lxml', '4.9.1'),
     ('dagmc_dev', '3.2.2')
 ]
+
+osdependencies = [('python-pandas','python-h5py','python-matplotlib','python-uncertainties','python-scipy','python-numpy','python-lxml')]
 
 easyblock = 'CMakeMake'
 

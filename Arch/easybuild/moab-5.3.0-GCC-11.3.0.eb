@@ -16,6 +16,8 @@ sources = [{
     },
 }]
 
+osdependencies = [('eigen', 'netcdf','hdf5','python-setuptools','cython')]
+
 easyblock = 'CMakeMake'
 
 local_install_prefix = '/usr/local/lib'
