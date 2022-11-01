@@ -24,12 +24,12 @@ dependencies = [
     ('Python', '3.10.4'),
     ('HDF5', '1.13.1','',{'name': 'iimpi', 'version': '2022a'}),
     ('dagmc_dev', '3.2.2'),
-    ('pandas','1.1.2','Python-3.8.2',{'name': 'foss', 'version': '2020a'}),
-    ('hp5y','3.7.0','',{'name': 'foss', 'version': '2022a'}),
+    ('pandas','1.1.2','-Python-3.8.2',{'name': 'foss', 'version': '2020a'}),
+    ('h5py','3.7.0','',{'name': 'foss', 'version': '2022a'}),
     ('matplotlib','3.5.2','',{'name': 'foss', 'version': '2022a'}),
-    ('uncertainties','3.1.7','Python-3.8.2',{'name': 'foss', 'version': '2020a'}),
-    ('scipy','1.4.1','Python-3.7.4',{'name': 'foss', 'version': '2019b'}),
-    ('numpy','1.13.1','Python-3.6.1',{'name': 'intel', 'version': '2017a'}),
+    ('uncertainties','3.1.7','-Python-3.8.2',{'name': 'foss', 'version': '2020a'}),
+    ('scipy','1.4.1','-Python-3.7.4',{'name': 'foss', 'version': '2019b'}),
+    ('numpy','1.13.1','-Python-3.6.1',{'name': 'intel', 'version': '2017a'}),
     ('lxml','4.9.1','',{'name': 'GCCcore', 'version': '11.3.0'})
 ]
 
