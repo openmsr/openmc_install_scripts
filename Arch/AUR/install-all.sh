@@ -11,11 +11,12 @@ makepkg --noconfirm -csgi >> PKGBUILD && makepkg
 cd ..
 echo "compiled & installed MOAB, proceeding..."
 
+# embree is now available via pacman
 # Compile Embree package and install it
-cd EMBREE-PKGBUILD
-makepkg --noconfirm -csgi >> PKGBUILD && makepkg
-cd ..
-echo "compiled & installed Embree, proceeding..."
+#cd EMBREE-PKGBUILD
+#makepkg --noconfirm -csgi >> PKGBUILD && makepkg
+#cd ..
+#echo "compiled & installed Embree, proceeding..."
 
 # Compile double-down package and install it
 cd DOUBLE-DOWN-PKGBUILD

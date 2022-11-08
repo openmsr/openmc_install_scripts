@@ -26,5 +26,5 @@ osdependencies = [('embree', 'doxygen')]
 
 easyblock = 'CMakeMake'
 
-local_install_prefix = '/usr/local/lib'
+local_install_prefix = '$HOME/easybuild'
 configure_cmd = f"cmake ../double-down -DMOAB_DIR=${local_install_prefix} -DCMAKE_INSTALL_PREFIX={local_install_prefix}"

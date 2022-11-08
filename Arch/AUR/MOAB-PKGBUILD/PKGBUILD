@@ -1,24 +1,23 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 
 pkgname=moab-git
-pkgver=5.3.1.r96.g6410dadbb
+pkgver=5.4.0.r27.gc2d697beb
 pkgrel=1
 pkgdesc="The Mesh-Oriented datABase MOAB is a component for representing and evaluating mesh data"
 arch=(x86_64)
 url="https://bitbucket.org/fathomteam/moab"
 license=(GPL3)
+depends=(
+	python-numpy
+	blas
+	lapack
+)
 makedepends=(
 	git
-	python
-	cmake
-	gcc-fortran
 	eigen
 	netcdf
 	hdf5
 	cython
-	blas
-	lapack
-	python-numpy
 	python-setuptools
 	"glibc>=2.34"
 )
@@ -37,23 +36,20 @@ build() {
 	         -DENABLE_FORTRAN=OFF \
 	         -DENABLE_BLASLAPACK=OFF \
 	         -DBUILD_SHARED_LIBS=ON \
+			 -DENABLE_PYMOAB=ON \
 	         -DCMAKE_INSTALL_PREFIX=/opt/moab
-	sudo make
-	sudo make install
-	cmake .. -DENABLE_HDF5=ON \
-	         -DENABLE_PYMOAB=ON \
-	         -DENABLE_FORTRAN=OFF \
-	         -DBUILD_SHARED_LIBS=ON \
-	         -DENABLE_BLASLAPACK=OFF \
-	         -DCMAKE_INSTALL_PREFIX=/opt/moab
-	sudo make
+	make
 }
 
 package() {
 	cd $srcdir/$pkgname/build
-	sudo make DESTDIR="${pkgdir}" install
+	make install
 	cd pymoab
-	ls
-	sudo bash install.sh
+	bash install.sh
 	python setup.py install
 }
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')

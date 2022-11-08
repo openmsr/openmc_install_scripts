@@ -22,7 +22,7 @@ builddependencies = [('CMake', '3.23.1')]
 
 dependencies = [
     ('Python', '3.10.4'),
-    ('HDF5', '1.13.1','',{'name': 'iimpi', 'version': '2022a'}),
+    ('HDF5', '1.13.3','',{'name': 'GCC', 'version': '11.3.0'}),
     ('dagmc_dev', '3.2.2'),
     ('pandas','1.1.2','-Python-3.8.2',{'name': 'foss', 'version': '2020a'}),
     ('h5py','3.7.0','',{'name': 'foss', 'version': '2022a'}),
@@ -35,6 +35,6 @@ dependencies = [
 
 easyblock = 'CMakeMake'
 
-local_install_prefix = '/usr/local/lib'
+local_install_prefix = '$HOME/easybuild'
 configure_cmd = f"cmake -DOPENMC_USE_DAGMC=ON -DOPENMC_USE_OPENMP=ON -DOPENMC_USE_MPI=ON -DDAGMC_ROOT={local_install_prefix} -DHDF5_PREFER_PARALLEL=OFF -DCMAKE_INSTALL_PREFIX={local_install_prefix} .."
 postinstallcmds = ['pip install ..']

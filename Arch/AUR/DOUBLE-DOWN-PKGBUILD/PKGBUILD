@@ -1,19 +1,18 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 
 pkgname=double-down-git
-pkgver=v1.0.0.r0.gd20beda
+pkgver=v1.0.0.r6.g498a43c
 pkgrel=1
 pkgdesc="double-down: A double precision interface to Embree"
 pkgdir=/opt
 arch=(x86_64)
-url="https://github.com/pshriwise/double-down"
+url="https://github.com/pshriwise/double-down/tree/array_incl"
 license=(MIT)
 makedepends=(
 	git
 	python
 	cmake
 	binutils
-	cmake
 	make
 	gcc-fortran
 	eigen
@@ -39,3 +38,5 @@ package() {
 	sudo make
 	sudo make install
 }
+sha256sums=('SKIP')
+sha256sums=('SKIP')
