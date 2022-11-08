@@ -6,8 +6,12 @@ pkgrel=1
 pkgdesc="double-down: A double precision interface to Embree"
 pkgdir=/opt
 arch=(x86_64)
-url="https://github.com/pshriwise/double-down/tree/array_incl"
+url="https://github.com/pshriwise/double-down"
 license=(MIT)
+depends=(
+	#    include once these are actually available as packages
+	#	 moab-git
+)
 makedepends=(
 	git
 	python
@@ -26,6 +30,8 @@ pkgver() {
 }
 
 build() {
+	cd $pkgname
+	git checkout array_incl
 	cd $srcdir/$pkgname
 	mkdir build && cd build
 	cmake .. -DMOAB_DIR=/opt/moab \
@@ -38,5 +44,12 @@ package() {
 	sudo make
 	sudo make install
 }
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
 sha256sums=('SKIP')
 sha256sums=('SKIP')

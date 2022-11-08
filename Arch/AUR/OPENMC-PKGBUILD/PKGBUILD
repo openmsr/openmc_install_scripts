@@ -1,0 +1,60 @@
+# Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
+
+pkgname=openmc
+pkgver=v0.5.2.r12523.g1a7762283
+pkgrel=1
+pkgdesc="OpenMC Monte Carlo Particle Transport Code"
+pkgdir=/opt
+arch=(x86_64)
+url="https://github.com/openmc-dev/openmc"
+license=('MIT')
+makedepends=(
+    cmake
+    git
+    python
+	python-numpy
+	python-setuptools
+#    include once these are actually available as packages
+#    dagmc-git
+#    nuclear-data
+)
+provides=("${pkgname%}")
+source=("${pkgname}::git+${url}.git")
+pkgver() {
+  cd "$pkgname"
+  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+conflicts=(
+	openmc-git
+)
+
+build() {
+    sudo pacman --noconfirm -Syu python-lxml \
+                               python-scipy \
+                               python-pandas \
+                               python-h5py \
+                               python-matplotlib \
+                               python-uncertainties \
+                               embree \
+                               # dependencies needed for CAD_to_openmc
+                               glu \
+                               libxrender \
+                               libxcursor \
+                               libxft \
+                               libxinerama \
+                               freecad
+    cd $srcdir/$pkgname
+    mkdir build && cd build
+    cmake -DOPENMC_USE_DAGMC=ON \
+          -DDAGMC_ROOT=/opt/dagmc \
+          -DHDF5_PREFER_PARALLEL=off ..
+    sudo make
+}
+
+package() {
+    cd $srcdir/$pkgname/build
+    sudo make install
+    cd ..
+    python setup.py install
+}
+

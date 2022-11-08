@@ -1,13 +1,17 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 
 pkgname=dagmc-git
-pkgver=v0.1.r3799.g1f8b5979
+pkgver=v0.1.r3849.g980c901d
 pkgrel=1
 pkgdesc="DAGMC – Direct Accelerated Geometry Monte Carlo"
 pkgdir=/opt
 arch=(x86_64)
 url="https://github.com/svalinn/DAGMC"
 license=(Simplified BSD)
+depends=(
+	#    include once these are actually available as packages
+	# double-down-git
+)
 makedepends=(
 	git
 	python
@@ -38,3 +42,4 @@ package() {
 	sudo make
 	sudo make install
 }
+sha256sums=('SKIP')
