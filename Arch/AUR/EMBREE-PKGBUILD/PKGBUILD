@@ -1,12 +1,12 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 
 pkgname=embree-git
-pkgver=v3.13.1.r117.gf7a54f8f6
+pkgver=v3.13.1.r163.g489b746c0
 pkgrel=1
 pkgdesc="double-down: A double precision interface to Embree"
 pkgdir=/opt
 arch=(x86_64)
-url="https://github.com/LukeLabrie/embree"
+url="https://github.com/embree/embree"
 license=(Apache 2.0)
 makedepends=(
 	git
@@ -38,3 +38,4 @@ package() {
 	sudo make
 	sudo make install
 }
+sha256sums=('SKIP')

@@ -1,22 +1,24 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
-
-pkgname=openmc
-pkgver=v0.5.2.r12523.g1a7762283
+pkgname=openmc_dev_dagmc
+pkgver=0.13.2
 pkgrel=1
 pkgdesc="OpenMC Monte Carlo Particle Transport Code"
 pkgdir=/opt
 arch=(x86_64)
 url="https://github.com/openmc-dev/openmc"
 license=('MIT')
+depends(
+    dagmc-git
+)
 makedepends=(
     cmake
     git
     python
 	python-numpy
 	python-setuptools
-#    include once these are actually available as packages
-#    dagmc-git
-#    nuclear-data
+)
+optdepends = (
+    nuclear-data
 )
 provides=("${pkgname%}")
 source=("${pkgname}::git+${url}.git")
@@ -41,7 +43,7 @@ build() {
                                libxinerama \
                                freecad \
                                glu
-    pip install h5py
+    pip install h5py CAD_to_OpenMC
     cd $srcdir/$pkgname
     mkdir build && cd build
     cmake -DOPENMC_USE_DAGMC=ON \
@@ -57,15 +59,4 @@ package() {
     cd ..
     python setup.py install
 }
-
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
+sha256sums=('00c41eb0762bff820a2e1962a006d2ed2b7278abc42bd220ef099f0060cb0da1')
