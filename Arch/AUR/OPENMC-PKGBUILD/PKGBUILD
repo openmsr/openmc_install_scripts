@@ -29,25 +29,25 @@ conflicts=(
 )
 
 build() {
-    sudo pacman --noconfirm -Syu python-lxml \
+    sudo pacman --noconfirm -S python-lxml \
                                python-scipy \
                                python-pandas \
-                               python-h5py \
                                python-matplotlib \
                                python-uncertainties \
                                embree \
-                               # dependencies needed for CAD_to_openmc
-                               glu \
                                libxrender \
                                libxcursor \
                                libxft \
                                libxinerama \
-                               freecad
+                               freecad \
+                               glu
+    pip install h5py
     cd $srcdir/$pkgname
     mkdir build && cd build
     cmake -DOPENMC_USE_DAGMC=ON \
           -DDAGMC_ROOT=/opt/dagmc \
-          -DHDF5_PREFER_PARALLEL=off ..
+          -DOPENMC_USE_MPI=ON \
+          -DHDF5_PREFER_PARALLEL=ON ..
     sudo make
 }
 
@@ -58,3 +58,14 @@ package() {
     python setup.py install
 }
 
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')
+sha256sums=('SKIP')

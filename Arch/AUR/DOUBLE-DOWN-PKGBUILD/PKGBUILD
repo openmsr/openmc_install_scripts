@@ -1,7 +1,7 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 
 pkgname=double-down-git
-pkgver=v1.0.0.r6.g498a43c
+pkgver=v1.0.0.r8.g74ab1f9
 pkgrel=1
 pkgdesc="double-down: A double precision interface to Embree"
 pkgdir=/opt
@@ -30,13 +30,11 @@ pkgver() {
 }
 
 build() {
-	cd $pkgname
-	git checkout array_incl
 	cd $srcdir/$pkgname
 	mkdir build && cd build
 	cmake .. -DMOAB_DIR=/opt/moab \
 	         -DEMBREE_DIR=/opt/embree \
-		 		 	 -DCMAKE_INSTALL_PREFIX=/opt/double-down
+		 	 -DCMAKE_INSTALL_PREFIX=/opt/double-down
 }
 
 package() {
@@ -44,6 +42,8 @@ package() {
 	sudo make
 	sudo make install
 }
+sha256sums=('SKIP')
+sha256sums=('SKIP')
 sha256sums=('SKIP')
 sha256sums=('SKIP')
 sha256sums=('SKIP')
