@@ -41,7 +41,7 @@ build() {
                                libxinerama \
                                freecad \
                                glu
-    pip install h5py
+    pip install h5py CAD_to_OpenMC
     cd $srcdir/$pkgname
     mkdir build && cd build
     cmake -DOPENMC_USE_DAGMC=ON \
