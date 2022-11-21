@@ -8,7 +8,7 @@ set -ex
 #./nuclear_data-install.sh
 #echo "Downloaded & extracted nuclear data, proceeding..."
 
-openmc_version="v0.13.1"
+openmc_version="v0.13.2"
 if [ "x" != "x$OPENMC_VERSION" ]; then
 	openmc_version=$OPENMC_VERSION
 fi
@@ -35,11 +35,10 @@ echo will build openmc from $build_prefix
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-  pacman -Qi python-pandas python-h5py python-matplotlib python-uncertainties > /dev/null
-  if [[ $? != 0 ]]; then
+  if ! pacman -Qi python-pandas python-h5py-openmpi python-matplotlib python-uncertainties > /dev/null; then
     sudo pacman -Sy --noconfirm\
 	python-pandas\
-	python-h5py\
+	python-h5py-openmpi\
 	python-matplotlib\
 	python-uncertainties
   fi
