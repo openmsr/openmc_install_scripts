@@ -25,7 +25,7 @@ if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
 fi
 
-build_prefix="$HOME/openmc"
+build_prefix="/dev/null/openmc" #this will never exist - and so use the default later.
 if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
   build_prefix=$OPENMC_BUILD_PREFIX
 fi
@@ -52,16 +52,21 @@ if [ ! -e ${name}.done ]; then
   
   #Should --openmc_build be passed as argument, it assumes a git version is already checked-out
   if [ -e $build_prefix/openmc ]; then
-	  cd $build_prefix
+        cd $build_prefix
   else
   	#source install
   	mkdir -p $HOME/openmc
   	cd $HOME/openmc
   	if [ -e openmc ]; then
-        	#repo exists checkout the given version
+                #repo exists checkout the given version and get new updates
+                #(updates are of course only relevant for development branches.)
         	cd openmc
         	git checkout $openmc_version
-  	else
+                #if this is a branch - make sure it is up to date
+                if git show-ref --verify refs/heads/$openmc_version; then
+                    git pull
+                fi
+        else
         	#clone the repo and checkout the given version
         	git clone --recurse-submodules https://github.com/openmc-dev/openmc.git
         	cd openmc
