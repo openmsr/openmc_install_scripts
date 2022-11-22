@@ -1,5 +1,5 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
-pkgname=openmc_dev_dagmc
+pkgname=openmc
 pkgver=0.13.2
 pkgrel=1
 pkgdesc="OpenMC Monte Carlo Particle Transport Code"
@@ -11,14 +11,13 @@ depends(
     dagmc-git
 )
 makedepends=(
-    cmake
-    git
-    python
+  cmake
+  git
+  python
 	python-numpy
 	python-setuptools
-)
-optdepends = (
-    nuclear-data
+  nuclear-data
+  cad-to-openmc
 )
 provides=("${pkgname%}")
 source=("${pkgname}::git+${url}.git")

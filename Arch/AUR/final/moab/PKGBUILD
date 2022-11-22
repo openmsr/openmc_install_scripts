@@ -31,12 +31,12 @@ build() {
 	mkdir build && cd build
 	# test later if it's necessary to have double compilation
 	cmake .. -DENABLE_HDF5=ON \
-	         -DENABLE_NETCDF=ON \
-	         -DENABLE_FORTRAN=OFF \
-	         -DENABLE_BLASLAPACK=OFF \
-	         -DBUILD_SHARED_LIBS=ON \
-			 -DENABLE_PYMOAB=ON \
-	         -DCMAKE_INSTALL_PREFIX=/opt/moab
+		-DENABLE_NETCDF=ON \
+		-DENABLE_FORTRAN=OFF \
+		-DENABLE_BLASLAPACK=OFF \
+		-DBUILD_SHARED_LIBS=ON \
+		-DENABLE_PYMOAB=ON \
+		-DCMAKE_INSTALL_PREFIX=/opt/moab
 	make
 }
 
@@ -48,4 +48,3 @@ package() {
 	python setup.py install
 }
 sha256sums=('98c3c97ed9a7d53a000dd015802f6cbe77c6544f4983d394553c9512fed612fd')
-

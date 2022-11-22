@@ -1,11 +1,11 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
-pkgname=double-down-git
+pkgname=double-down
 pkgver=1.0.0
 pkgrel=1
 pkgdesc="double-down: A double precision interface to Embree"
 pkgdir=/opt
 arch=(x86_64)
-url="https://github.com/pshriwise/double-down"
+url="git+https://github.com/pshriwise/double-down"
 license=(MIT)
 depends=(
 	moab
@@ -31,8 +31,8 @@ build() {
 	cd $srcdir/$pkgname
 	mkdir build && cd build
 	cmake .. -DMOAB_DIR=/opt/moab \
-	         -DEMBREE_DIR=/opt/embree \
-		 	 -DCMAKE_INSTALL_PREFIX=/opt/double-down
+		-DEMBREE_DIR=/opt/embree \
+		-DCMAKE_INSTALL_PREFIX=/opt/double-down
 }
 
 package() {

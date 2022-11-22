@@ -1,5 +1,5 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
-pkgname=dagmc-git
+pkgname=dagmc
 pkgver=3.2.2
 pkgrel=1
 pkgdesc="DAGMC – Direct Accelerated Geometry Monte Carlo"
@@ -27,12 +27,12 @@ build() {
 	cd $srcdir/$pkgname
 	mkdir build && cd build
 	cmake .. -DBUILD_TALLY=ON \
-	         -DMOAB_DIR=/opt/moab \
-	         -DDOUBLE_DOWN="$include_double_down" \
-	         -DBUILD_STATIC_EXE=OFF \
-	         -DBUILD_STATIC_LIBS=OFF \
-	         -DCMAKE_INSTALL_PREFIX=/opt/DAGMC \
-	         -DDOUBLE_DOWN_DIR=/opt/double-down
+		-DMOAB_DIR=/opt/moab \
+		-DDOUBLE_DOWN="$include_double_down" \
+		-DBUILD_STATIC_EXE=OFF \
+		-DBUILD_STATIC_LIBS=OFF \
+		-DCMAKE_INSTALL_PREFIX=/opt/DAGMC \
+		-DDOUBLE_DOWN_DIR=/opt/double-down
 }
 
 package() {

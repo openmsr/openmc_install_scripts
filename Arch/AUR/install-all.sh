@@ -1,5 +1,4 @@
 #!/bin/bash
-set -ex
 
 #install needed base-devel software & turn off install confirms
 find /var/cache/pacman/pkg/ -iname "*.part" -delete
