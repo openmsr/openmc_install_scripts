@@ -48,7 +48,7 @@ if [ ! -e ${name}.done ]; then
   if [ "x$1" != "x" ]; then
 	ccores=$1
   fi
-  
+
   #Should --openmc_build be passed as argument, it assumes a git version is already checked-out
   if [ -e $build_prefix/openmc ]; then
         cd $build_prefix
