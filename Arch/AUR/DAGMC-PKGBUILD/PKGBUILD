@@ -1,16 +1,18 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
-
-pkgname=dagmc-git
-pkgver=v0.1.r3849.g980c901d
+pkgname=DAGMC-git
+pkgver=v3.2.2.r29.g980c901d
 pkgrel=1
-pkgdesc="DAGMC – Direct Accelerated Geometry Monte Carlo"
-pkgdir=/opt
-arch=(x86_64)
+pkgdesc="Direct Accelerated Geometry Monte Carlo (DAGMC) is a software package 
+		 that allows users to perform Monte Carlo radiation transport directly 
+		 on CAD models."
+arch=('x86_64')
 url="https://github.com/svalinn/DAGMC"
-license=(Simplified BSD)
+license=('BSD')
+
 depends=(
 	#    include once these are actually available as packages
 	# double-down-git
+	# moab-5.3.1
 )
 makedepends=(
 	git
@@ -22,26 +24,24 @@ provides=("${pkgname%}")
 source=("${pkgname}::git+${url}.git")
 pkgver() {
   cd "$pkgname"
-  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
+md5sums=('SKIP')
 
 build() {
 	cd $srcdir/$pkgname
 	mkdir build && cd build
 	cmake .. -DBUILD_TALLY=ON \
-	         -DMOAB_DIR=/opt/moab \
-	         -DDOUBLE_DOWN="$include_double_down" \
+	         -DMOAB_DIR=/opt/moab-5.3.1 \
+	         -DDOUBLE_DOWN=ON \
 	         -DBUILD_STATIC_EXE=OFF \
 	         -DBUILD_STATIC_LIBS=OFF \
-	         -DCMAKE_INSTALL_PREFIX=/opt/DAGMC \
-	         -DDOUBLE_DOWN_DIR=/opt/double-down
+	         -DCMAKE_INSTALL_PREFIX=$pkgdir/opt \
+	         -DDOUBLE_DOWN_DIR=/opt/double-down-git 
 }
 
 package() {
 	cd $srcdir/$pkgname/build
-	sudo make
-	sudo make install
+	make
+	make DESTDIR="$pkgdir/" install
 }
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
