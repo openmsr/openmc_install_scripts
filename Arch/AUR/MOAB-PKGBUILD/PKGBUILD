@@ -1,12 +1,12 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
-
-pkgname=moab-git
-pkgver=5.4.1.r0.g032173711
+pkgname=moab
+pkgver=5.4.1
 pkgrel=1
 pkgdesc="The Mesh-Oriented datABase MOAB is a component for representing and evaluating mesh data"
-arch=(x86_64)
+arch=('any')
 url="https://bitbucket.org/fathomteam/moab"
-license=(GPL3)
+license=('GPL3')
+
 depends=(
 	python-numpy
 	blas
@@ -21,40 +21,27 @@ makedepends=(
 	python-setuptools
 	"glibc>=2.34"
 )
+
 provides=("${pkgname%}")
-source=("${pkgname}::git+${url}.git")
-pkgver() {
-  cd "$pkgname"
-  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
-}
+source=('http://ftp.mcs.anl.gov/pub/fathom/moab-5.4.1.tar.gz')
+md5sums=('620850a74d7af431599e7328a36f0440')
+
 build() {
-	cd $srcdir/$pkgname
+	cd $srcdir/$pkgname-$pkgver
 	mkdir build && cd build
-	# test later if it's necessary to have double compilation
 	cmake .. -DENABLE_HDF5=ON \
 	         -DENABLE_NETCDF=ON \
 	         -DENABLE_FORTRAN=OFF \
 	         -DENABLE_BLASLAPACK=OFF \
-	         -DBUILD_SHARED_LIBS=ON \
 			 -DENABLE_PYMOAB=ON \
-	         -DCMAKE_INSTALL_PREFIX=/opt/moab
+			 -DCMAKE_INSTALL_PREFIX=${pkgdir}/opt
 	make
 }
 
 package() {
-	cd $srcdir/$pkgname/build
-	make install
-	cd pymoab
+	cd $srcdir/$pkgname-$pkgver/build
+	make DESTDIR="$pkgdir/" install
+	cd pymoab && ls
 	bash install.sh
 	python setup.py install
 }
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
