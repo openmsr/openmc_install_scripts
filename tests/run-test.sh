@@ -9,7 +9,7 @@ export PYTHONPATH=$PYTHONPATH:$HOME"/openmc/MOAB/build/pymoab/"
 export PYTHONPATH=$PYTHONPATH:$HOME"/openmc/CAD_to_openMC/src/"
 # set custom version of OpenMC
 export PYTHONPATH=$PYTHONPATH:$HOME"/openmc/openmc/"
-
+export PATH=$PATH:$HOME"/openmc/openmc/build/bin/"
 
 if [ ! -e dagmc.h5m ]; then
     python step_to_h5m.py fuel_pins.step
