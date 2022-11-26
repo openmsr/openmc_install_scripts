@@ -32,3 +32,11 @@ jobs:
         run: |
           cd openmc_install_scripts/Ubuntu_22.04
           ./openmc-install.sh
+      - name: cad-to-openmc-install
+        run: |
+          cd openmc_install_scripts/Ubuntu_22.04
+          ./cad-to-openmc-install.sh
+      - name: test-install
+        run: |
+          cd tests
+          ./run-test.sh

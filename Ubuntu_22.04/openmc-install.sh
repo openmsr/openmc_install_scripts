@@ -5,8 +5,8 @@
 set -ex
 
 #nuclear_data_download
-#./nuclear_data-install.sh
-#echo "Downloaded & extracted nuclear data, proceeding..."
+./nuclear_data-install.sh
+echo "Downloaded & extracted nuclear data, proceeding..."
   
 #dagmc compile & install
 ./dagmc-install.sh
@@ -50,12 +50,11 @@ if [ ! -e ${name}.done ]; then
   cd build
   cmake -DOPENMC_USE_DAGMC=ON \
         -DDAGMC_ROOT=$HOME/openmc/DAGMC \
-        -DHDF5_PREFER_PARALLEL=off ..
+        -DHDF5_PREFER_PARALLEL=off \
+        -DCMAKE_INSTALL_PREFIX=$HOME/openmc \
+         ..
   make -j $ccores
-  sudo make install
-
-  cd ..
-  sudo pip3 install .
+  make install
 
   cd ${WD}
 
