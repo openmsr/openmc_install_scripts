@@ -43,5 +43,6 @@ jobs:
       - name: test-install
         run: |
           sudo apt-get install libgl1-mesa-glx libglu1-mesa libxcursor1 libxinerama1
+          sudo pip install -U numpy
           cd openmc_install_scripts/tests
           ./run-test.sh
