@@ -28,3 +28,5 @@ if [ ! -e ${name}.done ]; then
 else
   echo CAD_to_openMC appears already to be installed \(lock file ${name}.done exists\) - skipping.
 fi
+
+sudo pip install -r $HOME/openmc/CAD_to_openMC/requirements.txt

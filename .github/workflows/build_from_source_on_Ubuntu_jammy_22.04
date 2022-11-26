@@ -38,5 +38,5 @@ jobs:
           ./cad-to-openmc-install.sh
       - name: test-install
         run: |
-          cd tests
+          cd openmc_install_scripts/tests
           ./run-test.sh
