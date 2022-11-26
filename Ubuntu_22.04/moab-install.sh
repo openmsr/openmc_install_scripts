@@ -56,7 +56,7 @@ if [ ! -e ${name}.done ]; then
               -DENABLE_FORTRAN=OFF \
               -DENABLE_BLASLAPACK=OFF \
               -DBUILD_SHARED_LIBS=ON \
-              -DENABLE_PYMOAB=OFF \
+              -DENABLE_PYMOAB=ON \
               -DCMAKE_INSTALL_PREFIX=$HOME/openmc/MOAB
   make -j $ccores
   make install
