@@ -42,5 +42,6 @@ jobs:
           ./cad-to-openmc-install.sh
       - name: test-install
         run: |
+          sudo apt-get install libgl1-mesa-glx
           cd openmc_install_scripts/tests
           ./run-test.sh
