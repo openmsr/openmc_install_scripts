@@ -52,7 +52,7 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake ../moab -DENABLE_HDF5=ON \
-              -DENABLE_PYMOAB=ON\
+              -DENABLE_PYMOAB=ON \
               -DENABLE_NETCDF=ON \
               -DENABLE_FORTRAN=OFF \
               -DBUILD_SHARED_LIBS=ON \
@@ -64,7 +64,7 @@ if [ ! -e ${name}.done ]; then
   #to install the python API
   cd pymoab
   bash install.sh
-  sudo python3 setup.py install
+  python3 setup.py install
 
   cd ${WD}
   touch ${name}.done
