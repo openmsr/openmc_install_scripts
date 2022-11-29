@@ -1,32 +1,42 @@
-# Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
-
+# Maintainer: Your Name <youremail@domain.com>
 pkgname=openmc
-pkgver=v0.5.2.r12523.g1a7762283
+pkgver=0.13.2
 pkgrel=1
-pkgdesc="OpenMC Monte Carlo Particle Transport Code"
-pkgdir=/opt
-arch=(x86_64)
-url="https://github.com/openmc-dev/openmc"
+pkgdesc="The OpenMC project aims to provide a fully-featured Monte Carlo particle 
+		 transport code based on modern methods."
+arch=('any')
+url="https://docs.openmc.org/en/develop/"
 license=('MIT')
+
+depends=(
+	python-lxml
+	python-scipy
+	python-pandas
+	python-matplotlib
+	python-uncertainties
+	embree
+	libxrender 
+	libxcursor 
+	libxft 
+	libxinerama 
+	freecad 
+	glu
+	# include once actually available
+	# DAGMC-git
+	# nuclear data
+)
 makedepends=(
     cmake
     git
     python
 	python-numpy
 	python-setuptools
-#    include once these are actually available as packages
-#    dagmc-git
-#    nuclear-data
 )
-provides=("${pkgname%}")
-source=("${pkgname}::git+${url}.git")
-pkgver() {
-  cd "$pkgname"
-  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
-}
+
+provides=("${pkgname%-pkgver}")
 conflicts=(
 	openmc-git
-)
+	)
 
 build() {
     sudo pacman --noconfirm -S python-lxml \
@@ -51,21 +61,9 @@ build() {
     sudo make
 }
 
-package() {
-    cd $srcdir/$pkgname/build
-    sudo make install
-    cd ..
-    python setup.py install
-}
+source=('https://github.com/openmc-dev/openmc/archive/refs/tags/v0.13.2.tar.gz')
+md5sums=('SKIP')
 
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
-sha256sums=('SKIP')
+# Please refer to the 'USING VCS SOURCES' section of the PKGBUILD man page for
+# a description of each element in the source array.
+

@@ -26,18 +26,18 @@ pkgver() {
   cd "$pkgname"
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
-md5sums=('SKIP')
+md5sums=('099c62ca91482bdba7ff4849da3315b4')
 
 build() {
 	cd $srcdir/$pkgname
 	mkdir build && cd build
 	cmake .. -DBUILD_TALLY=ON \
-	         -DMOAB_DIR=/opt/moab-5.3.1 \
+	         -DMOAB_DIR=/opt/MOAB \
 	         -DDOUBLE_DOWN=ON \
 	         -DBUILD_STATIC_EXE=OFF \
 	         -DBUILD_STATIC_LIBS=OFF \
 	         -DCMAKE_INSTALL_PREFIX=$pkgdir/opt \
-	         -DDOUBLE_DOWN_DIR=/opt/double-down-git 
+	         -DDOUBLE_DOWN_DIR=/opt/double-down 
 }
 
 package() {
