@@ -38,11 +38,16 @@ source=('https://github.com/openmsr/CAD_to_OpenMC/releases/download/v0.2.2/CAD_t
 md5sums=('SKIP')
 
 build() {
-    cd "$_name-$pkgver"
+    cd "$pkgname-$pkgver"
     python -m build --wheel --no-isolation
 }
 
 package() {
-    cd "$_name-$pkgver"
+    cd "$pkgname-$pkgver"
     python -m installer --destdir="$pkgdir" dist/*.whl
+}
+
+check(){
+    cd "$srcdir/$pkgname-$pkgver"
+    pytest
 }

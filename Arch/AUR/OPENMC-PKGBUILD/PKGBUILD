@@ -1,4 +1,4 @@
-# Maintainer: Your Name <youremail@domain.com>
+# Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 pkgname=openmc
 pkgver=0.13.2
 pkgrel=1
@@ -23,7 +23,8 @@ depends=(
 	glu
 	# include once actually available
 	# DAGMC-git
-	# nuclear data
+	# nuclear-data
+	# python-cad_to_openmc
 )
 makedepends=(
     cmake
@@ -39,18 +40,6 @@ conflicts=(
 	)
 
 build() {
-    sudo pacman --noconfirm -S python-lxml \
-                               python-scipy \
-                               python-pandas \
-                               python-matplotlib \
-                               python-uncertainties \
-                               embree \
-                               libxrender \
-                               libxcursor \
-                               libxft \
-                               libxinerama \
-                               freecad \
-                               glu
     pip install h5py CAD_to_OpenMC
     cd $srcdir/$pkgname
     mkdir build && cd build
