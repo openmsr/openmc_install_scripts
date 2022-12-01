@@ -16,7 +16,7 @@ sources = [{
     },
 }]
 
-builddependencies = [('CMake', '3.23.1')]
+builddependencies = [('CMake', '3.23.1'),('Python', '3.10.4'),('numpy','1.13.1','-Python-3.6.1',{'name': 'intel', 'version': '2017a'})]
 
 osdependencies = [('eigen', 'netcdf','hdf5','python-setuptools','cython')]
 
