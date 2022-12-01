@@ -23,5 +23,5 @@ osdependencies = [('eigen', 'netcdf','hdf5','python-setuptools','cython')]
 easyblock = 'CMakeMake'
 
 local_install_prefix = '$HOME/easybuild'
-configure_cmd = f"cmake ../moab -DENABLE_HDF5=ON -DENABLE_PYMOAB=ON -DENABLE_FORTRAN=OFF -DBUILD_SHARED_LIBS=ON -DENABLE_BLASLAPACK=OFF -DCMAKE_INSTALL_PREFIX={local_install_prefix}"
+configopts = f"-DENABLE_HDF5=ON -DENABLE_PYMOAB=ON -DENABLE_FORTRAN=OFF -DBUILD_SHARED_LIBS=ON -DENABLE_BLASLAPACK=OFF -DCMAKE_INSTALL_PREFIX={local_install_prefix}"
 postinstallcmds = ['pwd','ls','bash ./pymoab/install.sh','python ./pymoab/setup.py install']

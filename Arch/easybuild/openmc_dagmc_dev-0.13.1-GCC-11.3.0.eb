@@ -31,5 +31,5 @@ dependencies = [
 easyblock = 'CMakeMake'
 
 local_install_prefix = '$HOME/easybuild'
-configure_cmd = f"cmake -DOPENMC_USE_DAGMC=ON -DOPENMC_USE_OPENMP=ON -DOPENMC_USE_MPI=ON -DDAGMC_ROOT={local_install_prefix} -DHDF5_PREFER_PARALLEL=OFF -DCMAKE_INSTALL_PREFIX={local_install_prefix} .."
+configopts = f"-DOPENMC_USE_DAGMC=ON -DOPENMC_USE_OPENMP=ON -DOPENMC_USE_MPI=ON -DDAGMC_ROOT={local_install_prefix} -DHDF5_PREFER_PARALLEL=OFF -DCMAKE_INSTALL_PREFIX={local_install_prefix} .."
 postinstallcmds = ['pip install ..']
