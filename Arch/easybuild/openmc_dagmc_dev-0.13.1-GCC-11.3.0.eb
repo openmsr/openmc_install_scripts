@@ -18,7 +18,7 @@ sources = [{
 }]
 
 
-builddependencies = [('CMake', '3.23.1')]
+builddependencies = [('CMake', '3.23.1'),('make','4.3')]
 
 osdependencies = [('python-pandas','python-h5py','python-matplotlib','python-uncertainties','python-scipy','python-lxml','python-numpy')]
 

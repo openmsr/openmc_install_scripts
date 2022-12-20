@@ -16,7 +16,7 @@ sources = [{
     },
 }]
 
-builddependencies = [('CMake', '3.23.1')]
+builddependencies = [('CMake', '3.23.1'),('make','4.3')]
 
 osdependencies = [('eigen', 'netcdf','hdf5','python-setuptools','cython')]
 

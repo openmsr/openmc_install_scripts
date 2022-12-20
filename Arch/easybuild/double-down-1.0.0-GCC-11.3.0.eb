@@ -16,7 +16,7 @@ sources = [{
     },
 }]
 
-builddependencies = [('CMake', '3.23.1')]
+builddependencies = [('CMake', '3.23.1'),('make','4.3')]
 
 dependencies = [
     ('moab','5.3.0','',{'name': 'GCC', 'version': '11.3.0'})
