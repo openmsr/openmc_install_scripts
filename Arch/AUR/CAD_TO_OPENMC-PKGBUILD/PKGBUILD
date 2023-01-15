@@ -1,32 +1,17 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
-pkgname=python-cad_to_openmc
-pkgver=0.2.2
+pkgname=python-CAD_to_OpenMC
+pkgver=0.2.2.r109.g898ba93
 pkgrel=1
 pkgdesc="code to target the conversion from a step-file to a h5m-geometry 
-		 for neutronics"
+		     for neutronics"
 arch=('x86_64')
 url="https://github.com/openmsr/CAD_to_OpenMC"
 license=('MIT')
+depends=(python)
 
-depends=(
-	# add once available
-	# moab-5.3.1
-	gmsh
-	python-pyparsing
-	python-cadquery
-	python-numpy
-	ocp
-	python-meshio
-	python-trimesh
-	python-networkx
-	cython
-	python-pytest
-	mmg
-	)
 makedepends=(
 	git
 	python
-	cmake
 	python-build
 	python-installer
 	python-wheel
@@ -34,20 +19,26 @@ makedepends=(
 
 provides=("${pkgname%-pkgver}")
 
-source=('https://github.com/openmsr/CAD_to_OpenMC/releases/download/v0.2.2/CAD_to_OpenMC-0.2.2-py3-none-any.whl')
+_name=${pkgname#python-}
+source=("git+https://github.com/openmsr/CAD_to_OpenMC.git")
 md5sums=('SKIP')
 
-build() {
-    cd "$pkgname-$pkgver"
-    python -m build --wheel --no-isolation
+pkgver() {
+  cd "$srcdir/${_name}"
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
+
+build() {
+    cd "$srcdir/${_name}"
+    python \
+      -m build \
+      --wheel \
+      --no-isolation
+  }
+
 package() {
-    cd "$pkgname-$pkgver"
+    cd "$srcdir/${_name}"
     python -m installer --destdir="$pkgdir" dist/*.whl
 }
 
-check(){
-    cd "$srcdir/$pkgname-$pkgver"
-    pytest
-}

@@ -1,20 +1,11 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
-
-pkgname=nuclear-data
+pkgname=nuclear_data
 pkgver=0
 pkgrel=1
 pkgdesc="Evaluated nuclear data files for OpenMC"
 pkgdir=/opt
 arch=(x86_64)
-# openmc.org supported nuclear data
-_endfb71="https://anl.box.com/shared/static/9igk353zpy8fn9ttvtrqgzvw1vtejoz6.xz"
-_endfb80="https://anl.box.com/shared/static/uhbxlrx7hvxqw27psymfbhi7bx7s6u6a.xz"
-_jeff33="https://anl.box.com/shared/static/4jwkvrr9pxlruuihcrgti75zde6g7bum.xz"
-_fendl32="https://anl.box.com/shared/static/3cb7jetw7tmxaw6nvn77x6c578jnm2ey.xz"
-_chain_endfb71_pwr="https://anl.box.com/shared/static/os1u896bwsbopurpgas72bi6aij2zzdc.xml"
-_chain_endfb71_fast="https://anl.box.com/shared/static/9058zje1gm0ekd93hja542su50pccvj0.xml"
-_chain_casl_pwr="https://anl.box.com/shared/static/3nvnasacm2b56716oh5hyndxdyauh5gs.xml"
-_chain_casl_sfr="https://anl.box.com/shared/static/9fqbq87j0tx4m6vfl06pl4ccc0hwamg9.xml"
+
 license=()
 makedepends=(
 	git
