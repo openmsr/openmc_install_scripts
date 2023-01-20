@@ -37,6 +37,10 @@ if [ ! -e ${name}.done ]; then
     git clone --single-branch --branch develop --depth 1 https://github.com/svalinn/DAGMC.git
   fi
 
+  for patch in `ls ${WD}/../patches/dagmc_*.patch`; do
+    patch -p1 < $patch
+  done
+
   mkdir -p build
   cd build
   cmake ../DAGMC -DBUILD_TALLY=ON \

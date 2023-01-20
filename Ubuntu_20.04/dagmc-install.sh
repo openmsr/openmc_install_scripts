@@ -31,7 +31,7 @@ if [ ! -e ${name}.done ]; then
     cd DAGMC; git pull; cd ..
   fi
 
-  for patch in `ls ${pwd}/../patches/dagmc_.patch`; do
+  for patch in `ls ${WD}/../patches/dagmc_*.patch`; do
     patch -p1 < $patch
   done
 
