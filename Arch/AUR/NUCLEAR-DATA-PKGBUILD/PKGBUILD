@@ -62,19 +62,19 @@ for range in "${ranges_cs[@]}"; do
         [ -z "$start" ] && continue
         [ -z "$end" ] && end=$start
         for (( i=start ; i <= end ; i++ )); do
-                if [ i==1 ]; then
+                if [[ $i = 1 ]]; then
 					_csChosen+=$_endfb71
 					if [ !path_set ]; then
 						_cpath="endfb-vii.1-hdf5"
 						_path_set=true
 					fi
-				elif [ i==2 ]; then
+				elif [[ $i = 2 ]]; then
 					_csChosen+=$_endfb80 
 					if [ !path_set ]; then
-						_cpath="endfb80_hdf5"
+						_cpath="endfb-viii.0-hdf5"
 						_path_set=true
 					fi
-				elif [ i==3 ]; then
+				elif [[ $i = 3 ]]; then
 					_csChosen+=$_jeff33 
 					if [ !path_set ]; then
 						_cpath="jeff33_hdf5"
@@ -82,7 +82,7 @@ for range in "${ranges_cs[@]}"; do
 					fi
 				else
 					_csChosen+=$_fendl32
-					if [ !path_set ]; then
+					if [[ !path_set ]]; then
 						_cpath="fendl-3.2-hdf5"
 						_path_set=true
 					fi
@@ -95,11 +95,11 @@ for range in "${ranges_dep[@]}"; do
         [ -z "$start" ] && continue
         [ -z "$end" ] && end=$start
         for (( i=start ; i <= end ; i++ )); do
-                if [ i==1 ]; then
+                if [[ $i=1 ]]; then
 					_depChosen+=$_chain_endfb71_pwr 
-				elif [ i==2 ]; then
+				elif [[ $i=2 ]]; then
 					_depChosen+=$_chain_endfb71_fast
-				elif [ i==3 ]; then
+				elif [[ $i=3 ]]; then
 					_depChosen+=$_chain_casl_pwr 
 				else
 					_depChosen+=$_chain_casl_sfr 
@@ -129,10 +129,12 @@ build() {
 		fi
 	done
 
-	echo "export OPENMC_CROSS_SECTIONS=$PWD/$_cpath/cross_sections.xml" >> $HOME/.bashrc 
-	source $HOME/.bashrc
-	echo "depletion data (.xml) saved at $PWD"
-	echo "nuclear data set to OPENMC_CROSS_SECTIONS=$PWD/$_cpath/cross_sections.xml"
+	#echo "export OPENMC_CROSS_SECTIONS=$PWD/$_cpath/cross_sections.xml" >> $HOME/.bashrc 
+	#source $HOME/.bashrc
+echo -e "\nINFO: depletion data (.xml) saved at $PWD"
+echo -e "INFO: nuclear data saved to OPENMC_CROSS_SECTIONS=$PWD/$_cpath/cross_sections.xml,\
+to make this data available at runtime for OpenMC set OPENMC_CROSS_SECTIONS\
+environment variable to this path via: export OPENMC_CROSS_SECTIONS=$PWD/$_cpath/cross_sections.xml\n"
 }
 
 package(){

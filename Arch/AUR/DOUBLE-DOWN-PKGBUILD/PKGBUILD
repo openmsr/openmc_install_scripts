@@ -9,7 +9,7 @@ license=('MIT')
 
 depends=(
 	#    include once these are actually available as packages
-	#	 moab-git
+	#	 moab
 )
 makedepends=(
 	git

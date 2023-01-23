@@ -1,12 +1,19 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 pkgname=openmc
-pkgver=0.13.2
+pkgver=v0.13.2.r446.g303812202
 pkgrel=1
 pkgdesc="The OpenMC project aims to provide a fully-featured Monte Carlo particle 
 		 transport code based on modern methods."
 arch=('any')
-url="https://docs.openmc.org/en/develop/"
+url="https://github.com/openmc-dev/openmc"
 license=('MIT')
+
+source=("${pkgname}::git+${url}.git")
+pkgver() {
+  cd "$pkgname"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+md5sums=('b1d793bbb7d0568c8d2e86b867dd12df')
 
 depends=(
 	python-lxml
@@ -24,7 +31,7 @@ depends=(
 	# include once actually available
 	# DAGMC-git
 	# nuclear-data
-	# python-cad_to_openmc
+	# python-CAD_to_OpenMC
 )
 makedepends=(
     cmake
@@ -40,19 +47,20 @@ conflicts=(
 	)
 
 build() {
-    pip install h5py CAD_to_OpenMC
     cd $srcdir/$pkgname
     mkdir build && cd build
     cmake -DOPENMC_USE_DAGMC=ON \
           -DDAGMC_ROOT=/opt/dagmc \
           -DOPENMC_USE_MPI=ON \
           -DHDF5_PREFER_PARALLEL=ON ..
-    sudo make
 }
 
-source=('https://github.com/openmc-dev/openmc/archive/refs/tags/v0.13.2.tar.gz')
-md5sums=('SKIP')
+package() {
+	cd $srcdir/$pkgname/build
+	make 
+	make DESTDIR="${pkgdir}" install
+	pip install ../
+}
 
-# Please refer to the 'USING VCS SOURCES' section of the PKGBUILD man page for
-# a description of each element in the source array.
+
 
