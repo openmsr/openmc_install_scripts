@@ -41,3 +41,4 @@ package() {
 	make
 	make DESTDIR="$pkgdir/" install
 }
+md5sums=('SKIP')

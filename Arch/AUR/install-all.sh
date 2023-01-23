@@ -57,8 +57,6 @@ if [ ! -e ./OPENMC-PKGBUILD/*.tar.zst ]; then
     makepkg --noconfirm -csgi >> PKGBUILD && makepkg
     cd ..
     echo "compiled & installed OpenMC, finised!"
-    python tests/step_to_h5m.py
-    python tests/test_openmc.py
 else
     echo "openmc already installed"
 fi

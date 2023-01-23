@@ -1,6 +1,6 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 pkgname=DAGMC-git
-pkgver=v3.2.2.r29.g980c901d
+pkgver=v3.2.2.r37.gaf2a4ce0
 pkgrel=1
 pkgdesc="Direct Accelerated Geometry Monte Carlo (DAGMC) is a software package 
 		 that allows users to perform Monte Carlo radiation transport directly 
@@ -45,3 +45,4 @@ package() {
 	make
 	make DESTDIR="$pkgdir/" install
 }
+md5sums=('SKIP')
