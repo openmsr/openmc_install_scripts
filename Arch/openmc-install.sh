@@ -35,14 +35,21 @@ echo will build openmc from $build_prefix
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-  if ! pacman -Qi python-pandas python-h5py-openmpi python-matplotlib python-uncertainties > /dev/null; then
+  if ! pacman -Qi python-pandas python-matplotlib python-uncertainties > /dev/null; then
     sudo pacman -Sy --noconfirm\
 	python-pandas\
-	python-h5py-openmpi\
 	python-matplotlib\
 	python-uncertainties
   fi
-
+  if [ $OPENMC_NOMPI ]; then
+    if ! pacman -Qi python-h5py hdf5 >/dev/null; then
+      sudo pacman -Sy --noconfirm python-h5py h5py
+    fi
+  else
+    if ! pacman -Qi python-h5py-openmpi hdf5-openmpi >/dev/null; then
+      sudo pacman -Sy --noconfirm python-h5py-openmpi hdf5-openmpi
+    fi
+  fi
   #Should we run make in parallel? Default is to use all available cores
   ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
   if [ "x$1" != "x" ]; then
