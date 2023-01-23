@@ -34,13 +34,17 @@ if [ ! -e ${name}.done ]; then
   mkdir -p $HOME/openmc/DAGMC
   cd $HOME/openmc/DAGMC
   if [ ! -e DAGMC ]; then
-    git clone --single-branch --branch develop --depth 1 https://github.com/svalinn/DAGMC.git
+    git clone https://github.com/svalinn/DAGMC.git
+    cd DAGMC
+  else
+    cd DAGMC; git pull
   fi
 
   for patch in `ls ${WD}/../patches/dagmc_*.patch`; do
     patch -p1 < $patch
   done
 
+  cd ..
   mkdir -p build
   cd build
   cmake ../DAGMC -DBUILD_TALLY=ON \
