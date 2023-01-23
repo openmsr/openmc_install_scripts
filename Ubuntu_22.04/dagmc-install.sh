@@ -25,8 +25,19 @@ if [ ! -e ${name}.done ]; then
 
   mkdir -p $HOME/openmc/DAGMC
   cd $HOME/openmc/DAGMC
-  git clone --single-branch --branch develop --depth 1 https://github.com/svalinn/DAGMC.git
-  mkdir build
+  if [ ! -e DAGMC ]; then
+    git clone --single-branch --branch develop --depth 1 https://github.com/svalinn/DAGMC.git
+  else
+    cd DAGMC
+    git checkout develop
+    git fetch
+    git pull
+    cd ..
+  fi
+
+  if [ ! -e build ]; then
+    mkdir build
+  fi
   cd build
   cmake ../DAGMC -DBUILD_TALLY=ON \
                -DMOAB_DIR=$HOME/openmc/MOAB \

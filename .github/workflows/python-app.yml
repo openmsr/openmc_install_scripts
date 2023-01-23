@@ -1,4 +1,8 @@
-name: build on Ubuntu 22
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python application
+
 on:
   workflow_dispatch:
   schedule:
@@ -38,5 +42,7 @@ jobs:
           ./cad-to-openmc-install.sh
       - name: test-install
         run: |
+          sudo apt-get install libgl1-mesa-glx libglu1-mesa libxcursor1 libxinerama1
+          sudo pip install -U numpy
           cd openmc_install_scripts/tests
           ./run-test.sh

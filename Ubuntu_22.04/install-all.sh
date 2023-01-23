@@ -8,8 +8,5 @@ echo 'Defaults    timestamp_timeout=-1' | sudo EDITOR='tee -a' visudo
 ./openmc-install.sh
 echo "Compiled & installed openmc, done."
 
-echo "Running test script..."
-python test_openmc.py
-
-#remove timestamp update
-sudo sed -i '/Defaults    timestamp_timeout=-1/d' /etc/sudoers
+./cad-to-openmc-install.sh
+echo "Compiled & installed CAD_to_openMC, done."

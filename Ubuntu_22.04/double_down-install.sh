@@ -4,9 +4,13 @@
 #!/bin/bash
 set -ex
 
-#embree compile & install
-#./embree-install.sh
-#echo "Compiled & installed embree, proceeding..."
+# uncomment to install embree or define as an environmental variable
+# BUILD_EMBREE=1
+# embree compile & install
+if [ $BUILD_EMBREE ]; then
+  ./embree-install.sh
+  echo "Compiled & installed embree, proceeding..."
+fi
 
 #moab compile & install
 ./moab-install.sh
@@ -29,11 +33,24 @@ if [ ! -e ${name}.done ]; then
 
   mkdir -p $HOME/openmc/double-down
   cd $HOME/openmc/double-down
-  git clone --single-branch --branch main --depth 1 https://github.com/pshriwise/double-down.git
-  mkdir build
+  if [ ! -e double-down ]; then
+    git clone --single-branch --branch main --depth 1 https://github.com/pshriwise/double-down.git
+  else
+    cd double-down;
+    git checkout main
+    git fetch
+    git pull
+    cd ..
+  fi
+  if [ ! -e build ]; then
+    mkdir build
+  fi
+
   cd build
-  cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \
-                     -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down
+  cmake ../double-down \
+    -DMOAB_DIR=$HOME/openmc/MOAB \
+    $(if [ $BUILD_EMBREE ]; then echo "-DEMBREE_DIR=$HOME/openmc/embree"; fi) \
+    -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down
 
   make -j $ccores
   make install
