@@ -46,3 +46,4 @@ package() {
 	bash install.sh
 	python setup.py install --user
 }
+md5sums=('935d18f8edf7dc3df625d9426a2d59e1')
