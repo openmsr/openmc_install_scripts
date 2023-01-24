@@ -7,7 +7,7 @@ find /var/cache/pacman/pkg/ -iname "*.part" -delete
 # Compile MOAB package and install it
 if [ ! -e ./MOAB-PKGBUILD/*.tar.zst ]; then
     cd MOAB-PKGBUILD
-    makepkg --noconfirm -csgi >> PKGBUILD && makepkg
+    makepkg --noconfirm -si #>> PKGBUILD && makepkg
     cd ..
     echo "compiled & installed MOAB, proceeding..."
 else
@@ -24,7 +24,7 @@ fi
 # Compile double-down package and install it
 if [ ! -e ./DOUBLE-DOWN-PKGBUILD/*.tar.zst ]; then
     cd DOUBLE-DOWN-PKGBUILD
-    makepkg --noconfirm -csgi >> PKGBUILD && makepkg
+    makepkg --noconfirm -si #>> PKGBUILD && makepkg
     cd ..
     echo "compiled & installed double-down, proceeding..."
 else
@@ -34,7 +34,7 @@ fi
 # Compile DAGMC package and install it
 if [ ! -e ./DAGMC-PKGBUILD/*.tar.zst ]; then
     cd DAGMC-PKGBUILD
-    makepkg --noconfirm -csgi >> PKGBUILD && makepkg
+    makepkg --noconfirm -si #>> PKGBUILD && makepkg
     cd ..
     echo "compiled & installed DAGMC, proceeding..."
 else
@@ -44,7 +44,7 @@ fi
 # Download the nuclear data
 if [ ! -e ./NUCLEAR-DATA-PKGBUILD/*.tar.zst ]; then
     cd NUCLEAR-DATA-PKGBUILD
-    makepkg --noconfirm -csgi >> PKGBUILD && makepkg
+    makepkg --noconfirm -si #>> PKGBUILD && makepkg
     cd ..
     echo "nuclear data downloaded , proceeding..."
 else
@@ -54,7 +54,7 @@ fi
 # Compile OpenMC package and install it
 if [ ! -e ./OPENMC-PKGBUILD/*.tar.zst ]; then
     cd OPENMC-PKGBUILD
-    makepkg --noconfirm -csgi >> PKGBUILD && makepkg
+    makepkg --noconfirm -si #>> PKGBUILD && makepkg
     cd ..
     echo "compiled & installed OpenMC, finised!"
 else

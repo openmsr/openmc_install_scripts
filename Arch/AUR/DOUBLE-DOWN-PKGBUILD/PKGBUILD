@@ -32,13 +32,13 @@ md5sums=('c75cdd029fe8b4f2650c3eccefc3d6d5')
 build() {
 	cd $srcdir/$pkgname
 	mkdir build && cd build
-	cmake .. -DMOAB_DIR=${pkgdir}/opt/moab \
-		 	 -DCMAKE_INSTALL_PREFIX=${pkgdir}/opt/double-down
+	cmake .. -DMOAB_DIR=/opt/mnt \
+		 -DCMAKE_INSTALL_PREFIX=${pkgdir}/opt/double-down
 }
 
 package() {
 	cd $srcdir/$pkgname/build
 	make
-	make DESTDIR="$pkgdir/" install
+	make DESTDIR="$pkgdir/double-down" install
 }
 md5sums=('SKIP')
