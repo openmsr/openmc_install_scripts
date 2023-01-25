@@ -4,6 +4,26 @@
 find /var/cache/pacman/pkg/ -iname "*.part" -delete
 #sudo pacman -Syyu --ignore sudo --needed base-devel
 
+# Download the nuclear data
+if [ ! -e ./NUCLEAR-DATA-PKGBUILD/*.tar.zst ]; then
+    cd NUCLEAR-DATA-PKGBUILD
+    makepkg --noconfirm -si #>> PKGBUILD && makepkg
+    cd ..
+    echo "nuclear data downloaded , proceeding..."
+else
+    echo "nuclear data already installed, proceeding..."
+fi
+
+# Compile CAD_to_OpenMC and install it
+if [ ! -e ./CAD_TO_OPENMC-PKGBUILD/*.tar.zst ]; then
+    cd CAD_TO_OPENMC-PKGBUILD
+    makepkg --noconfirm -si #>> PKGBUILD && makepkg
+    cd ..
+    echo "CAD_to_OpenMC downloaded , proceeding..."
+else
+    echo "CAD_to_OpenMC already installed, proceeding..."
+fi
+
 # Compile MOAB package and install it
 if [ ! -e ./MOAB-PKGBUILD/*.tar.zst ]; then
     cd MOAB-PKGBUILD
@@ -39,16 +59,6 @@ if [ ! -e ./DAGMC-PKGBUILD/*.tar.zst ]; then
     echo "compiled & installed DAGMC, proceeding..."
 else
     echo "dagmc already installed, proceeding..."
-fi
-
-# Download the nuclear data
-if [ ! -e ./NUCLEAR-DATA-PKGBUILD/*.tar.zst ]; then
-    cd NUCLEAR-DATA-PKGBUILD
-    makepkg --noconfirm -si #>> PKGBUILD && makepkg
-    cd ..
-    echo "nuclear data downloaded , proceeding..."
-else
-    echo "nuclear data already installed, proceeding..."
 fi
 
 # Compile OpenMC package and install it
