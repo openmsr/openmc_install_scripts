@@ -42,6 +42,6 @@ build() {
 package() {
     cd "$srcdir/${_name}"
     python -m installer --destdir="$pkgdir" dist/*.whl
-    pip install gmsh # python-pygmsh is not compatible currently
+    pip install requirements.txt
 }
 

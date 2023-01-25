@@ -28,6 +28,7 @@ depends=(
 	libxinerama 
 	freecad 
 	glu
+	openssh
 	# include once actually available
 	# DAGMC-git
 	# nuclear-data
