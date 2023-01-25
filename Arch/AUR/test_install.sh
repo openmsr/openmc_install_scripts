@@ -7,3 +7,6 @@ python tests/step_to_h5m.py
 
 # test run
 python tests/test_openmc.py
+
+# clean
+rm *.stl

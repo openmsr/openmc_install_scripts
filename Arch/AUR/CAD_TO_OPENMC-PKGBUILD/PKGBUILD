@@ -1,6 +1,6 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 pkgname=python-CAD_to_OpenMC
-pkgver=0.2.2.r115.g0080cce
+pkgver=0.2.2.r118.g5fa9100
 pkgrel=1
 pkgdesc="code to target the conversion from a step-file to a h5m-geometry 
 		     for neutronics"
@@ -8,7 +8,7 @@ arch=('x86_64')
 url="https://github.com/openmsr/CAD_to_OpenMC"
 license=('MIT')
 depends=(python
- 	 python-pygmsh
+ 	 python-pip
 )
 
 makedepends=(
@@ -42,6 +42,6 @@ build() {
 package() {
     cd "$srcdir/${_name}"
     python -m installer --destdir="$pkgdir" dist/*.whl
-    pip install requirements.txt
+    pip install -r requirements.txt
 }
 
