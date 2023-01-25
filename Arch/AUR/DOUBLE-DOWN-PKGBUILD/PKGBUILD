@@ -40,6 +40,6 @@ build() {
 package() {
 	cd $srcdir/$pkgname/build
 	make
-	make DESTDIR="$pkgdir/double-down" install
+	make install
 }
 md5sums=('SKIP')

@@ -1,6 +1,6 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 pkgname=openmc
-pkgver=v0.13.2.r446.g303812202
+pkgver=v0.13.2.r453.g3f5b90042
 pkgrel=1
 pkgdesc="The OpenMC project aims to provide a fully-featured Monte Carlo particle 
 		 transport code based on modern methods."
@@ -47,18 +47,19 @@ conflicts=(
 	)
 
 build() {
-    cd $srcdir/$pkgname
+    cd $srcdir/${pkgname}
     mkdir build && cd build
-    cmake -DOPENMC_USE_DAGMC=ON \
-          -DDAGMC_ROOT=/opt/dagmc \
-          -DOPENMC_USE_MPI=ON \
-          -DHDF5_PREFER_PARALLEL=ON ..
+    cmake .. -DOPENMC_USE_DAGMC=ON \
+             -DDAGMC_ROOT=/opt/DAGMC \
+             -DOPENMC_USE_MPI=ON \
+             -DHDF5_PREFER_PARALLEL=ON \
+	     -DCMAKE_INSTALL_PREFIX=${pkgdir}/opt/openmc
+    make
 }
 
 package() {
-	cd $srcdir/$pkgname/build
-	make 
-	make DESTDIR="${pkgdir}" install
+	cd $srcdir/${pkgname}/build 
+	make install
 	pip install ../
 }
 

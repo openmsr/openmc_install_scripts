@@ -60,3 +60,6 @@ if [ ! -e ./OPENMC-PKGBUILD/*.tar.zst ]; then
 else
     echo "openmc already installed"
 fi
+
+echo "testing installation..."
+bash test_install.sh

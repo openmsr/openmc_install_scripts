@@ -1,13 +1,15 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 pkgname=python-CAD_to_OpenMC
-pkgver=0.2.2.r109.g898ba93
+pkgver=0.2.2.r115.g0080cce
 pkgrel=1
 pkgdesc="code to target the conversion from a step-file to a h5m-geometry 
 		     for neutronics"
 arch=('x86_64')
 url="https://github.com/openmsr/CAD_to_OpenMC"
 license=('MIT')
-depends=(python)
+depends=(python
+ 	 python-pygmsh
+)
 
 makedepends=(
 	git
@@ -40,5 +42,6 @@ build() {
 package() {
     cd "$srcdir/${_name}"
     python -m installer --destdir="$pkgdir" dist/*.whl
+    pip install gmsh # python-pygmsh is not compatible currently
 }
 
