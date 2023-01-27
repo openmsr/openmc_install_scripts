@@ -41,6 +41,7 @@ if [ ! -e ${name}.done ]; then
         python3-scipy\
         python3-pandas\
         python3-h5py\
+        python3-h5py-mpi\
         python3-matplotlib\
         python3-uncertainties
 

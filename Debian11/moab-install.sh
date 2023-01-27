@@ -31,6 +31,9 @@ if [ ! -e ${name}.done ]; then
         libhdf5-103 \
         libhdf5-cpp-103 \
         libhdf5-dev \
+        libhdf5-openmpi-103-1 \
+        libhdf5-openmpi-cpp-103-1 \
+        libhdf5-openmpi-dev \
         python3-setuptools\
 	cython3
   #Should we run make in parallel? Default is to use all available cores
