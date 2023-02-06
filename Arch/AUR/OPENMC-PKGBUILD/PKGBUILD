@@ -1,6 +1,6 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
 pkgname=openmc
-pkgver=v0.13.2.r453.g3f5b90042
+pkgver=v0.13.2.r497.g6218becb1
 pkgrel=1
 pkgdesc="The OpenMC project aims to provide a fully-featured Monte Carlo particle 
 		 transport code based on modern methods."

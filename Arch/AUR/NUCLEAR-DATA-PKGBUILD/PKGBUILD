@@ -149,4 +149,8 @@ mkdir ${pkgdir}/opt/${pkgname}
 cd $srcdir
 mv *.xml* *hdf5 ${pkgdir}/opt/${pkgname}
 
+# permission fixes 
+chmod -R go+r "${pkgdir}/opt"
+chmod -R 755 "${pkgdir}/opt/${pkgname}"
+
 }
