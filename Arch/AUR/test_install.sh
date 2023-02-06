@@ -1,6 +1,6 @@
 # set non-standard paths
 export PATH=$PATH:/opt/openmc/bin:$HOME/.local/lib/python3.10/site-packages
-var=`ls /opt/nuclear_data/*hdf5 | head -n1`
+var=`echo /opt/nuclear-data/*hdf5 | head -n1`
 export OPENMC_CROSS_SECTIONS=$var/cross_sections.xml
 
 # test geometry build
