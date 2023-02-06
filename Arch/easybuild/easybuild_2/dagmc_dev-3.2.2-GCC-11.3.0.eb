@@ -19,7 +19,7 @@ sources = [{
 builddependencies = [('CMake', '3.23.1')]
 
 dependencies = [
-    ('HDF5', '1.12.2','-serial',{'name': 'GCCcore', 'version': '11.3.0'}),
+    ('HDF5', '1.13.3','',{'name': 'GCC', 'version': '11.3.0'}),
     ('Eigen','3.4.0','',{'name': 'GCCcore', 'version': '11.3.0'}),
     ('double-down','1.0.0','',{'name': 'GCC', 'version': '11.3.0'})
 ]
@@ -27,4 +27,4 @@ dependencies = [
 easyblock = 'CMakeMake'
 
 local_install_prefix = '$HOME/easybuild'
-configopts = f"-DBUILDTALLY=ON -DMOAB_DIR={local_install_prefix} -DDOUBLE_DOWN=ON -DBUILD_STATIC_EXE=OFF -DBUILD_STATIC_LIBS=OFF -DCMAKE_INSTALL_PREFIX={local_install_prefix} -DDOUBLE_DOWN_DIR={local_install_prefix}"
+configure_cmd = f"cmake ../DAGMC -DBUILDTALLY=ON -DMOAB_DIR={local_install_prefix} -DDOUBLE_DOWN=ON -DBUILD_STATIC_EXE=OFF -DBUILD_STATIC_LIBS=OFF -DCMAKE_INSTALL_PREFIX={local_install_prefix} -DDOUBLE_DOWN_DIR={local_install_prefix}"

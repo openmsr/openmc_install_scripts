@@ -4,10 +4,30 @@
 find /var/cache/pacman/pkg/ -iname "*.part" -delete
 #sudo pacman -Syyu --ignore sudo --needed base-devel
 
+# Download the nuclear data
+if [ ! -e ./NUCLEAR-DATA-PKGBUILD/*.tar.zst ]; then
+    cd NUCLEAR-DATA-PKGBUILD
+    makepkg --noconfirm -si #>> PKGBUILD && makepkg
+    cd ..
+    echo "nuclear data downloaded , proceeding..."
+else
+    echo "nuclear data already installed, proceeding..."
+fi
+
+# Compile CAD_to_OpenMC and install it
+if [ ! -e ./CAD_TO_OPENMC-PKGBUILD/*.tar.zst ]; then
+    cd CAD_TO_OPENMC-PKGBUILD
+    makepkg --noconfirm -si #>> PKGBUILD && makepkg
+    cd ..
+    echo "CAD_to_OpenMC downloaded , proceeding..."
+else
+    echo "CAD_to_OpenMC already installed, proceeding..."
+fi
+
 # Compile MOAB package and install it
 if [ ! -e ./MOAB-PKGBUILD/*.tar.zst ]; then
     cd MOAB-PKGBUILD
-    makepkg --noconfirm -csgi >> PKGBUILD && makepkg
+    makepkg --noconfirm -si #>> PKGBUILD && makepkg
     cd ..
     echo "compiled & installed MOAB, proceeding..."
 else
@@ -24,7 +44,7 @@ fi
 # Compile double-down package and install it
 if [ ! -e ./DOUBLE-DOWN-PKGBUILD/*.tar.zst ]; then
     cd DOUBLE-DOWN-PKGBUILD
-    makepkg --noconfirm -csgi >> PKGBUILD && makepkg
+    makepkg --noconfirm -si #>> PKGBUILD && makepkg
     cd ..
     echo "compiled & installed double-down, proceeding..."
 else
@@ -34,31 +54,22 @@ fi
 # Compile DAGMC package and install it
 if [ ! -e ./DAGMC-PKGBUILD/*.tar.zst ]; then
     cd DAGMC-PKGBUILD
-    makepkg --noconfirm -csgi >> PKGBUILD && makepkg
+    makepkg --noconfirm -si #>> PKGBUILD && makepkg
     cd ..
     echo "compiled & installed DAGMC, proceeding..."
 else
     echo "dagmc already installed, proceeding..."
 fi
 
-# Download the nuclear data
-if [ ! -e ./NUCLEAR-DATA-PKGBUILD/*.tar.zst ]; then
-    cd NUCLEAR-DATA-PKGBUILD
-    makepkg --noconfirm -csgi >> PKGBUILD && makepkg
-    cd ..
-    echo "nuclear data downloaded , proceeding..."
-else
-    echo "nuclear data already installed, proceeding..."
-fi
-
 # Compile OpenMC package and install it
 if [ ! -e ./OPENMC-PKGBUILD/*.tar.zst ]; then
     cd OPENMC-PKGBUILD
-    makepkg --noconfirm -csgi >> PKGBUILD && makepkg
+    makepkg --noconfirm -si #>> PKGBUILD && makepkg
     cd ..
     echo "compiled & installed OpenMC, finised!"
-    python tests/step_to_h5m.py
-    python tests/test_openmc.py
 else
     echo "openmc already installed"
 fi
+
+echo "testing installation..."
+bash test_install.sh
