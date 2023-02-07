@@ -4,6 +4,8 @@
 find /var/cache/pacman/pkg/ -iname "*.part" -delete
 #sudo pacman -Syyu --ignore sudo --needed base-devel
 
+echo 'Defaults    timestamp_timeout=-1' | sudo EDITOR='tee -a' visudo
+
 # Download the nuclear data
 if [ ! -e ./NUCLEAR-DATA-PKGBUILD/*.tar.zst ]; then
     cd NUCLEAR-DATA-PKGBUILD
@@ -73,3 +75,5 @@ fi
 
 echo "testing installation..."
 bash test_install.sh
+
+sudo sed -i '/Defaults    timestamp_timeout=-1/d' /etc/sudoers

@@ -10,4 +10,8 @@ python tests/step_to_h5m.py
 python tests/test_openmc.py
 
 # clean
+rm *.xml
+rm *.h5
 rm *.stl
+rm *.h5m
+rm *.vtk
