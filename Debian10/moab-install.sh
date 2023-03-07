@@ -22,9 +22,8 @@ sudo apt-get install --yes gcc\
         cython
 
 #if there is a .done-file then skip this step
+PWD=`pwd`
 if [ ! -e $0.done ]; then
-
-  touch ${0}.done
 
   cd $HOME
   mkdir -p openmc
@@ -39,13 +38,16 @@ if [ ! -e $0.done ]; then
               -DENABLE_FORTRAN=OFF \
               -DENABLE_BLASLAPACK=OFF \
               -DBUILD_SHARED_LIBS=ON \
-              -DENABLE_PYMOAB=ON \
+              -DENABLE_PYMOAB=OFF \
               -DCMAKE_INSTALL_PREFIX=$HOME/openmc/MOAB
   make  -j $ccores
   make install 
   cd pymoab
   bash install.sh
   sudo python3 setup.py install
+  
+  touch i${PWD}/${0}.done
+
 else
    name=`basename $0`
    echo MOAB appears to already be installed \(lock file ${name}.done exists\) - skipping.

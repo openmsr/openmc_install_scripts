@@ -1,48 +1,69 @@
 # Maintainer: Luke Labrie-Cleary <luke.cleary@copenhagenatomics.com>
-
 pkgname=openmc
-pkgver=v0.5.2.r11311.g062b8897a
+pkgver=v0.13.2.r497.g6218becb1
 pkgrel=1
-pkgdesc="OpenMC Monte Carlo Particle Transport Code"
-pkgdir=/opt
-arch=(x86_64)
+pkgdesc="The OpenMC project aims to provide a fully-featured Monte Carlo particle 
+		 transport code based on modern methods."
+arch=('any')
 url="https://github.com/openmc-dev/openmc"
 license=('MIT')
-makedepends=(
-  cmake
-  git
-	python
-	python-numpy
-	python-setuptools
-)
-provides=("${pkgname%}")
+
 source=("${pkgname}::git+${url}.git")
 pkgver() {
   cd "$pkgname"
-  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
-conflicts=(
-	openmc-git
+md5sums=('b1d793bbb7d0568c8d2e86b867dd12df')
+
+depends=(
+	python-lxml
+	python-scipy
+	python-pandas
+	python-matplotlib
+	python-uncertainties
+	embree
+	libxrender 
+	libxcursor 
+	libxft 
+	libxinerama 
+	freecad 
+	glu
+	openssh
+	# include once actually available
+	# DAGMC-git
+	# nuclear-data
+	# python-CAD_to_OpenMC
+)
+makedepends=(
+    cmake
+    git
+    python
+	python-numpy
+	python-setuptools
 )
 
+provides=("${pkgname%-pkgver}")
+conflicts=(
+	openmc-git
+	)
+
 build() {
-  sudo pacman --noconfirm -Syu python-lxml \
-                               python-scipy \
-                               python-pandas \
-                               python-h5py \
-                               python-matplotlib \
-                               python-uncertainties
-  cd $srcdir/$pkgname
-	mkdir build && cd build
-  cmake -DOPENMC_USE_DAGMC=ON \
-        -DDAGMC_ROOT=/opt/dagmc \
-        -DHDF5_PREFER_PARALLEL=off ..
-  sudo make
+    cd $srcdir/${pkgname}
+    mkdir build && cd build
+    cmake .. -DOPENMC_USE_DAGMC=ON \
+             -DDAGMC_ROOT=/opt/DAGMC \
+             -DOPENMC_USE_MPI=ON \
+             -DHDF5_PREFER_PARALLEL=ON \
+	     -DCMAKE_INSTALL_PREFIX=${pkgdir}/opt/openmc
+    make
 }
 
 package() {
-  cd $srcdir/$pkgname/build
-  sudo make install
-  cd ..
-  python setup.py install
+	cd $srcdir/${pkgname}/build 
+	make install
+	pip install ../
 }
+
+
+
+md5sums=('SKIP')

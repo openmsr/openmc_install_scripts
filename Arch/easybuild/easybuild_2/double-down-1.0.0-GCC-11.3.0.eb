@@ -1,0 +1,30 @@
+name = 'double-down'
+version = '1.0.0'
+
+homepage = 'https://github.com/pshriwise/double-down'
+description = "double-down is a double precision interface to Embree via the Mesh Oriented dAtaBase (MOAB)."
+software_license = 'LicenseGCC'
+software_license_urls = ['https://github.com/pshriwise/double-down/blob/develop/LICENSE']
+toolchain = {'name': 'GCC', 'version': '11.3.0'}
+
+sources = [{
+    'filename': 'double-down.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/pshriwise',
+        'repo_name': 'double-down',
+        'tag':'v1.0.0'
+    },
+}]
+
+builddependencies = [('CMake', '3.23.1')]
+
+dependencies = [
+    ('moab','5.3.0','',{'name': 'GCC', 'version': '11.3.0'})
+]
+
+osdependencies = [('embree', 'doxygen')]
+
+easyblock = 'CMakeMake'
+
+local_install_prefix = '$HOME/easybuild'
+configure_cmd = f"cmake ../double-down -DMOAB_DIR=${local_install_prefix} -DCMAKE_INSTALL_PREFIX={local_install_prefix}"

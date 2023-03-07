@@ -1,0 +1,35 @@
+name = 'openmc_dagmc_dev'
+version = '0.13.1'
+
+homepage = 'https://openmc.org/'
+description = "OpenMC is a community-developed Monte Carlo neutron and photon transport simulation code."
+docurls = ['https://docs.openmc.org/en/develop/']
+software_license = 'LicenseGCC'
+software_license_urls = ['https://docs.openmc.org/en/latest/license.html']
+toolchain = {'name': 'GCC', 'version': '11.3.0'}
+
+sources = [{
+    'filename': 'openmc-dev.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/openmc-dev',
+        'repo_name': 'openmc',
+        'tag':'v0.13.1'
+    },
+}]
+
+
+builddependencies = [('CMake', '3.23.1')]
+
+osdependencies = [('python-pandas','python-h5py','python-matplotlib','python-uncertainties','python-scipy','python-lxml','python-numpy')]
+
+dependencies = [
+    ('Python', '3.10.4'),
+    ('HDF5', '1.12.2','-serial',{'name': 'GCCcore', 'version': '11.3.0'}),
+    ('dagmc_dev', '3.2.2')
+]
+
+easyblock = 'CMakeMake'
+
+local_install_prefix = '$HOME/easybuild'
+configopts = f"-DOPENMC_USE_DAGMC=ON -DOPENMC_USE_OPENMP=ON -DOPENMC_USE_MPI=ON -DDAGMC_ROOT={local_install_prefix} -DHDF5_PREFER_PARALLEL=OFF -DCMAKE_INSTALL_PREFIX={local_install_prefix} .."
+postinstallcmds = ['pip install ..']
