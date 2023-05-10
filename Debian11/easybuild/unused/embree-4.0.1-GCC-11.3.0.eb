@@ -1,0 +1,23 @@
+name = 'embree'
+version = '4.0.1'
+
+homepage = 'https://github.com/embree/embree'
+description = "Embree is a high-performance ray tracing library developed at Intel, which is released as open source under the Apache 2.0 license."
+software_license_urls = ['https://github.com/embree/embree/blob/master/LICENSE.txt']
+toolchain = {'name': 'GCC', 'version': '11.3.0'}
+
+sources = [{
+    'filename': 'embree-4.0.1.x86_64.linux.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/embree',
+        'repo_name': 'embree',
+        'tag':'v4.0.1'
+    },
+}]
+
+builddependencies = [('CMake', '3.23.1'),('make','4.3')]
+
+easyblock = 'CMakeMake'
+
+local_install_prefix = '$HOME/easybuild'
+configopts = f"-DEMBREE_ISPC_SUPPORT=OFF -DEMBREE_TUTORIALS=OFF -DCMAKE_INSTALL_PREFIX={local_install_prefix}"

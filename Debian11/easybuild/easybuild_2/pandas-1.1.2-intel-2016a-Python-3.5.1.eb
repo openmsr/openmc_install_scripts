@@ -1,0 +1,27 @@
+easyblock = 'PythonPackage'
+
+name = 'pandas'
+version = '1.1.2'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = "https://pypi.python.org/pypi/pandas/"
+description = """pandas is an open source, BSD-licensed library providing high-performance, easy-to-use data structures
+ and data analysis tools for the Python programming language."""
+
+toolchain = {'name': 'intel', 'version': '2016a'}
+
+sources = [SOURCE_TAR_GZ]
+checksums = ['b64ffd87a2cfd31b40acd4b92cb72ea9a52a48165aec4c140e78fd69c45d1444']
+
+dependencies = [
+    ('Python', '3.5.1'),
+    ('SciPy-bundle', '2022.05','', {'name': 'intel', 'version': '2022a'}),
+    ('numexpr', '2.8.1','', {'name': 'intel', 'version': '2021a'}),
+    ('Bottleneck', '1.2.1', '-Python-3.6.4',{'name': 'intel', 'version': '2018a'}),
+]
+
+download_dep_fail = True
+use_pip = True
+sanity_pip_check = True
+
+moduleclass = 'lib'
