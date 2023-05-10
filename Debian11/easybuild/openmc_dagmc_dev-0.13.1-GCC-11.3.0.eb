@@ -29,7 +29,7 @@ dependencies = [
     ('matplotlib','3.2.1','-Python-3.8.2',{'name':'foss','version':'2020a'}),
     ('scipy','1.4.1','-Python-3.7.4',{'name':'foss','version':'2019b'}),
     ('uncertainties','3.1.7'),
-    ('Embree','3.4.0','',{'name':'iccifort','version':'2018.1.163-GCC-6.4.0-2.28'})
+    ('Embree','3.13.4','',{'name':'SYSTEM','version':''})
 ]
 
 easyblock = 'CMakeMake'
