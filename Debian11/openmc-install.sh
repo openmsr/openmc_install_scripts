@@ -83,7 +83,7 @@ if [ ! -e ${name}.done ]; then
   cd build
   cmake -DOPENMC_USE_DAGMC=ON\
         -DOPENMC_USE_OPENMP=ON\
-        -DOPENMC_USE_MPI=OFF\
+        -DOPENMC_USE_MPI=ON\
         -DDAGMC_ROOT=${install_prefix}\
         -DHDF5_PREFER_PARALLEL=off\
 	-DCMAKE_INSTALL_PREFIX=${install_prefix} ..
