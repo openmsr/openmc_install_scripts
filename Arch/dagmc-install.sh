@@ -34,7 +34,7 @@ if [ ! -e ${name}.done ]; then
   mkdir -p $HOME/openmc/DAGMC
   cd $HOME/openmc/DAGMC
   if [ ! -e DAGMC ]; then
-    git clone https://github.com/svalinn/DAGMC.git
+    git clone --branch develop https://github.com/svalinn/DAGMC.git
     cd DAGMC
   else
     cd DAGMC; git pull
