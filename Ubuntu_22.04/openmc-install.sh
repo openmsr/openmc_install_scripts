@@ -54,8 +54,8 @@ if [ ! -e ${name}.done ]; then
   make -j $ccores
   sudo make install
 
-  cd ..
-  sudo pip3 install .
+  #install the python layer
+  pip install .. --prefix=${install_prefix}
 
   cd ${WD}
 

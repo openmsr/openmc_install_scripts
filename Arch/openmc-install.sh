@@ -97,7 +97,7 @@ if [ ! -e ${name}.done ]; then
   make install
 
   #install the python layer
-  pip install ..
+  pip install .. --prefix=${install_prefix}
 
   cd ${WD}
 
