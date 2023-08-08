@@ -33,8 +33,6 @@ fi
 echo will install openmc to $install_prefix
 echo will build openmc from $build_prefix
 
-echo will install openmc to $install_prefix
-
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
   if ! pacman -Qi python-pandas python-matplotlib python-uncertainties > /dev/null; then
