@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1325ac1..36228e2 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -33,7 +33,7 @@ MESSAGE ( STATUS "MOAB_INCLUDE_DIRS is " ${MOAB_INCLUDE_DIRS} )
+ INCLUDE_DIRECTORIES( ${MOAB_INCLUDE_DIRS} )
+ 
+ # Embree
+-FIND_PACKAGE (embree 3.6.1 REQUIRED HINTS ${EMBREE_DIR})
++find_package(embree MODULE)
+ 
+ if (NOT ${EMBREE_VERSION} VERSION_GREATER 3.6.0)
+   message(FATAL_ERROR "Double-down requires Embree v3.6.1 or higher.")
