@@ -1,0 +1,44 @@
+name = 'openmc_dagmc_dev'
+version = '0.13.1'
+
+homepage = 'https://openmc.org/'
+description = "OpenMC is a community-developed Monte Carlo neutron and photon transport simulation code."
+docurls = ['https://docs.openmc.org/en/develop/']
+software_license = 'LicenseGCC'
+software_license_urls = ['https://docs.openmc.org/en/latest/license.html']
+toolchain = {'name': 'foss', 'version': '2022a'}
+
+sources = [{
+    'filename': 'openmc-dev.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/openmc-dev',
+        'repo_name': 'openmc',
+        'tag':'v0.13.1'
+    },
+}]
+
+
+builddependencies = [('CMake', '3.23.1'),('make','4.3')]
+
+osdependencies = ['python-lxml']
+
+dependencies = [
+    ('Python', '3.10.4'),
+    ('HDF5', '1.12.2'),
+    ('dagmc_dev', '3.2.2'),
+    ('SciPy-bundle','2022.05'),
+    ('h5py','3.7.0'),
+    ('matplotlib','3.5.2'),
+    ('lxml','4.9.1')
+]
+
+exts_list = [
+    ('uncertainties', '3.1.7', {
+        'checksums': ['80111e0839f239c5b233cb4772017b483a0b7a1573a581b92ab7746a35e6faab']
+    })
+]
+
+easyblock = 'CMakeMake'
+
+configopts = f"-DOPENMC_USE_DAGMC=ON -DOPENMC_USE_OPENMP=ON -DOPENMC_USE_MPI=ON -DHDF5_PREFER_PARALLEL=OFF"
+postinstallcmds = ['pip install ..']

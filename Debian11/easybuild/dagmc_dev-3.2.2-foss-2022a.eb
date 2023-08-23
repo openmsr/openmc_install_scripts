@@ -1,0 +1,29 @@
+name = 'dagmc_dev'
+version = '3.2.2'
+
+homepage = 'https://svalinn.github.io/DAGMC/index.html'
+description = "Direct Accelerated Geometry Monte Carlo (DAGMC) is a software package that allows users to perform Monte Carlo radiation transport directly on CAD models."
+software_license_urls = ['https://github.com/svalinn/DAGMC/blob/develop/LICENSE.txt']
+toolchain = {'name': 'foss', 'version': '2022a'}
+
+sources = [{
+    'filename': 'dagmc_dev.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/svalinn',
+        'repo_name': 'DAGMC',
+        'tag':'v3.2.2'
+    },
+}]
+
+
+builddependencies = [('CMake', '3.23.1'),('make','4.3')]
+
+dependencies = [
+    ('HDF5', '1.12.2'),
+    ('Eigen','3.4.0'),
+    ('double-down','1.0.0')
+]
+
+easyblock = 'CMakeMake'
+
+configopts = f"-DBUILDTALLY=ON -DDOUBLE_DOWN=ON -DBUILD_STATIC_EXE=OFF -DBUILD_STATIC_LIBS=OFF"
