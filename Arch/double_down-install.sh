@@ -21,6 +21,9 @@ if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
 fi
 build_prefix="$HOME/openmc"
+if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
+  build_prefix=$OPENMC_BUILD_PREFIX
+fi
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
@@ -32,11 +35,12 @@ if [ ! -e ${name}.done ]; then
 	ccores=$1
   fi
 
-  mkdir -p $HOME/openmc/double-down
-  cd $HOME/openmc/double-down
+  mkdir -p ${build_prefix}/openmc/double-down
+  cd ${build_prefix}/openmc/double-down
   if [ ! -d double-down ]; then
-	  git clone --single-branch --branch develop --depth 1 https://github.com/pshriwise/double-down.git
+    git clone --single-branch --branch develop --depth 1 https://github.com/pshriwise/double-down.git
   fi
+
   mkdir -p build
   cd build
   cmake ../double-down -DMOAB_DIR=${install_prefix} \
