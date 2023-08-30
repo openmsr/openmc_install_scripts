@@ -30,7 +30,7 @@ if [ ! -e ${name}.done ]; then
   mkdir -p $HOME/openmc/double-down
   cd $HOME/openmc/double-down
   if [ ! -d double-down ]; then
-	  git clone --single-branch --branch array_incl --depth 1 https://github.com/pshriwise/double-down.git
+	  git clone --single-branch --branch develop --depth 1 https://github.com/pshriwise/double-down.git
   fi
   #trick to help cmake find embree for older Ubuntus 
   cd double-down
