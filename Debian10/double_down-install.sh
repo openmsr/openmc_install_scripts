@@ -22,7 +22,7 @@ if [ ! -e $0.done ]; then
   cd $HOME/openmc
   mkdir double-down
   cd double-down
-  git clone --single-branch --branch main --depth 1 https://github.com/pshriwise/double-down.git
+  git clone --single-branch --branch develop --depth 1 https://github.com/pshriwise/double-down.git
   mkdir build
   cd build
   cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \

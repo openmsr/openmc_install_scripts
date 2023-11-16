@@ -9,19 +9,22 @@ if [ ! -e $0.done ]; then
 	 echo "export OPENMC_CROSS_SECTIONS=$HOME/openmc/nuclear_data/mcnp_endfb71/cross_sections.xml" >> $HOME/.bashrc
  fi
 
+
  #default libraries
- endfb_VII="https://anl.box.com/shared/static/d359skd2w6wrm86om2997a1bxgigc8pu.xz"
- endfb_VIII="https://anl.box.com/shared/static/nd7p4jherolkx4b1rfaw5uqp58nxtstr.xz"
- jeff="https://anl.box.com/shared/static/ddetxzp0gv1buk1ev67b8ynik7f268hw.xz"
+ endfb_VII="https://anl.box.com/shared/static/9igk353zpy8fn9ttvtrqgzvw1vtejoz6.xz"
+ endfb_VIII="https://anl.box.com/shared/static/uhbxlrx7hvxqw27psymfbhi7bx7s6u6a.xz"
+ jeff="https://anl.box.com/shared/static/4jwkvrr9pxlruuihcrgti75zde6g7bum.xz"
 
  mkdir -p $HOME/openmc/nuclear_data
  cd $HOME/openmc/nuclear_data
 
- if [ ! -e `basename $endfb_VII` ]; then
-   #see other default options above
-   wget $endfb_VII
+ toget=$endfb_VIII
 
-   for entry in "$PWD"/*
+ if [ ! -e `basename $toget` ]; then
+   #see other default options above
+   wget $toget
+
+   for entry in "$PWD"/*.xz
    do
      tar -xvf $entry
    done

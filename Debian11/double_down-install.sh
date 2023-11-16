@@ -22,6 +22,11 @@ if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
 fi
 build_prefix="$HOME/openmc"
 
+
+sudo apt-get install --yes doxygen\
+        libembree3-3 libembree-dev
+
+
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
   sudo apt-get install --yes doxygen\
