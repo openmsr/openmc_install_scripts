@@ -21,7 +21,7 @@ sudo apt-get install --yes gcc\
         libopenimageio2.2\
         libopenimageio-dev
 
-sudo pip install numpy
+sudo pip install numpy==1.21
 WD=`pwd`
 
 #if there is a .done-file then skip this step
@@ -36,7 +36,8 @@ if [ ! -e $0.done ]; then
    cd build
    cmake ../embree -DCMAKE_INSTALL_PREFIX=$HOME/openmc/embree \
                 -DEMBREE_ISPC_SUPPORT=OFF \
-		-DEMBREE_TUTORIALS=OFF
+		        -DEMBREE_TUTORIALS=OFF \
+                -DEMBREE_MAX_ISA=NONE
    make -j $ccores
    sudo make install
    rm -rf embree/build embree/embree
