@@ -30,7 +30,7 @@ if [ ! -e $0.done ]; then
   cd openmc
   mkdir -p MOAB
   cd MOAB
-  git clone  --single-branch --branch 5.3.0 --depth 1 https://bitbucket.org/fathomteam/moab.git
+  git clone  --single-branch --branch 5.3.1 --depth 1 https://bitbucket.org/fathomteam/moab.git
   mkdir -p build
   cd build
   cmake ../moab -DENABLE_HDF5=ON \

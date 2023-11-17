@@ -8,7 +8,7 @@ set -ex
 #./nuclear_data-install.sh
 #echo "Downloaded & extracted nuclear data, proceeding..."
 
-openmc_version="v0.13.2"
+openmc_version="v0.13.4"
 if [ "x" != "x$OPENMC_VERSION" ]; then
 	openmc_version=$OPENMC_VERSION
 fi
@@ -57,12 +57,12 @@ if [ ! -e ${name}.done ]; then
   fi
 
   #Should --openmc_build be passed as argument, it assumes a git version is already checked-out
-  if [ -e $build_prefix/openmc ]; then
-        cd $build_prefix/openmc
+  if [ -e $build_prefix/openmc/openmc ]; then
+        cd $build_prefix/openmc/openmc
   else
-  	#source install
-  	mkdir -p $HOME/openmc
-  	cd $HOME/openmc
+        #source install
+        mkdir -p $build_prefix/openmc
+        cd $build_prefix/openmc
   	if [ -e openmc ]; then
                 #repo exists checkout the given version and get new updates
                 #(updates are of course only relevant for development branches.)
@@ -77,7 +77,7 @@ if [ ! -e ${name}.done ]; then
         	git clone --recurse-submodules https://github.com/openmc-dev/openmc.git
         	cd openmc
         	git checkout $openmc_version
-  	fi
+        fi
   fi
 
   if [ -e build ]; then
@@ -97,7 +97,7 @@ if [ ! -e ${name}.done ]; then
   make install
 
   #install the python layer
-  pip install ..
+  pip install .. --prefix=${install_prefix}
 
   cd ${WD}
 

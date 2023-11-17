@@ -26,7 +26,7 @@ if [ ! -e ${name}.done ]; then
         python3-uncertainties
 
   #Should we run make in parallel? Default is to use all available cores
-  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
+  ccores=`cat /proc/cpuinfo |grep processor|wc -l`
   if [ "x$1" != "x" ]; then
 	ccores=$1
   fi
@@ -54,8 +54,8 @@ if [ ! -e ${name}.done ]; then
   make -j $ccores
   sudo make install
 
-  cd ..
-  sudo pip3 install .
+  #install the python layer
+  pip install .. --prefix=${install_prefix}
 
   cd ${WD}
 

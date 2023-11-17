@@ -8,7 +8,7 @@ set -ex
 #./nuclear_data-install.sh
 #echo "Downloaded & extracted nuclear data, proceeding..."
 
-openmc_version="v0.13.2"
+openmc_version="v0.13.3"
 if [ "x" != "x$OPENMC_VERSION" ]; then
 	openmc_version=$OPENMC_VERSION
 fi
@@ -83,7 +83,7 @@ if [ ! -e ${name}.done ]; then
   cd build
   cmake -DOPENMC_USE_DAGMC=ON\
         -DOPENMC_USE_OPENMP=ON\
-        -DOPENMC_USE_MPI=OFF\
+        -DOPENMC_USE_MPI=ON\
         -DDAGMC_ROOT=${install_prefix}\
         -DHDF5_PREFER_PARALLEL=off\
 	-DCMAKE_INSTALL_PREFIX=${install_prefix} ..
@@ -91,7 +91,7 @@ if [ ! -e ${name}.done ]; then
   make install
 
   #install the python layer
-  pip install ..
+  pip install .. --prefix=${install_prefix}
 
   cd ${WD}
 
