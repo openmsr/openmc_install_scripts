@@ -12,6 +12,10 @@ install_prefix="/opt"
 if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
 fi
+build_prefix="$HOME/openmc"
+if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
+  build_prefix=$OPENMC_BUILD_PREFIX
+fi
 
 echo will install to $LOCAL_INSTALL_PREFIX
 
