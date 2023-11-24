@@ -12,6 +12,15 @@ WD=`pwd`
 name=`basename $0`
 package_name='dagmc'
 
+install_prefix="/opt"
+if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
+  install_prefix=$LOCAL_INSTALL_PREFIX
+fi
+build_prefix="$HOME/openmc"
+if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
+  build_prefix=$OPENMC_BUILD_PREFIX
+fi
+
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
 
@@ -23,10 +32,21 @@ if [ ! -e ${name}.done ]; then
 	ccores=$1
   fi
 
-  mkdir -p $HOME/openmc/DAGMC
-  cd $HOME/openmc/DAGMC
-  git clone --single-branch --branch develop --depth 1 https://github.com/svalinn/DAGMC.git
-  mkdir build
+  mkdir -p ${build_prefix}/openmc/DAGMC
+  cd ${build_prefix}/openmc/DAGMC
+  if [ ! -e DAGMC ]; then
+    git clone --branch develop https://github.com/svalinn/DAGMC.git
+    cd DAGMC
+  else
+    cd DAGMC; git pull
+  fi
+
+  for patch in `ls ${WD}/../patches/dagmc_*.patch`; do
+    patch -p1 < $patch
+  done
+
+  cd ..
+  mkdir -p build
   cd build
   cmake ../DAGMC -DBUILD_TALLY=ON \
                -DMOAB_DIR=$HOME/openmc/MOAB \
