@@ -49,17 +49,17 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake ../DAGMC -DBUILD_TALLY=ON \
-               -DMOAB_DIR=$HOME/openmc/MOAB \
-               -DDOUBLE_DOWN=ON \
-               -DBUILD_STATIC_EXE=OFF \
-               -DBUILD_STATIC_LIBS=OFF \
-               -DCMAKE_INSTALL_PREFIX=$HOME/openmc/DAGMC/ \
-               -DDOUBLE_DOWN_DIR=$HOME/openmc/double-down
-  make -j $ccores
+               -DMOAB_DIR=${install_prefix} \
+               -DDOUBLE_DOWN=ON\
+               -DBUILD_STATIC_EXE=OFF\
+               -DBUILD_STATIC_LIBS=OFF\
+               -DCMAKE_INSTALL_PREFIX=${install_prefix}\
+               -DDOUBLE_DOWN_DIR=${install_prefix}
+  make -j ${ccores}
   make install
 
   cd ${WD}
   touch ${name}.done
 else
-  echo DAGMC appears already to be installed \(lock file ${name}.done exists\) - skipping.
+  echo ${package_name} appears already to be installed \(lock file ${name}.done exists\) - skipping.
 fi
