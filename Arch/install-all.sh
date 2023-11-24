@@ -20,7 +20,7 @@ OPENMC_BUILD_PREFIX=$HOME/openmc
 
 openmc_build_regex="^--openmc_build=(.*)$"
 for arg in $*
-do 
+do
   if [[ $arg =~ $openmc_build_regex ]]
   then
     echo ${BASH_REMATCH[0]}
