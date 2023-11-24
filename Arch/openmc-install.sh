@@ -8,7 +8,7 @@ set -ex
 #./nuclear_data-install.sh
 #echo "Downloaded & extracted nuclear data, proceeding..."
 
-openmc_version="v0.13.4"
+openmc_version="v0.14.0"
 if [ "x" != "x$OPENMC_VERSION" ]; then
 	openmc_version=$OPENMC_VERSION
 fi
@@ -91,7 +91,7 @@ if [ ! -e ${name}.done ]; then
         -DDAGMC_ROOT=${install_prefix} -DHDF5_PREFER_PARALLEL=off -DCMAKE_INSTALL_PREFIX=${install_prefix} ..
   else
         cmake -DOPENMC_USE_DAGMC=ON -DOPENMC_USE_OPENMP=ON -DOPENMC_USE_MPI=ON\
-        -DDAGMC_ROOT=${install_prefix} -DHDF5_PREFER_PARALLEL=off -DCMAKE_INSTALL_PREFIX=${install_prefix} ..
+        -DDAGMC_ROOT=${install_prefix} -DHDF5_PREFER_PARALLEL=on -DCMAKE_INSTALL_PREFIX=${install_prefix} ..
   fi
   make -j $ccores
   make install
