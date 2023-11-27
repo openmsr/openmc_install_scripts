@@ -7,7 +7,7 @@ jobs:
   run-openmc-installer:
     runs-on: ubuntu-22.04
     env:
-      LOCAL_INSTALL_PREFIX: $HOME/openmc-latest
+      LOCAL_INSTALL_PREFIX: ${{ env.HOME }}/openmc-latest
     steps:
       - name: checkout_main_repo
         uses: actions/checkout@v3
