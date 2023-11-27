@@ -32,3 +32,7 @@ jobs:
         run: |
           cd openmc_install_scripts/Ubuntu_22.04
           sudo ./openmc-install.sh
+      - name: check if openmc is runnable
+        run: |
+          which openmc
+          openmc -v
