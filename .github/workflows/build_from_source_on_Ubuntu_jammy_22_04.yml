@@ -34,5 +34,4 @@ jobs:
           sudo ./openmc-install.sh
       - name: check if openmc is runnable
         run: |
-          which openmc
           openmc -v
