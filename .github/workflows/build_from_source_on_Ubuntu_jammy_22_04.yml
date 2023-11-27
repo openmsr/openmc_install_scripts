@@ -6,8 +6,6 @@ on:
 jobs:
   run-openmc-installer:
     runs-on: ubuntu-22.04
-    env:
-      LOCAL_INSTALL_PREFIX: ~/openmc-latest
     steps:
       - name: checkout_main_repo
         uses: actions/checkout@v3
@@ -21,16 +19,16 @@ jobs:
       - name: moab-install
         run: |
           cd openmc_install_scripts/Ubuntu_22.04
-          ./moab-install.sh
+          sudo ./moab-install.sh
       - name: double_down-install
         run: |
           cd openmc_install_scripts/Ubuntu_22.04
-          ./double_down-install.sh
+          sudo ./double_down-install.sh
       - name: dagmc-install
         run: |
           cd openmc_install_scripts/Ubuntu_22.04
-          ./dagmc-install.sh
+          sudo ./dagmc-install.sh
       - name: openmc-install
         run: |
           cd openmc_install_scripts/Ubuntu_22.04
-          ./openmc-install.sh
+          sudo ./openmc-install.sh
