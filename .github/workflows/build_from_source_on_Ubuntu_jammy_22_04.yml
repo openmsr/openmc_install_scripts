@@ -33,5 +33,6 @@ jobs:
           cd openmc_install_scripts/Ubuntu_22.04
           ./openmc-install.sh
       - name: as a test run openmc
+        run: |
           which openmc
           openmc --version
