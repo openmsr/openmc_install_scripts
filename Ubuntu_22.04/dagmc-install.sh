@@ -29,6 +29,10 @@ if [ ! -e ${name}.done ]; then
   if [ "x$1" != "x" ]; then
 	ccores=$1
   fi
+  # gitlab runner...
+  if [ $ccores == 0 ]; then
+    ccores=1
+  fi
 
   mkdir -p $HOME/openmc/DAGMC
   cd $HOME/openmc/DAGMC
