@@ -12,6 +12,13 @@ WD=`pwd`
 name=`basename $0`
 package_name='dagmc'
 
+install_prefix="/opt"
+if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
+  install_prefix=$LOCAL_INSTALL_PREFIX
+fi
+build_prefix="$HOME/openmc"
+
+
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
 
@@ -22,18 +29,29 @@ if [ ! -e ${name}.done ]; then
   if [ "x$1" != "x" ]; then
 	ccores=$1
   fi
+  # gitlab runner...
+  if [ $ccores == 0 ]; then
+    ccores=1
+  fi
 
   mkdir -p $HOME/openmc/DAGMC
   cd $HOME/openmc/DAGMC
-  git clone --single-branch --branch develop --depth 1 https://github.com/svalinn/DAGMC.git
-  mkdir build
+  if [ ! -e DAGMC ]; then
+    git clone --single-branch --branch develop --depth 1 https://github.com/svalinn/DAGMC.git
+    cd DAGMC
+  else
+    cd DAGMC; git pull
+  fi
+  
+  cd ..
+  mkdir -p build
   cd build
   cmake ../DAGMC -DBUILD_TALLY=ON \
-               -DMOAB_DIR=$HOME/openmc/MOAB \
+               -DMOAB_DIR=${install_prefix} \
                -DDOUBLE_DOWN=ON \
                -DBUILD_STATIC_EXE=OFF \
                -DBUILD_STATIC_LIBS=OFF \
-               -DCMAKE_INSTALL_PREFIX=$HOME/openmc/DAGMC/ \
+               -DCMAKE_INSTALL_PREFIX=${install_prefix} \
                -DDOUBLE_DOWN_DIR=$HOME/openmc/double-down
   make -j $ccores
   make install

@@ -14,6 +14,12 @@ echo "Compiled & installed dagmc, proceeding..."
 
 WD=`pwd`
 name=`basename $0`
+
+install_prefix="/opt"
+if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
+  install_prefix=$LOCAL_INSTALL_PREFIX
+fi
+
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
   sudo apt-get install --yes libpng-dev libpng++-dev\
@@ -49,7 +55,7 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake -DOPENMC_USE_DAGMC=ON \
-        -DDAGMC_ROOT=$HOME/openmc/DAGMC \
+        -DDAGMC_ROOT=${install_prefix}/openmc/DAGMC \
         -DHDF5_PREFER_PARALLEL=off ..
   make -j $ccores
   sudo make install
