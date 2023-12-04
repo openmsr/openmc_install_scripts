@@ -12,6 +12,10 @@ install_prefix="/opt"
 if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
 fi
+build_prefix="$HOME/openmc"
+if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
+  build_prefix=$OPENMC_BUILD_PREFIX
+fi
 
 echo will install to $LOCAL_INSTALL_PREFIX
 
@@ -42,10 +46,10 @@ if [ ! -e ${name}.done ]; then
 	ccores=$1
   fi
 
-  mkdir -p $HOME/openmc/MOAB
-  cd $HOME/openmc/MOAB
+  mkdir -p ${build_prefix}/openmc/MOAB
+  cd ${build_prefix}/openmc/MOAB
   if [ ! -e moab ]; then
-    git clone --single-branch --branch 5.3.1 --depth 1 https://bitbucket.org/fathomteam/moab.git
+    git clone --single-branch --branch 5.5.1 --depth 1 https://bitbucket.org/fathomteam/moab.git
   else
     cd moab
     git pull

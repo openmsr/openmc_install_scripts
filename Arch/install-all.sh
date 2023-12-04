@@ -20,7 +20,7 @@ OPENMC_BUILD_PREFIX=$HOME/openmc
 
 openmc_build_regex="^--openmc_build=(.*)$"
 for arg in $*
-do 
+do
   if [[ $arg =~ $openmc_build_regex ]]
   then
     echo ${BASH_REMATCH[0]}
@@ -43,8 +43,32 @@ echo "Compiled & installed openmc, done."
 #echo "Running test scripts..."
 #python ./tests/step_to_h5m.py
 #python ./tests/test_openmc.py
-rm *.xml
-rm *.h5
-rm *.stl
-rm *.h5m
-rm *.vtk
+
+#clean up after tests
+rm -f *.xml
+rm -f *.h5
+rm -f *.stl
+rm -f *.h5m
+rm -f *.vtk
+
+regexpression="(.*)(_|-)(.*)"
+[[ $LOCAL_INSTALL_PREFIX =~ $regexpression ]]
+pfix=${BASH_REMATCH[1]}${BASH_REMATCH[2]}
+version=${BASH_REMATCH[3]}
+
+echo "Below is a possible implementation of a modulefile"
+echo "  save in e.g. $HOME/modulefiles/openmc/${version}.lua"
+echo "-------------"
+cat << _end
+local home    = os.getenv("HOME")
+local version = myModuleVersion()
+local pkgName = myModuleName()
+local pkgpath     = pathJoin("${pfix}" .. version,"bin")
+local pkgpypath   = pathJoin("${pfix}" .. version,"lib/python3.11/site-packages")
+
+depends_on('openmc_chain')
+depends_on('openmc_xsect')
+
+prepend_path("PATH", pkgpath)
+prepend_path("PYTHONPATH", pkgpypath)
+_end

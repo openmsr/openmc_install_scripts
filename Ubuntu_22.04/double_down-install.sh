@@ -16,6 +16,15 @@ WD=`pwd`
 name=`basename $0`
 package_name='double_down'
 
+install_prefix="/opt"
+if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
+  install_prefix=$LOCAL_INSTALL_PREFIX
+fi
+build_prefix="$HOME/openmc"
+if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
+  build_prefix=$OPENMC_BUILD_PREFIX
+fi
+
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
   sudo apt-get install --yes doxygen\
@@ -27,18 +36,21 @@ if [ ! -e ${name}.done ]; then
 	ccores=$1
   fi
 
-  mkdir -p $HOME/openmc/double-down
-  cd $HOME/openmc/double-down
-  git clone --single-branch --branch develop --depth 1 https://github.com/pshriwise/double-down.git
-  mkdir build
-  cd build
-  cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \
-                     -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down
+  mkdir -p ${build_prefix}/openmc/double-down
+  cd ${build_prefix}/openmc/double-down
+  if [ ! -d double-down ]; then
+    git clone --single-branch --branch develop --depth 1 https://github.com/pshriwise/double-down.git
+  fi
 
-  make -j $ccores
+  mkdir -p build
+  cd build
+  cmake ../double-down -DMOAB_DIR=${install_prefix} \
+                       -DCMAKE_INSTALL_PREFIX=${install_prefix}
+  make -j ${ccores}
   make install
 
-  cd ${WD}
+  #touch a lock file to avoid uneccessary rebuilds
+  cd $WD
   touch ${name}.done
 else
   echo double-down appears to be already installed \(lock file ${name}.done exists\) - skipping.

@@ -19,20 +19,19 @@ jobs:
       - name: moab-install
         run: |
           cd openmc_install_scripts/Ubuntu_22.04
-          ./moab-install.sh
+          sudo ./moab-install.sh
       - name: double_down-install
         run: |
           cd openmc_install_scripts/Ubuntu_22.04
-          ./double_down-install.sh
+          sudo ./double_down-install.sh
       - name: dagmc-install
         run: |
           cd openmc_install_scripts/Ubuntu_22.04
-          ./dagmc-install.sh
+          sudo ./dagmc-install.sh
       - name: openmc-install
         run: |
           cd openmc_install_scripts/Ubuntu_22.04
-          ./openmc-install.sh
-      - name: as a test run openmc
+          sudo ./openmc-install.sh
+      - name: check if openmc is runnable
         run: |
-          which openmc
-          openmc --version
+          /usr/local/lib/bin/openmc -v
