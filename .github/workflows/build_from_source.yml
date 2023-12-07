@@ -21,6 +21,7 @@ jobs:
     env:
       CC: ${{ matrix.CC }}
       CXX: ${{ matrix.CXX }}
+      basename: ${{ matrix.os }}
     steps:
       - name: checkout_main_repo
         uses: actions/checkout@v3
