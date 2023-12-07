@@ -81,9 +81,11 @@ if [ ! -e ${name}.done ]; then
   cd build
   if [ $OPENMC_NOMPI ]; then
         cmake -DOPENMC_USE_DAGMC=ON -DOPENMC_USE_OPENMP=ON -DOPENMC_USE_MPI=OFF\
+        -DCMAKE_BUILD_TYPE=Debug\
         -DDAGMC_ROOT=${install_prefix} -DHDF5_PREFER_PARALLEL=off -DCMAKE_INSTALL_PREFIX=${install_prefix} ..
   else
         cmake -DOPENMC_USE_DAGMC=ON -DOPENMC_USE_OPENMP=ON -DOPENMC_USE_MPI=ON\
+        -DCMAKE_BUILD_TYPE=Debug\
         -DDAGMC_ROOT=${install_prefix} -DHDF5_PREFER_PARALLEL=on -DCMAKE_INSTALL_PREFIX=${install_prefix} ..
   fi
   make -j $ccores

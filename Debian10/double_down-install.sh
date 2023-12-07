@@ -26,6 +26,7 @@ if [ ! -e $0.done ]; then
   mkdir build
   cd build
   cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \
+                     -DCMAKE_BUILD_TYPE=Debug\
                      -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down \
                      -DEMBREE_DIR=$HOME/openmc/embree
   make

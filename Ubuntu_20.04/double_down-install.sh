@@ -40,6 +40,7 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake ../double-down -DMOAB_DIR=$HOME/openmc/MOAB \
+                     -DCMAKE_BUILD_TYPE=Debug\
                      -DCMAKE_INSTALL_PREFIX=$HOME/openmc/double-down
 
   make -j $ccores

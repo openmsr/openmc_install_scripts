@@ -45,6 +45,7 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake ../double-down -DMOAB_DIR=${install_prefix} \
+                       -DCMAKE_BUILD_TYPE=Debug\
                        -DCMAKE_INSTALL_PREFIX=${install_prefix}
   make -j ${ccores}
   make install

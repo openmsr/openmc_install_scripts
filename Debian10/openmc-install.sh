@@ -32,6 +32,7 @@ if [ ! -e $0.done ]; then
   mkdir -p build
   cd build
   cmake -DOPENMC_USE_DAGMC=ON \
+           -DCMAKE_BUILD_TYPE=Debug\
            -DDAGMC_ROOT=$HOME/openmc/DAGMC \
            -DHDF5_PREFER_PARALLEL=off ..
   sudo make install
