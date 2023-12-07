@@ -29,8 +29,9 @@ jobs:
           ref: '${{github.sha}}'
           path: openmc_install_scripts
           submodules: true
-      - name: bootstrap
+      - name: bootstrap_ubuntu22.04
         run: sudo apt-get -y update
+        if: ${{ matrix.os }} == 'ubuntu-22.04'
       - name: moab-install
         run: |
           cd openmc_install_scripts/${{ matrix.os}}
