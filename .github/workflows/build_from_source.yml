@@ -21,6 +21,7 @@ jobs:
     env:
       CC: ${{ matrix.CC }}
       CXX: ${{ matrix.CXX }}
+      basename: ${{ matrix.os }}
     steps:
       - name: checkout_main_repo
         uses: actions/checkout@v3
@@ -33,7 +34,7 @@ jobs:
         run: sudo apt-get -y update
       - name: moab-install
         run: |
-          cd openmc_install_scripts/${{ matrix.os}}
+          cd openmc_install_scripts/${{ matrix.os }^}
           sudo ./moab-install.sh
       - name: double_down-install
         run: |
