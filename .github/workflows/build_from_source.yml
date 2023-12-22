@@ -6,6 +6,7 @@ on:
 jobs:
   run-build-stack:
     strategy:
+      fail-fast: false
       matrix:
         include:
           - { os: ubuntu-20.04,  CC: gcc-10,   CXX: g++-10,     python: '3.8'  }
