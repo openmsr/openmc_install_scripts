@@ -1,5 +1,5 @@
 name = 'double-down'
-version = '1.0.0'
+version = '1.1.0'
 
 homepage = 'https://github.com/pshriwise/double-down'
 description = "double-down is a double precision interface to Embree via the Mesh Oriented dAtaBase (MOAB)."
@@ -12,7 +12,7 @@ sources = [{
     'git_config': {
         'url': 'https://github.com/pshriwise',
         'repo_name': 'double-down',
-        'tag':'v1.0.0'
+        'tag':'v1.1.0'
     },
 }]
 
@@ -21,7 +21,13 @@ builddependencies = [('CMake', '3.23.1'),('make','4.3')]
 dependencies = [
     ('Doxygen','1.9.4'),
     ('Embree','3.13.4','',{'name': 'system', 'version': ''}),
-    ('moab','5.3.0')
+    ('moab','5.5.0'),
+    ('tbb','2021.5.0')
 ]
 
 easyblock = 'CMakeMake'
+
+sanity_check_paths = {
+    'files':['lib/libdd.so'],
+    'dirs': ['lib','include','tools']
+}

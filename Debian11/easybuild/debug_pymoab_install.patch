@@ -1,0 +1,26 @@
+--- /home/myuser/.local/easybuild/build/moab/5.5.0/foss-2022a/moab/pymoab/CMakeLists.txt.orig	2024-04-10 13:22:47.330141560 +0000
++++ /home/myuser/.local/easybuild/build/moab/5.5.0/foss-2022a/moab/pymoab/CMakeLists.txt	2024-04-10 13:25:05.233477110 +0000
+@@ -79,11 +79,19 @@
+ 
+   # python setuptools build/install local version of pymoab for testing
+   # add test install path to PYTHONPATH for compatibility with newer versions of pip/setuptools
++  # Get the current PYTHONPATH environment variable
++  set(MY_CURRENT_PYTHONPATH "$ENV{PYTHONPATH}")
++
++  # Construct the new PYTHONPATH
++  set(MY_PYTHONPATH "${CMAKE_CURRENT_BINARY_DIR}:${CMAKE_CURRENT_BINARY_DIR}/lib/${PYMOAB_RELATIVE_INSTALL}:${MY_CURRENT_PYTHONPATH}")
++
++  # Now set the environment variable PYTHONPATH for CMake's process environment
++  set(ENV{PYTHONPATH} "${MY_PYTHONPATH}")
++
+   ADD_CUSTOM_TARGET(pymoab-local-install ALL
+-    COMMAND export CFLAGS='-w' &&
+-    PYTHONPATH=${CMAKE_CURRENT_BINARY_DIR}:${CMAKE_CURRENT_BINARY_DIR}/lib/${PYMOAB_RELATIVE_INSTALL}:${PYTHONPATH}
+-               ${PYTHON_EXECUTABLE} -m pip install -e ${CMAKE_CURRENT_BINARY_DIR} --prefix ${CMAKE_CURRENT_BINARY_DIR}
+-    DEPENDS ${DEPS} MOAB)
++	  COMMAND ${CMAKE_COMMAND} -E env CFLAGS='-w' PYTHONPATH="${MY_PYTHONPATH}"
++	  ${PYTHON_EXECUTABLE} -m pip install -e ${CMAKE_CURRENT_BINARY_DIR} --prefix ${CMAKE_CURRENT_BINARY_DIR}
++	  DEPENDS ${DEPS} MOAB)
+ 
+   # move pymoab egg into the correct location for a --user setuptools install based on username
+   SET(INSTALL_SCRIPT_IN "${CMAKE_CURRENT_SOURCE_DIR}/install.sh.cmake")
