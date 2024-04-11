@@ -1,5 +1,5 @@
 name = 'dagmc_dev'
-version = '3.2.3'
+version = '3.2.2'
 
 homepage = 'https://svalinn.github.io/DAGMC/index.html'
 description = "Direct Accelerated Geometry Monte Carlo (DAGMC) is a software package that allows users to perform Monte Carlo radiation transport directly on CAD models."
@@ -7,14 +7,16 @@ software_license_urls = ['https://github.com/svalinn/DAGMC/blob/develop/LICENSE.
 toolchain = {'name': 'foss', 'version': '2022a'}
 
 sources = [{
-    'filename': 'dagmc_dev.tar.gz',
+    'filename': f'DAGMC-{version}.tar.gz',
     'git_config': {
-        'url': 'https://github.com/LukeLabrie/',
+        'url': 'https://github.com/svalinn/',
         'repo_name': 'DAGMC',
         'recursive':True,
-        'commit':'4303ac5',
+        'tag': f'v{version}'
     },
 }]
+
+patches = ['fix_dagmc_findMOAB.patch']
 
 builddependencies = [('CMake', '3.23.1'),('make','4.3')]
 
@@ -27,7 +29,6 @@ dependencies = [
 
 easyblock = 'CMakeMake'
 
-
-preconfigopts = "cd ../DAGMC && git init && git remote add https://github.com/LukeLabrie/DAGMC.git && git fetch && git checkout 4303ac5 && git submodule update --init --recursive && cd ../easybuild_obj && "
-_moab_dir = HOME + '/.local/easybuild/software/moab/5.5.0-foss-2022a'
-configopts = f"-DMOAB_DIR={_moab_dir} -DBUILDTALLY=ON -DDOUBLE_DOWN=ON -DBUILD_STATIC_EXE=OFF -DBUILD_STATIC_LIBS=OFF"
+_moab_dir = HOME + '/.local/easybuild/software/moab/5.5.0-foss-2022a/'
+_double_down_dir = HOME + '/.local/easybuild/software/double-down/1.1.0-foss-2022a/lib/cmake/dd'
+configopts = f"-DMOAB_DIR={_moab_dir} -DBUILDTALLY=ON -DDOUBLE_DOWN=ON -DBUILD_STATIC_EXE=OFF -DBUILD_STATIC_LIBS=OFF -DDOUBLE_DOWN_DIR={_double_down_dir} -DBUILD_UWUW=OFF"

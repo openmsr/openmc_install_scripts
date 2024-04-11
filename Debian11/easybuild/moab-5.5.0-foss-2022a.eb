@@ -16,7 +16,8 @@ sources = [{
     },
 }]
 
-patches = ['debug_pymoab_install.patch']
+# patch needed for cmake handling of pythonpath variable within easybuild build environment 
+patches = ['cmake_pymoab_install.patch']
 
 builddependencies = [('CMake', '3.23.1'),('make','4.3')]
 

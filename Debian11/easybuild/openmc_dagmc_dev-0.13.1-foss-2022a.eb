@@ -23,7 +23,7 @@ builddependencies = [('CMake', '3.23.1'),('make','4.3')]
 dependencies = [
     ('Python', '3.10.4'),
     ('HDF5', '1.12.2'),
-    ('dagmc_dev', '3.2.3'),
+    ('dagmc_dev', '3.2.2'),
     ('SciPy-bundle','2022.05'),
     ('h5py','3.7.0'),
     ('matplotlib','3.5.2'),
