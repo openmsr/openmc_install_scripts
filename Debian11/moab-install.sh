@@ -35,7 +35,8 @@ if [ ! -e ${name}.done ]; then
         libhdf5-openmpi-cpp-103-1 \
         libhdf5-openmpi-dev \
         python3-setuptools\
-	cython3
+	cython3 \
+ 	python-numpy 
   #Should we run make in parallel? Default is to use all available cores
   ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
   if [ "x$1" != "x" ]; then
