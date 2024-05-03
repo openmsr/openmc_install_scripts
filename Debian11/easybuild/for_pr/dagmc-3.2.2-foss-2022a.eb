@@ -1,4 +1,4 @@
-name = 'dagmc_dev'
+name = 'dagmc'
 version = '3.2.2'
 
 homepage = 'https://svalinn.github.io/DAGMC/index.html'
@@ -16,7 +16,8 @@ sources = [{
     },
 }]
 
-# patches = ['fix_dagmc_findMOAB.patch']
+# patch needed for correct path handling to find MOAB
+patches = ['dagmc-3.2.2_find-MOAB.patch']
 
 builddependencies = [('CMake', '3.23.1'),('make','4.3')]
 

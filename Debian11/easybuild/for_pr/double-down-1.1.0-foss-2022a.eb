@@ -12,7 +12,7 @@ sources = [{
     'git_config': {
         'url': 'https://github.com/pshriwise',
         'repo_name': 'double-down',
-        'tag':'v1.1.0'
+        'tag': f'v{version}'
     },
 }]
 
