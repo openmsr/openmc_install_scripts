@@ -5,8 +5,8 @@
 set -ex
 
 #nuclear_data_download
-#./nuclear_data-install.sh
-#echo "Downloaded & extracted nuclear data, proceeding..."
+./nuclear_data-install.sh
+echo "Downloaded & extracted nuclear data, proceeding..."
 
 openmc_version="v0.14.0"
 if [ "x" != "x$OPENMC_VERSION" ]; then
