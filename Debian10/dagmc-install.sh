@@ -20,6 +20,7 @@ if [ ! -e $0.done ]; then
   mkdir build
   cd build
   cmake ../DAGMC -DBUILD_TALLY=ON \
+               -DCMAKE_BUILD_TYPE=Debug\
                -DMOAB_DIR=$HOME/openmc/MOAB \
                -DDOUBLE_DOWN=ON \
                -DBUILD_STATIC_EXE=OFF \

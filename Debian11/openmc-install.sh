@@ -82,6 +82,7 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake -DOPENMC_USE_DAGMC=ON\
+        -DCMAKE_BUILD_TYPE=Debug\
         -DOPENMC_USE_OPENMP=ON\
         -DOPENMC_USE_MPI=ON\
         -DDAGMC_ROOT=${install_prefix}\

@@ -5,8 +5,8 @@
 set -ex
 
 #nuclear_data_download
-#./nuclear_data-install.sh
-#echo "Downloaded & extracted nuclear data, proceeding..."
+./nuclear_data-install.sh
+echo "Downloaded & extracted nuclear data, proceeding..."
 
 openmc_version="v0.14.0"
 if [ "x" != "x$OPENMC_VERSION" ]; then
@@ -33,25 +33,18 @@ fi
 echo will install openmc to $install_prefix
 echo will build openmc from $build_prefix
 
-#if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-  if ! pacman -Qi python-pandas python-matplotlib python-uncertainties > /dev/null; then
-    sudo pacman -Sy --noconfirm\
-	python-pandas\
-	python-matplotlib\
-	python-uncertainties
-  fi
-  if [ $OPENMC_NOMPI ]; then
-    if ! pacman -Qi python-h5py hdf5 >/dev/null; then
-      sudo pacman -Sy --noconfirm python-h5py h5py
-    fi
-  else
-    if ! pacman -Qi python-h5py-openmpi hdf5-openmpi >/dev/null; then
-      sudo pacman -Sy --noconfirm python-h5py-openmpi hdf5-openmpi
-    fi
-  fi
+  sudo apt-get install --yes libpng-dev libpng++-dev\
+	imagemagick\
+	python3-lxml\
+        python3-scipy\
+        python3-pandas\
+        python3-h5py\
+        python3-matplotlib\
+        python3-uncertainties
+
   #Should we run make in parallel? Default is to use all available cores
-  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
+  ccores=`cat /proc/cpuinfo |grep processor|wc -l`
   if [ "x$1" != "x" ]; then
 	ccores=$1
   fi

@@ -23,15 +23,17 @@ fi
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-  pacman -Qi python > /dev/null
-  if [[ $? != 0 ]]; then
-     sudo pacman -Sy python
-  fi
+
+  sudo apt-get install --yes python3
 
   #Should we run make in parallel? Default is to use all available cores
-  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
+  ccores=`cat /proc/cpuinfo |grep processor|wc -l`
   if [ "x$1" != "x" ]; then
 	ccores=$1
+  fi
+  # gitlab runner...
+  if [ $ccores == 0 ]; then
+    ccores=1
   fi
 
   mkdir -p ${build_prefix}/openmc/DAGMC

@@ -54,6 +54,7 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake ../moab -DENABLE_HDF5=ON \
+              -DCMAKE_BUILD_TYPE=Debug\
               -DENABLE_NETCDF=ON \
 	      -DENABLE_PYMOAB=ON \
               -DENABLE_FORTRAN=OFF \
