@@ -36,7 +36,7 @@ if [ ! -e $0.done ]; then
    cd build
    cmake ../embree -DCMAKE_INSTALL_PREFIX=$HOME/openmc/embree \
                 -DEMBREE_ISPC_SUPPORT=OFF \
-		        -DEMBREE_TUTORIALS=OFF \
+	        -DEMBREE_TUTORIALS=OFF \
                 -DEMBREE_MAX_ISA=NONE
    make -j $ccores
    sudo make install

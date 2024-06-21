@@ -44,7 +44,6 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake ../DAGMC -DBUILD_TALLY=ON \
-               -DCMAKE_BUILD_TYPE=Debug\
                -DMOAB_DIR=${install_prefix}\
                -DDOUBLE_DOWN=ON\
                -DBUILD_STATIC_EXE=OFF\
