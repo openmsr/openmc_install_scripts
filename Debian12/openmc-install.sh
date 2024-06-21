@@ -53,8 +53,8 @@ if [ ! -e ${name}.done ]; then
   fi
 
   #Should --openmc_build be passed as argument, it assumes a git version is already checked-out
-  if [ -e ${build_prefix}/openmc ]; then
-    cd ${build_prefix}/openmc
+  if [ -e ${build_prefix}/openmc/openmc ]; then
+    cd ${build_prefix}/openmc/openmc
   else
     #source install
   	mkdir -p $HOME/openmc

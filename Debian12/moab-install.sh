@@ -8,12 +8,15 @@ WD=`pwd`
 name=`basename $0`
 package_name='MOAB'
 
-install_prefix="/opt"
+install_prefix="/usr/local/lib"
 if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
 fi
 
-echo will install to $LOCAL_INSTALL_PREFIX
+build_prefix="/dev/null/openmc" #this will never exist - and so use the default later.
+if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
+  build_prefix=$OPENMC_BUILD_PREFIX
+fi
 
 #check if there is a .done file indicating that we have already built this target
 if [ ! -e ${name}.done ]; then

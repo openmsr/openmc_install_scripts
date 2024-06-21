@@ -22,6 +22,10 @@ if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
 fi
 build_prefix="$HOME/openmc"
 
+build_prefix="/dev/null/openmc" #this will never exist - and so use the default later.
+if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
+  build_prefix=$OPENMC_BUILD_PREFIX
+fi
 
 sudo apt-get install --yes doxygen\
         libembree3-3 libembree-dev
