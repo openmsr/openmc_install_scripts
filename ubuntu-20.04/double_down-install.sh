@@ -39,6 +39,17 @@ if [ ! -e ${name}.done ]; then
   if [ ! -d double-down ]; then
 	  git clone --single-branch --branch develop --depth 1 https://github.com/pshriwise/double-down.git
   fi
+
+  # These bits are hacks to get things working on older ubuntu
+  # needed because the binary packages dont include .cmake-configs.
+  for patch in `ls ${WD}/../patches/double-down_*.patch`; do
+    patch -p1 < $patch
+  done
+
+  mkdir -p double-down/cmake
+  cp ${WD}/../patches/Findembree.cmake double-down/cmake
+
+
   mkdir -p build
   cd build
   cmake ../double-down -DMOAB_DIR=${install_prefix}\
