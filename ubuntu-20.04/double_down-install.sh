@@ -44,8 +44,10 @@ if [ ! -e ${name}.done ]; then
   # These bits are hacks to get things working on older ubuntu
   # needed because the binary packages dont include .cmake-configs.
   cd double-down
-  for patch in `ls ${WD}/../patches/double_down_*.patch`; do
-    patch -p1 < $patch
+  patches=`ls ${WD}/../patches/double_down_*.patch`
+  for pat in ${patches}; do
+    echo applying $pat
+    patch -p1 < $pat
   done
 
   mkdir -p cmake
