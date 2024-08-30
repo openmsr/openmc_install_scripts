@@ -18,6 +18,10 @@ if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
   build_prefix=$OPENMC_BUILD_PREFIX
 fi
 
+build_type="Release"
+if [ "xON" == "x$DEBUG_BUILD" ]; then
+    build_type="Debug"
+fi
 #check if there is a .done file indicating that we have already built this target
 if [ ! -e ${name}.done ]; then
 
@@ -62,6 +66,7 @@ if [ ! -e ${name}.done ]; then
               -DENABLE_FORTRAN=OFF \
               -DBUILD_SHARED_LIBS=ON \
               -DENABLE_BLASLAPACK=OFF \
+              -DCMAKE_BUILD_TYPE=${build_type}\
               -DCMAKE_INSTALL_PREFIX=${install_prefix}
   make -j ${ccores}
   make install

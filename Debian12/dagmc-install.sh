@@ -21,6 +21,10 @@ if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
   build_prefix=$OPENMC_BUILD_PREFIX
 fi
 
+build_type="Release"
+if [ "xON" == "x$DEBUG_BUILD" ]; then
+    build_type="Debug"
+fi
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
@@ -49,6 +53,7 @@ if [ ! -e ${name}.done ]; then
                -DBUILD_STATIC_EXE=OFF\
                -DBUILD_STATIC_LIBS=OFF\
                -DCMAKE_INSTALL_PREFIX=${install_prefix}\
+               -DCMAKE_BUILD_TYPE=${build_type}\
                -DDOUBLE_DOWN_DIR=${install_prefix}
   make -j $ccores
   make install
