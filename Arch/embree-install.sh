@@ -3,6 +3,11 @@
 ################################################################################
 #!/bin/bash
 set -ex
+if [ "x" == "$1x" ]; then
+	ccores=1
+else
+	ccores=$1
+fi
 
 WD=`pwd`
 name=`basename $0`
@@ -19,26 +24,27 @@ if [ ! -e ${name}.done ]; then
 	tbb \
 	openimageio
 
-  #Should we run make in parallel? Default is yo use all available cores
-  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
-  if [ "x$1" != "x" ]; then
-	ccores=$1
-  fi
+#if there is a .done-file then skip this step
+if [ ! -e $0.done ]; then
+   cd $HOME
+   mkdir -p openmc
+   cd openmc
+   mkdir -p embree
+   cd embree
+   git clone --single-branch --branch v3.13.3 --depth 1 https://github.com/embree/embree.git
+   mkdir build
+   cd build
+   cmake ../embree -DCMAKE_INSTALL_PREFIX=$HOME/openmc/embree \
+                -DEMBREE_ISPC_SUPPORT=OFF \
+	        -DEMBREE_TUTORIALS=OFF \
+                -DEMBREE_MAX_ISA=NONE
+   make -j $ccores
+   sudo make install
+   rm -rf embree/build embree/embree
 
-  #run actual install process
-  mkdir -p $HOME/openmc/embree
-  cd $HOME/openmc/embree
-  git clone --single-branch --branch v3.13.3 --depth 1 https://github.com/embree/embree.git
-  mkdir -p build
-  cd build
-  cmake ../embree -DCMAKE_INSTALL_PREFIX=/opt/embree\
-              -DEMBREE_ISPC_SUPPORT=OFF\
-              -DEMBREE_TUTORIALS=OFF
-  make -j ${ccores}
-  sudo make install
-  cd ${WD}
-  #touch a lock file to avoid uneccessary rebuilds
-  touch ${name}.done
+   cd ${WD}
+   touch ${0}.done
 else
-  echo embree appears to be already installed \(lock file ${name}.done exists\) - skipping.
+   name=`basename $0`
+   echo embree appears to already be installed \(lock file ${name}.done exists\) - skipping.
 fi
