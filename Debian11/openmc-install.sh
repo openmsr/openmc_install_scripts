@@ -20,6 +20,7 @@ echo "Compiled & installed dagmc, proceeding..."
 
 WD=`pwd`
 name=`basename $0`
+package_name='openmc'
 install_prefix="/usr/local/lib"
 if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
@@ -28,6 +29,11 @@ fi
 build_prefix="/dev/null/openmc" #this will never exist - and so use the default later.
 if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
   build_prefix=$OPENMC_BUILD_PREFIX
+fi
+
+build_type="Release"
+if [ "xON" == "x$DEBUG_BUILD" ]; then
+    build_type="Debug"
 fi
 
 echo will install openmc to $install_prefix
@@ -52,8 +58,8 @@ if [ ! -e ${name}.done ]; then
   fi
 
   #Should --openmc_build be passed as argument, it assumes a git version is already checked-out
-  if [ -e $build_prefix/openmc ]; then
-    cd $build_prefix/openmc
+  if [ -e ${build_prefix}/openmc/openmc ]; then
+    cd ${build_prefix}/openmc/openmc
   else
     #source install
   	mkdir -p $HOME/openmc
@@ -82,9 +88,10 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake -DOPENMC_USE_DAGMC=ON\
-        -DCMAKE_BUILD_TYPE=Debug\
         -DOPENMC_USE_OPENMP=ON\
         -DOPENMC_USE_MPI=ON\
+        -DOPENMC_USE_MCPL=ON\
+        -DCMAKE_BUILD_TYPE=${build_type}\
         -DDAGMC_ROOT=${install_prefix}\
         -DHDF5_PREFER_PARALLEL=off\
 	-DCMAKE_INSTALL_PREFIX=${install_prefix} ..
