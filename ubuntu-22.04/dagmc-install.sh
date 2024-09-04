@@ -16,9 +16,14 @@ install_prefix="/usr/local/lib"
 if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
 fi
-build_prefix="$HOME/openmc"
+build_prefix="$HOME"
 if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
   build_prefix=$OPENMC_BUILD_PREFIX
+fi
+
+build_type="Release"
+if [ "xON" = "x$DEBUG_BUILD" ]; then
+    build_type="Debug"
 fi
 
 #if there is a .done-file then skip this step
@@ -40,9 +45,8 @@ if [ ! -e ${name}.done ]; then
   cd ${build_prefix}/openmc/DAGMC
   if [ ! -e DAGMC ]; then
     git clone --branch develop https://github.com/svalinn/DAGMC.git
-    cd DAGMC
   else
-    cd DAGMC; git pull
+    cd DAGMC; git pull; cd ..
   fi
 
   for patch in `ls ${WD}/../patches/dagmc_*.patch`; do
@@ -53,12 +57,12 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake ../DAGMC -DBUILD_TALLY=ON \
-               -DCMAKE_BUILD_TYPE=Debug\
-               -DMOAB_DIR=${install_prefix} \
+               -DMOAB_DIR=${install_prefix}\
                -DDOUBLE_DOWN=ON\
                -DBUILD_STATIC_EXE=OFF\
                -DBUILD_STATIC_LIBS=OFF\
                -DCMAKE_INSTALL_PREFIX=${install_prefix}\
+               -DCMAKE_BUILD_TYPE=${build_type}\
                -DDOUBLE_DOWN_DIR=${install_prefix}
   make -j ${ccores}
   make install

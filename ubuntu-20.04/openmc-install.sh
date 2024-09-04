@@ -26,7 +26,7 @@ if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
 fi
 
-build_prefix="/dev/null/openmc" #this will never exist - and so use the default later.
+build_prefix="$HOME"
 if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
   build_prefix=$OPENMC_BUILD_PREFIX
 fi
@@ -87,14 +87,15 @@ if [ ! -e ${name}.done ]; then
   fi
   mkdir -p build
   cd build
-  cmake -DOPENMC_USE_DAGMC=ON\
-        -DOPENMC_USE_OPENMP=ON\
-        -DOPENMC_USE_MPI=ON\
-        -DOPENMC_USE_MCPL=ON\
+  if [ $OPENMC_NOMPI ]; then
+        cmake -DOPENMC_USE_DAGMC=ON -DOPENMC_USE_OPENMP=ON -DOPENMC_USE_MPI=OFF\
         -DCMAKE_BUILD_TYPE=${build_type}\
-        -DDAGMC_ROOT=${install_prefix}\
-        -DHDF5_PREFER_PARALLEL=off\
-	-DCMAKE_INSTALL_PREFIX=${install_prefix} ..
+        -DDAGMC_ROOT=${install_prefix} -DHDF5_PREFER_PARALLEL=off -DCMAKE_INSTALL_PREFIX=${install_prefix} ..
+  else
+        cmake -DOPENMC_USE_DAGMC=ON -DOPENMC_USE_OPENMP=ON -DOPENMC_USE_MPI=ON\
+        -DCMAKE_BUILD_TYPE=${build_type}\
+        -DDAGMC_ROOT=${install_prefix} -DHDF5_PREFER_PARALLEL=on -DCMAKE_INSTALL_PREFIX=${install_prefix} ..
+  fi
   make -j $ccores
   make install
 
