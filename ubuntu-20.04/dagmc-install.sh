@@ -49,7 +49,6 @@ if [ ! -e ${name}.done ]; then
     patch -p1 < $patch
   done
 
-  cd ..
   mkdir -p build
   cd build
   cmake ../DAGMC -DBUILD_TALLY=ON \
