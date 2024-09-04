@@ -12,13 +12,16 @@ install_prefix="/opt"
 if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
 fi
-build_prefix="$HOME/openmc"
+
+build_prefix="/dev/null/openmc" #this will never exist - and so use the default later.
 if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
   build_prefix=$OPENMC_BUILD_PREFIX
 fi
 
-echo will install to $LOCAL_INSTALL_PREFIX
-
+build_type="Release"
+if [ "xON" == "x$DEBUG_BUILD" ]; then
+    build_type="Debug"
+fi
 #check if there is a .done file indicating that we have already built this target
 if [ ! -e ${name}.done ]; then
   if ! pacman -Qi eigen netcdf hdf5-openmpi python-setuptools cython; then
@@ -47,12 +50,12 @@ if [ ! -e ${name}.done ]; then
   mkdir -p build
   cd build
   cmake ../moab -DENABLE_HDF5=ON \
-              -DCMAKE_BUILD_TYPE=Debug\
               -DENABLE_NETCDF=ON \
 	      -DENABLE_PYMOAB=ON \
               -DENABLE_FORTRAN=OFF \
               -DBUILD_SHARED_LIBS=ON \
               -DENABLE_BLASLAPACK=OFF \
+              -DCMAKE_BUILD_TYPE=${build_type}\
               -DCMAKE_INSTALL_PREFIX=${install_prefix}
   make -j ${ccores}
   make install

@@ -6,9 +6,12 @@ LOCAL_INSTALL_PREFIX=/usr/local/lib
 
 prefix_regex="^--prefix=(.*)$"
 openmc_build_regex="^--openmc_build=(.*)$"
+debug_regex="^--debug"
+openmc_version_regex="--openmc-version=(.*)$"
 
 LOCAL_INSTALL_PREFIX="/usr/local"
 OPENMC_BUILD_PREFIX=$HOME/openmc
+
 for arg in $*
 do
   if [[ $arg =~ '-h' ]] || [[ $arg =~ '--help' ]]
@@ -18,17 +21,20 @@ do
   fi
   if [[ $arg =~ $prefix_regex ]]
   then
-    echo ${BASH_REMATCH[0]}
     LOCAL_INSTALL_PREFIX=${BASH_REMATCH[1]}
   fi
   if [[ $arg =~ $openmc_build_regex ]]
   then
-    echo ${BASH_REMATCH[0]}
     OPENMC_BUILD_PREFIX=${BASH_REMATCH[1]}
+  fi
+  if [[ $arg =~ $debug_regex ]]
+  then
+    DEBUG_BUILD="ON"
   fi
 done
 export LOCAL_INSTALL_PREFIX
 export OPENMC_BUILD_PREFIX
+export DEBUG_BUILD
 
 #openmc compile & install
 #openmc-install.sh will call install scripts of its dependencies & nuclear data

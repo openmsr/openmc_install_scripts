@@ -31,6 +31,11 @@ if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
   build_prefix=$OPENMC_BUILD_PREFIX
 fi
 
+build_type="Release"
+if [ "xON" == "x$DEBUG_BUILD" ]; then
+    build_type="Debug"
+fi
+
 echo will install openmc to $install_prefix
 echo will build openmc from $build_prefix
 
@@ -86,6 +91,7 @@ if [ ! -e ${name}.done ]; then
         -DOPENMC_USE_OPENMP=ON\
         -DOPENMC_USE_MPI=ON\
         -DOPENMC_USE_MCPL=ON\
+        -DCMAKE_BUILD_TYPE=${build_type}\
         -DDAGMC_ROOT=${install_prefix}\
         -DHDF5_PREFER_PARALLEL=off\
 	-DCMAKE_INSTALL_PREFIX=${install_prefix} ..

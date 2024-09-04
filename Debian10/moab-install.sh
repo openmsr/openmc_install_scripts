@@ -1,55 +1,82 @@
 ###############################################################################
-#moab souce install
+#moab source install
 ################################################################################
 #!/bin/bash
 set -ex
-if [ "x" == "$1x" ]; then
-	ccores=1
-else
-	ccores=$1
+
+WD=`pwd`
+name=`basename $0`
+package_name='MOAB'
+
+install_prefix="/usr/local/lib"
+if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
+  install_prefix=$LOCAL_INSTALL_PREFIX
 fi
 
-sudo apt-get install --yes gcc\
+build_prefix="/dev/null/openmc" #this will never exist - and so use the default later.
+if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
+  build_prefix=$OPENMC_BUILD_PREFIX
+fi
+
+build_type="Release"
+if [ "xON" == "x$DEBUG_BUILD" ]; then
+    build_type="Debug"
+fi
+#check if there is a .done file indicating that we have already built this target
+if [ ! -e ${name}.done ]; then
+
+  sudo apt-get install gcc\
+	cmake\
+	make\
+	build-essential\
 	libeigen3-dev \
-        python3-netcdf4 \
+        libnetcdf-dev \
+	libnetcdf13\
+        libnetcdf-mpi-dev\
+	libnetcdf-mpi-13\
+	python3-netcdf4 \
         libhdf5-103 \
         libhdf5-cpp-103 \
-        libnetcdf13\
-        libnetcdf-dev\
-        libnetcdf-mpi-13\
-        libnetcdf-mpi-dev\
         libhdf5-dev \
-        cython
+        libhdf5-openmpi-103-1 \
+        libhdf5-openmpi-cpp-103-1 \
+        libhdf5-openmpi-dev \
+        python3-setuptools\
+	cython3
+  #Should we run make in parallel? Default is to use all available cores
+  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
+  if [ "x$1" != "x" ]; then
+	ccores=$1
+  fi
 
-#if there is a .done-file then skip this step
-PWD=`pwd`
-if [ ! -e $0.done ]; then
-
-  cd $HOME
-  mkdir -p openmc
-  cd openmc
-  mkdir -p MOAB
-  cd MOAB
-  git clone  --single-branch --branch 5.3.1 --depth 1 https://bitbucket.org/fathomteam/moab.git
+  mkdir -p ${build_prefix}/openmc/MOAB
+  cd ${build_prefix}/openmc/MOAB
+  if [ ! -e moab ]; then
+    git clone --single-branch --branch 5.5.1 --depth 1 https://bitbucket.org/fathomteam/moab.git
+  else
+    cd moab
+    git pull
+    cd ..
+  fi
   mkdir -p build
   cd build
   cmake ../moab -DENABLE_HDF5=ON \
-              -DCMAKE_BUILD_TYPE=Debug\
               -DENABLE_NETCDF=ON \
+	      -DENABLE_PYMOAB=ON \
               -DENABLE_FORTRAN=OFF \
-              -DENABLE_BLASLAPACK=OFF \
               -DBUILD_SHARED_LIBS=ON \
-              -DENABLE_PYMOAB=OFF \
-              -DCMAKE_INSTALL_PREFIX=$HOME/openmc/MOAB
-  make  -j $ccores
-  make install 
+              -DENABLE_BLASLAPACK=OFF \
+              -DCMAKE_BUILD_TYPE=${build_type}\
+              -DCMAKE_INSTALL_PREFIX=${install_prefix}
+  make -j ${ccores}
+  make install
+
+  #to install the python API
   cd pymoab
   bash install.sh
-  sudo python3 setup.py install
-  
-  touch i${PWD}/${0}.done
 
+  cd ${WD}
+  touch ${name}.done
 else
-   name=`basename $0`
-   echo MOAB appears to already be installed \(lock file ${name}.done exists\) - skipping.
+  echo ${package_name} appears to be already installed \(lock file ${name}.done exists\) - skipping.
 fi
