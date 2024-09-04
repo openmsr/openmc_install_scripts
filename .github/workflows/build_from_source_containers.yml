@@ -22,7 +22,7 @@ jobs:
 #          - { os: macos-11,      CC: clang,    CXX: clang++,    python: "3.10" }
 #          - { os: macos-12,      CC: clang,    CXX: clang++,    python: "3.11" }
 #          - { os: macos-13,      CC: clang,    CXX: clang++,    python: "3.11" }
-    runs-on: ubuntu.22.04
+    runs-on: ubuntu-22.04
     container: ${{ matrix.container }}
     env:
       CC: ${{ matrix.CC }}
