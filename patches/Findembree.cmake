@@ -29,8 +29,6 @@ FIND_LIBRARY(EMBREE_LIBRARY_MIC NAMES embree3_xeonphi PATHS
   /usr/local/lib 
   /opt/local/lib)
 
-message (${EMBREE_INCLUDE_DIRS})
-message (${EMBREE_LIBRARY})
 IF (EMBREE_INCLUDE_DIRS AND EMBREE_LIBRARY)
   SET(EMBREE_FOUND TRUE)
   #set embree version to the lowest allowable number and hope for the best
