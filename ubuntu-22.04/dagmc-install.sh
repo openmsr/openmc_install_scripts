@@ -12,7 +12,7 @@ WD=`pwd`
 name=`basename $0`
 package_name='dagmc'
 
-install_prefix="/opt"
+install_prefix="/usr/local/lib"
 if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
 fi
