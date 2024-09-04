@@ -31,4 +31,6 @@ FIND_LIBRARY(EMBREE_LIBRARY_MIC NAMES embree3_xeonphi PATHS
 
 IF (EMBREE_INCLUDE_DIRS AND EMBREE_LIBRARY)
   SET(EMBREE_FOUND TRUE)
+  #set embree version to the lowest allowable number and hope for the best
+  SET(EMBREE_VERSION 3.6.1)
 ENDIF ()

@@ -40,7 +40,7 @@ if [ ! -e ${name}.done ]; then
         libembree3-3 libembree-dev
 
   #Should we run make in parallel? Default is to use all available cores
-  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
+  ccores=`cat /proc/cpuinfo |grep processor|wc -l`
   if [ "x$1" != "x" ]; then
 	ccores=$1
   fi
@@ -48,14 +48,14 @@ if [ ! -e ${name}.done ]; then
   mkdir -p ${build_prefix}/openmc/double-down
   cd ${build_prefix}/openmc/double-down
   if [ ! -d double-down ]; then
-	  git clone --single-branch --branch develop --depth 1 https://github.com/pshriwise/double-down.git
+	  git clone --single-branch --branch v1.1.0 --depth 1 https://github.com/pshriwise/double-down.git
   fi
 
 
   # These bits are hacks to get things working on older ubuntu
   # needed because the binary packages dont include .cmake-configs.
   cd double-down
-  patches=`ls ${WD}/../patches/double_down_*.patch`
+  patches=`ls ${WD}/../patches/double_down_002*.patch`
   for pat in ${patches}; do
     echo applying $pat
     patch -p1 < $pat
@@ -63,10 +63,10 @@ if [ ! -e ${name}.done ]; then
 
   mkdir -p cmake
   cp ${WD}/../patches/Findembree.cmake cmake
+  cd ..
 
-
-  mkdir -p ../build
-  cd ../build
+  mkdir -p build
+  cd build
   cmake ../double-down -DMOAB_DIR=${install_prefix}\
             -DCMAKE_BUILD_TYPE=${build_type}\
             -DCMAKE_INSTALL_PREFIX=${install_prefix}
