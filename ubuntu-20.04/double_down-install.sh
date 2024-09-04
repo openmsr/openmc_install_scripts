@@ -65,8 +65,8 @@ if [ ! -e ${name}.done ]; then
 #  cp ${WD}/../patches/Findembree.cmake cmake
 
 
-  mkdir -p ../build
-  cd ../build
+  mkdir -p build
+  cd build
   cmake ../double-down -DMOAB_DIR=${install_prefix}\
             -DCMAKE_BUILD_TYPE=${build_type}\
             -DCMAKE_INSTALL_PREFIX=${install_prefix}
