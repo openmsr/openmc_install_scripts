@@ -48,7 +48,7 @@ if [ ! -e ${name}.done ]; then
   mkdir -p ${build_prefix}/openmc/double-down
   cd ${build_prefix}/openmc/double-down
   if [ ! -d double-down ]; then
-	  git clone --single-branch --branch develop --depth 1 https://github.com/pshriwise/double-down.git
+	  git clone --single-branch --branch v0.1.0 --depth 1 https://github.com/pshriwise/double-down.git
   fi
 
 

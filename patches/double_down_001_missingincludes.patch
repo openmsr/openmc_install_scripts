@@ -1,7 +1,7 @@
-diff --git a/include/double-down/MOABDirectAccess.h b/include/double-down/MOABDirectAccess.h
+diff --git a/include/double_down/MOABDirectAccess.h b/include/double_down/MOABDirectAccess.h
 index dd3b245..ad31008 100644
---- a/include/double-down/MOABDirectAccess.h
-+++ b/include/double-down/MOABDirectAccess.h
+--- a/include/double_down/MOABDirectAccess.h
++++ b/include/double_down/MOABDirectAccess.h
 @@ -2,6 +2,7 @@
  #define _MBDIRECTACCESS_
  
@@ -10,10 +10,10 @@ index dd3b245..ad31008 100644
  
  // MOAB
  #include "moab/Core.hpp"
-diff --git a/include/double-down/primitives.hpp b/include/double-down/primitives.hpp
+diff --git a/include/double_down/primitives.hpp b/include/double_down/primitives.hpp
 index 5eeb6a5..41b1f2a 100644
---- a/include/double-down/primitives.hpp
-+++ b/include/double-down/primitives.hpp
+--- a/include/double_down/primitives.hpp
++++ b/include/double_down/primitives.hpp
 @@ -1,6 +1,7 @@
  
  #ifndef DD_PRIMITIVES_H
