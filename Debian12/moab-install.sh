@@ -19,7 +19,7 @@ if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
 fi
 
 build_type="Release"
-if [ "xON" == "x$DEBUG_BUILD" ]; then
+if [ "xON" = "x$DEBUG_BUILD" ]; then
     build_type="Debug"
 fi
 #check if there is a .done file indicating that we have already built this target
