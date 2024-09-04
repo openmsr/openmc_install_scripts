@@ -33,5 +33,6 @@ message (${EMBREE_INCLUDE_DIRS})
 message (${EMBREE_LIBRARY})
 IF (EMBREE_INCLUDE_DIRS AND EMBREE_LIBRARY)
   SET(EMBREE_FOUND TRUE)
-  SET(EMBREE_VERSION 3)
+  #set embree version to the lowest allowable number and hope for the best
+  SET(EMBREE_VERSION 3.6.1)
 ENDIF ()
