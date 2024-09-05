@@ -13,7 +13,7 @@ if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
 fi
 
-build_prefix="/dev/null/openmc" #this will never exist - and so use the default later.
+build_prefix="$HOME"
 if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
   build_prefix=$OPENMC_BUILD_PREFIX
 fi
@@ -22,6 +22,7 @@ build_type="Release"
 if [ "xON" = "x$DEBUG_BUILD" ]; then
     build_type="Debug"
 fi
+
 #check if there is a .done file indicating that we have already built this target
 if [ ! -e ${name}.done ]; then
 
@@ -43,8 +44,9 @@ if [ ! -e ${name}.done ]; then
         libhdf5-openmpi-dev \
         python3-setuptools\
 	cython3
+
   #Should we run make in parallel? Default is to use all available cores
-  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
+  ccores=`cat /proc/cpuinfo |grep processor|wc -l`
   if [ "x$1" != "x" ]; then
 	ccores=$1
   fi
