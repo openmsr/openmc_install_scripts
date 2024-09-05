@@ -33,7 +33,7 @@ jobs:
           echo ${{ matrix.os }}
           apt-get update
           apt-get dist-upgrade -y
-          apt-get install -y git build-essential
+          apt-get install -y git build-essential sudo
         if: ${{ matrix.os == 'Debian11' || matrix.os == 'Debian12' }}
       - name: checkout_main_repo
         uses: actions/checkout@v3
