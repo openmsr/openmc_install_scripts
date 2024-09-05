@@ -45,19 +45,19 @@ jobs:
       - name: moab-install
         run: |
           cd openmc_install_scripts/${{ matrix.os }}
-          sudo ./moab-install.sh
+          ./moab-install.sh
       - name: double_down-install
         run: |
           cd openmc_install_scripts/${{ matrix.os }}
-          sudo ./double_down-install.sh
+          ./double_down-install.sh
       - name: dagmc-install
         run: |
           cd openmc_install_scripts/${{ matrix.os }}
-          sudo ./dagmc-install.sh
+          ./dagmc-install.sh
       - name: openmc-install
         run: |
           cd openmc_install_scripts/${{ matrix.os }}
-          sudo ./openmc-install.sh
+          ./openmc-install.sh
       - name: check if openmc is runnable
         run: |
           /usr/local/lib/bin/openmc -v
