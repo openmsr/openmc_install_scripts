@@ -43,7 +43,8 @@ echo will build openmc from $build_prefix
 if [ ! -e ${name}.done ]; then
   sudo apt-get install libpng-dev libpng++-dev\
 	imagemagick\
-	mcpl\
+	libmcpl1\
+        libmcpl-dev\
         python3-lxml\
         python3-scipy\
         python3-pandas\
