@@ -1,4 +1,5 @@
 ![Build status](https://github.com/openmsr/openmc_install_scripts/actions/workflows/build_from_source.yml/badge.svg)
+![Build status](https://github.com/openmsr/openmc_install_scripts/actions/workflows/build_from_source_containers.yml/badge.svg)
 
 # openmc_install_scripts
 
