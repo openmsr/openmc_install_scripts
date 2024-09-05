@@ -33,8 +33,8 @@ jobs:
           echo ${{ matrix.os }}
           echo APT::Get::Assume-Yes \"true\"; > /etc/apt/apt.conf.d/00AssumeYes
           apt-get update
-          apt-get dist-upgrade -y
-          apt-get install -y git build-essential sudo
+          apt-get dist-upgrade
+          apt-get install git build-essential sudo
         if: ${{ matrix.os == 'Debian11' || matrix.os == 'Debian12' }}
       - name: checkout_main_repo
         uses: actions/checkout@v3
