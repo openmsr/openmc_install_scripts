@@ -43,7 +43,6 @@ echo will build openmc from $build_prefix
 if [ ! -e ${name}.done ]; then
   sudo apt-get install libpng-dev libpng++-dev\
 	imagemagick\
-	mcpl\
         python3-lxml\
         python3-scipy\
         python3-pandas\
@@ -91,7 +90,7 @@ if [ ! -e ${name}.done ]; then
   cmake -DOPENMC_USE_DAGMC=ON\
         -DOPENMC_USE_OPENMP=ON\
         -DOPENMC_USE_MPI=ON\
-        -DOPENMC_USE_MCPL=ON\
+        -DOPENMC_USE_MCPL=OFF\
         -DCMAKE_BUILD_TYPE=${build_type}\
         -DDAGMC_ROOT=${install_prefix}\
         -DHDF5_PREFER_PARALLEL=off\
