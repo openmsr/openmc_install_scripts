@@ -43,7 +43,8 @@ if [ ! -e ${name}.done ]; then
         libhdf5-openmpi-cpp-103-1 \
         libhdf5-openmpi-dev \
         python3-setuptools\
-	cython3
+	python3-pip\
+        cython3
 
   #Should we run make in parallel? Default is to use all available cores
   ccores=`cat /proc/cpuinfo |grep processor|wc -l`
