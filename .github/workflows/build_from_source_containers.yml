@@ -31,7 +31,7 @@ jobs:
       - name: bootstrap debians
         run: |
           echo ${{ matrix.os }}
-          echo APT::Get::Assume-Yes \"true\"; > /etc/apt/apt.conf.d/00AssumeYes
+          echo APT::Get::Assume-Yes \"true\"\; > /etc/apt/apt.conf.d/00AssumeYes
           apt-get update
           apt-get dist-upgrade
           apt-get install git build-essential sudo
