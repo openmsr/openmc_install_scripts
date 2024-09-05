@@ -26,7 +26,7 @@ if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
 fi
 
-build_prefix="/dev/null/openmc" #this will never exist - and so use the default later.
+build_prefix="$HOME"
 if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
   build_prefix=$OPENMC_BUILD_PREFIX
 fi
@@ -41,7 +41,7 @@ echo will build openmc from $build_prefix
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-  sudo apt-get install --yes libpng-dev libpng++-dev\
+  sudo apt-get install libpng-dev libpng++-dev\
 	imagemagick\
 	python3-lxml\
         python3-scipy\
@@ -52,7 +52,7 @@ if [ ! -e ${name}.done ]; then
         python3-uncertainties
 
   #Should we run make in parallel? Default is to use all available cores
-  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
+  ccores=`cat /proc/cpuinfo |grep processor|wc -l`
   if [ "x$1" != "x" ]; then
 	ccores=$1
   fi
@@ -62,9 +62,9 @@ if [ ! -e ${name}.done ]; then
     cd ${build_prefix}/openmc/openmc
   else
     #source install
-  	mkdir -p $HOME/openmc
-  	cd $HOME/openmc
-  	if [ -e openmc ]; then
+    mkdir -p ${build_prefix}/openmc
+    cd ${build_prefix}/openmc
+    if [ -e openmc ]; then
       #repo exists checkout the given version and get new updates
       #(updates are of course only relevant for development branches.)
       cd openmc
@@ -78,7 +78,7 @@ if [ ! -e ${name}.done ]; then
       git clone --recurse-submodules https://github.com/openmc-dev/openmc.git
       cd openmc
       git checkout $openmc_version
-  	fi
+    fi
   fi
 
   if [ -e build ]; then
