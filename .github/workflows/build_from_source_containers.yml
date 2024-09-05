@@ -28,6 +28,13 @@ jobs:
       CC: ${{ matrix.CC }}
       CXX: ${{ matrix.CXX }}
     steps:
+      - name: bootstrap debians
+        run: |
+          echo ${{ matrix.os }}
+          sudo apt-get -y update
+          sudo apt-get dist-upgrade
+          sudo apt-get install git build-essentials
+        if: ${{ matrix.os == 'Debian11' || matrix.os == 'Debian12' }}
       - name: checkout_main_repo
         uses: actions/checkout@v3
         with:
@@ -35,11 +42,6 @@ jobs:
           ref: '${{github.sha}}'
           path: openmc_install_scripts
           submodules: true
-      - name: bootstrap_ubuntu22.04
-        run: |
-          echo ${{ matrix.os }}
-          sudo apt-get -y update
-        if: ${{ matrix.os }} == 'ubuntu-22.04'
       - name: moab-install
         run: |
           cd openmc_install_scripts/${{ matrix.os }}
