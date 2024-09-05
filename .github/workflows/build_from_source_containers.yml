@@ -1,4 +1,4 @@
-name: build from source on many
+name: source build in containers
 on:
   workflow_dispatch:
   schedule:
