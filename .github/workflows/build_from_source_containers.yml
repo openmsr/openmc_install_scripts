@@ -31,9 +31,9 @@ jobs:
       - name: bootstrap debians
         run: |
           echo ${{ matrix.os }}
-          sudo apt-get -y update
-          sudo apt-get dist-upgrade
-          sudo apt-get install git build-essentials
+          apt-get -y update
+          apt-get dist-upgrade
+          apt-get install git build-essentials
         if: ${{ matrix.os == 'Debian11' || matrix.os == 'Debian12' }}
       - name: checkout_main_repo
         uses: actions/checkout@v3
