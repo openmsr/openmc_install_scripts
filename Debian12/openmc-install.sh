@@ -43,8 +43,6 @@ echo will build openmc from $build_prefix
 if [ ! -e ${name}.done ]; then
   sudo apt-get install libpng-dev libpng++-dev\
 	imagemagick\
-	libmcpl1\
-        libmcpl-dev\
         python3-lxml\
         python3-scipy\
         python3-pandas\
@@ -82,6 +80,9 @@ if [ ! -e ${name}.done ]; then
       git checkout $openmc_version
     fi
   fi
+
+  #do a source install of MCPL
+  ./tools/ci/gha-install-mcpl.sh
 
   if [ -e build ]; then
     rm -rf build.bak
