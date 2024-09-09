@@ -8,7 +8,7 @@ set -ex
 #./nuclear_data-install.sh
 #echo "Downloaded & extracted nuclear data, proceeding..."
 
-openmc_version="v0.14.0"
+openmc_version="v0.15.0"
 if [ "x" != "x$OPENMC_VERSION" ]; then
 	openmc_version=$OPENMC_VERSION
 fi
@@ -26,7 +26,7 @@ if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
 fi
 
-build_prefix="/dev/null/openmc" #this will never exist - and so use the default later.
+build_prefix="$HOME"
 if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
   build_prefix=$OPENMC_BUILD_PREFIX
 fi
