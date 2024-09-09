@@ -42,7 +42,7 @@ jobs:
         if: ${{ matrix.os == 'Debian11' || matrix.os == 'Debian12' }}
       - name: bootstrap arch
         run: |
-          pacman -Syu --noconfirm gcc python>${{ matrix.python }}  cmake git
+          pacman -Syu --noconfirm gcc python>${{ matrix.python }}  cmake git sudo
         if: ${{ matrix.os == 'Arch' }}
       - name: checkout_main_repo
         uses: actions/checkout@v3
