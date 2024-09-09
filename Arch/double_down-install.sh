@@ -16,13 +16,11 @@ WD=`pwd`
 name=`basename $0`
 package_name='double_down'
 
-install_prefix="/opt"
+install_prefix="/usr/local/lib"
 if [ "x" != "x$LOCAL_INSTALL_PREFIX" ]; then
   install_prefix=$LOCAL_INSTALL_PREFIX
 fi
-build_prefix="$HOME/openmc"
-
-build_prefix="/dev/null/openmc" #this will never exist - and so use the default later.
+build_prefix="$HOME"
 if [ "x" != "x$OPENMC_BUILD_PREFIX" ]; then
   build_prefix=$OPENMC_BUILD_PREFIX
 fi
@@ -36,7 +34,7 @@ if [ ! -e ${name}.done ]; then
   sudo pacman -Sy --noconfirm embree doxygen
 
   #Should we run make in parallel? Default is to use all available cores
-  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
+  ccores=`cat /proc/cpuinfo |grep Processor|wc -l`
   if [ "x$1" != "x" ]; then
 	ccores=$1
   fi
