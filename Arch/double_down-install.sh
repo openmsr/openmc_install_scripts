@@ -34,7 +34,7 @@ if [ ! -e ${name}.done ]; then
   sudo pacman -Sy --noconfirm embree doxygen
 
   #Should we run make in parallel? Default is to use all available cores
-  ccores=`cat /proc/cpuinfo |grep CPU|wc -l`
+  ccores=`cat /proc/cpuinfo |grep Processor|wc -l`
   if [ "x$1" != "x" ]; then
 	ccores=$1
   fi
