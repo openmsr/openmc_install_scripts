@@ -11,7 +11,7 @@ on:
 jobs:
   run-build-stack:
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         include:
           - { os: Debian11, container: "debian:11", CC: gcc-10,   CXX: g++-10, python: '3.10' }
