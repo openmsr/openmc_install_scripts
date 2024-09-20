@@ -1,7 +1,9 @@
-##embree
+#all
 gcc
 cmake
 make
+
+##embree
 glfw
 glfw-devel
 tbb
@@ -22,9 +24,6 @@ hdf5-openmpi
 python3-setuptools
 python3-pip
 python3-Cython
-
-##double-down
-embree
 
 ##dagmc
 python3
