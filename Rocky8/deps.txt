@@ -1,3 +1,7 @@
+#This file should be read from top to bottom, in the sense that later
+#stages may use the same dependencies as former
+# namings are for RHEL-clones
+
 #all
 gcc
 cmake
@@ -17,6 +21,7 @@ netcdf
 netcdf-devel
 netcdf-openmpi
 netcdf-openmpi-devel
+python3
 python3-netcdf4
 hdf5
 hdf5-devel
@@ -24,9 +29,6 @@ hdf5-openmpi
 python3-setuptools
 python3-pip
 python3-Cython
-
-##dagmc
-python3
 
 ##openmc
 ImageMagick
