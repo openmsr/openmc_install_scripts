@@ -5,8 +5,8 @@
 set -ex
 
 #embree compile & install
-#./embree-install.sh
-#echo "Compiled & installed embree, proceeding..."
+./embree-install.sh
+echo "Compiled & installed embree, proceeding..."
 
 #moab compile & install
 ./moab-install.sh
@@ -29,15 +29,10 @@ build_type="Release"
 if [ "xON" = "x$DEBUG_BUILD" ]; then
     build_type="Debug"
 fi
-sudo apt-get install --yes doxygen\
-        libembree3-3 libembree-dev
-
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-  sudo apt-get install --yes doxygen\
-        libembree3-3 libembree-dev
-
+  
   #Should we run make in parallel? Default is to use all available cores
   ccores=`cat /proc/cpuinfo |grep processor|wc -l`
   if [ "x$1" != "x" ]; then

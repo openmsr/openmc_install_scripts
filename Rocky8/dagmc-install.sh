@@ -28,8 +28,6 @@ fi
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
 
-  sudo apt-get install --yes python3
-
   #Should we run make in parallel? Default is to use all available cores
   ccores=`cat /proc/cpuinfo |grep processor|wc -l`
   if [ "x$1" != "x" ]; then

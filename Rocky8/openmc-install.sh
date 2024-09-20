@@ -41,15 +41,6 @@ echo will build openmc from $build_prefix
 
 #if there is a .done-file then skip this step
 if [ ! -e ${name}.done ]; then
-  sudo apt-get install libpng-dev libpng++-dev\
-	imagemagick\
-        python3-lxml\
-        python3-scipy\
-        python3-pandas\
-        python3-h5py\
-        python3-h5py-mpi\
-        python3-matplotlib\
-        python3-uncertainties
 
   #Should we run make in parallel? Default is to use all available cores
   ccores=`cat /proc/cpuinfo |grep processor|wc -l`
@@ -82,7 +73,13 @@ if [ ! -e ${name}.done ]; then
   fi
 
   #do a source install of MCPL
-  ./tools/ci/gha-install-mcpl.sh
+  if [ ! -e mcpl ]; then
+    git clone https://github.com/mctools/mcpl
+  fi
+  cd mcpl
+  mkdir -p build && cd build
+  cmake .. -DCMAKE_INSTALL_PREFIX=${install_prefix} && make 2>/dev/null && make install
+  cd ..
 
   if [ -e build ]; then
     rm -rf build.bak
